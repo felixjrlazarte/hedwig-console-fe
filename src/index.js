@@ -1,18 +1,32 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
+import { RouterProvider } from "react-router-dom";
+import { ChakraProvider, Container } from '@chakra-ui/react';
+
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { store } from './slices/store';
+import { theme } from './styles/theme';
+import { axiosInterceptor } from './axios';
+import routes from './components/routes';
+
+import '../src/styles/index.css';
+import '../src/styles/Textinput.css';
+
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
+axiosInterceptor();
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ChakraProvider theme={theme}>
+        <Container h="100vh" maxWidth='100%' p="0">
+          <RouterProvider router={routes} />
+        </Container>
+      </ChakraProvider>
     </Provider>
   </React.StrictMode>
 );
