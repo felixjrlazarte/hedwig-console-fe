@@ -111,6 +111,7 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
         right="16px"
         bottom="5px"
         cursor="pointer"
+        marginBottom="6px"
         transform={isToggle ? "rotate(180deg)" : "none"}
       >
         <img src={CollapseIcon} alt="Logo" width={28} height={20} onClick={toggleSidebar} />

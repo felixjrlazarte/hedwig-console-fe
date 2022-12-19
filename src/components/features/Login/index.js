@@ -42,11 +42,11 @@ const Login = () => {
       <Box flex='1' bg="bg.primary" pt="120px" pl="80px">
         <img src={Logo} alt="Logo" width={112} height={128} />
         <Text pt="27px" fontSize='48px'>Hedwig Dashboard</Text>
-        <Text pt="28px" fontSize='20px'>Maya Communications Console</Text>
+        <Text pt="28px" fontSize='20px' fontWeight={500}>Maya Communications Console</Text>
       </Box>
       <Flex w='640px' flexDirection="column">
         <Flex flex="1" flexDirection="column" justifyContent="center" pl="80px" pr="80px" minWidth='100%'>
-          <Text fontSize='32px' color='text.black' mb="24px">
+          <Text fontSize='32px' color='text.black' mb="24px" fontWeight={600}>
             Log in to Hedwig
           </Text>
 
