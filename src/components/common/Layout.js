@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from "react-redux";
 import { Outlet, Navigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 
+import { configState } from '../../slices/config';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
 export default function Layout() {
+  const { HEDWIG_TOKEN } = useSelector(configState);
   const [isToggle, setIsToggle] = useState(false);
 
-  const HAS_SESSION_TOKEN = sessionStorage.getItem("hedwigToken");
+  const HAS_SESSION_TOKEN = sessionStorage.getItem(HEDWIG_TOKEN);
 
   const sidebarWidth = isToggle ? "60px" : "286px";
 

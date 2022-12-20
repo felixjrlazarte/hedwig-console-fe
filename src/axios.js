@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { configData } from './slices/config';
 
+const CONFIG = configData[process.env.REACT_APP_NODE_ENV];
 const UNAUTHORIZED = 401;
 
 export function axiosInterceptor() {
@@ -7,8 +9,8 @@ export function axiosInterceptor() {
     config => {
       config.headers['Accept'] = 'application/json';
       config.headers['Content-Type'] = 'application/json';
-      config.headers['Authorization'] = `Bearer ${sessionStorage.getItem(`hedwigToken`)}`;
-      config.baseURL = "http://localhost:3001/";
+      config.headers['Authorization'] = `Bearer ${sessionStorage.getItem(CONFIG.HEDWIG_TOKEN)}`;
+      config.baseURL = CONFIG.SERVER_URL;
       return config;
     },
     error => {
@@ -20,7 +22,7 @@ export function axiosInterceptor() {
     error => {
       const { status } = error.response;
       if (status === UNAUTHORIZED) {
-        sessionStorage.removeItem(`hedwigToken`);
+        sessionStorage.removeItem(CONFIG.HEDWIG_TOKEN);
       }
       return Promise.reject(error);
     }

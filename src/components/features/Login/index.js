@@ -6,6 +6,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import LoginForm from './LoginForm';
 import AlertBox from '../../common/AlertBox';
 
+import { configState } from '../../../slices/config';
 import { authState } from '../../../slices/auth/authSlice';
 import { loginUser } from '../../../slices/auth/authActions';
 
@@ -14,10 +15,11 @@ import Logo from '../../../assets/images/hc_logo.png';
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { HEDWIG_TOKEN } = useSelector(configState);
   const { isLoggedIn, error } = useSelector(authState);
   const [openAlertBox, setOpenAlertBox] = useState(false);
 
-  const HAS_SESSION_TOKEN = sessionStorage.getItem("hedwigToken");
+  const HAS_SESSION_TOKEN = sessionStorage.getItem(HEDWIG_TOKEN);
 
   const onSubmit = (values) => {
     dispatch(loginUser(values));
