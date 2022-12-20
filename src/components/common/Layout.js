@@ -34,7 +34,7 @@ export default function Layout({ authorize }) {
     <Box minH="100vh" bg={"bg.gray.100"}>
       <Sidebar display="block" isToggle={isToggle} sidebarWidth={sidebarWidth} toggleSidebar={handleToggle} />
       <Header sidebarWidth={sidebarWidth} />
-      <Box transition="0.5s ease" ml={sidebarWidth} p="4" h="100%">
+      <Box transition="0.5s ease" ml={sidebarWidth} p="36px" h="100%">
         <Outlet />
       </Box>
     </Box>

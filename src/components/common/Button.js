@@ -1,0 +1,27 @@
+import React from 'react';
+import {
+  Button as ChakraButton
+} from "@chakra-ui/react";
+
+export default function Button({
+  onClick,
+  children
+}) {
+  return (
+    <ChakraButton
+      bg="button.primary"
+      color="white"
+      py="16px"
+      px="24px"
+      h="48px"
+      w="240px"
+      colorScheme="none"
+      borderRadius="100px"
+      alignSelf={"center"}
+      _hover={{ bg: 'bg.primary' }}
+      onClick={onClick}
+    >
+      {children}
+    </ChakraButton>
+  );
+}
