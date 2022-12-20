@@ -139,6 +139,7 @@ const NavItem = ({
         transition="0.5s ease"
         align="center"
         justifyContent={isToggle ? "center" : "flex-start"}
+        height="46px"
         py="4"
         px={isToggle ? "0" : "26px"}
         role="group"
