@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react';
+import { useSelector } from "react-redux";
 import { NavLink, useLocation } from 'react-router-dom';
 import { Box, Flex, useColorModeValue, Text } from '@chakra-ui/react';
+import { authState } from '../../slices/auth/authSlice';
 
 import {
   DashboardIcon,
@@ -30,7 +32,7 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
         ],
         isOpen: false
       },
-      { name: 'Users', url: '/users', icon: UsersIcon }
+      { name: 'Users', url: '/users', icon: UsersIcon, authorize: "ADMIN" }
     ]
   );
 
@@ -85,6 +87,7 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
             subItems={link.subItems}
             isToggle={isToggle}
             isOpen={link.isOpen}
+            authorize={link.authorize}
             handleSubmenuClick={handleSubmenuClick}
           >
             {link.name}
@@ -128,11 +131,20 @@ const NavItem = ({
   url,
   subItems,
   isSubitem,
+  authorize,
   children,
   handleSubmenuClick,
   ...rest
 }) => {
   const { pathname } = useLocation();
+  const { userInfo } = useSelector(authState);
+
+  const role = userInfo && userInfo.role === 1 ? "ADMIN" : "COORDINATOR";
+
+  if (authorize && authorize !== role) {
+    return;
+  }
+
   return (
     <NavLink to={url ? url : '#'} onClick={() => handleSubmenuClick(name, subItems)}>
       <Flex

@@ -26,7 +26,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (HAS_SESSION_TOKEN && isLoggedIn) {
       navigate("/dashboard");
     }
 

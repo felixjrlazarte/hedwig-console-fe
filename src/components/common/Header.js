@@ -21,7 +21,7 @@ import { logoutUser } from '../../slices/auth/authActions';
 export default function Header({ sidebarWidth, ...rest }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector(authState);
+  const { userInfo } = useSelector(authState);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ export default function Header({ sidebarWidth, ...rest }) {
                 <VStack display={{ md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">Juan Dela Cruz</Text>
                   <Text fontSize="xs" color="text.lightgray" fontWeight={500}>
-                    juan@maya.ph
+                    {userInfo.email}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>

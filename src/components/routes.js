@@ -22,6 +22,9 @@ export default createBrowserRouter(
           path="dashboard"
           element={<Dashboard />}
         />
+      </Route>
+
+      <Route element={<Layout authorize="ADMIN" />}>
         <Route
           path="users"
           element={<Users />}
