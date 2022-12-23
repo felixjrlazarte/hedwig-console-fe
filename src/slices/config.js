@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const configData = {
-  "DEVELOPMENT": {
+  "development": {
     "SERVER_URL": "http://localhost:3001/",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
-  "TEST": {
+  "test": {
     "SERVER_URL": "http://localhost:3002/",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
-  "STAGING": {
+  "staging": {
     "SERVER_URL": "http://localhost:3003/",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
-  "PRODUCTION": {
+  "production": {
     "SERVER_URL": "http://localhost:3004/",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   }

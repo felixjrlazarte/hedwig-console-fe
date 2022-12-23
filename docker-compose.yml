@@ -1,0 +1,14 @@
+version: '1.0'
+
+services:
+  production:
+    container_name: hedwig-console-app
+    image: hedwig-console-app:production
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/hedwig_console_fe'
+      - '/hedwig_console_fe/node_modules'
+    ports:
+      - 8080:80
