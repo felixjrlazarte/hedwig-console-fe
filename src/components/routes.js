@@ -10,6 +10,7 @@ import NotFound from "./common/NotFound";
 import Login from "./features/Login";
 import Dashboard from "./features/Dashboard";
 import Users from "./features/Users";
+import SMS from "./features/Blaster/SMS";
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,10 @@ export default createBrowserRouter(
         <Route
           path="dashboard"
           element={<Dashboard />}
+        />
+        <Route
+          path="blaster/sms"
+          element={<SMS />}
         />
       </Route>
 
