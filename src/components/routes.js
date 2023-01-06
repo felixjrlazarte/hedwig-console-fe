@@ -29,6 +29,13 @@ export default createBrowserRouter(
         />
       </Route>
 
+      <Route element={<Layout type="modal"/>}>
+        <Route
+          path="blaster/sms/send"
+          element={<div>test</div>}
+        />
+      </Route>
+
       <Route element={<Layout authorize="ADMIN" />}>
         <Route
           path="users"
