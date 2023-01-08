@@ -11,6 +11,7 @@ import Login from "./features/Login";
 import Dashboard from "./features/Dashboard";
 import Users from "./features/Users";
 import SMS from "./features/Blaster/SMS";
+import SendSMS from "./features/Blaster/SMS/SendSMS";
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +33,7 @@ export default createBrowserRouter(
       <Route element={<Layout type="modal"/>}>
         <Route
           path="blaster/sms/send"
-          element={<div>test</div>}
+          element={<SendSMS />}
         />
       </Route>
 
