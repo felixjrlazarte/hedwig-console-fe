@@ -37,5 +37,6 @@ export default createBrowserRouter(
       </Route>
 
       <Route path="*" element={<NotFound />} />
+      <Route path="iamokay" element={<h3>Hey There!!! The App is Healthy</h3>} />
     </Route>
   ));
