@@ -13,7 +13,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon
 } from '../../assets/images/icons';
-import Logo from '../../assets/images/hc_logo.png';
+import Logo from '../../assets/images/hc_logo.svg';
 
 export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest }) {
   const [linkItems, setLinkItems] = useState(

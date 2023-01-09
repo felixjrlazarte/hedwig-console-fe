@@ -10,7 +10,7 @@ import { configState } from '../../../slices/config';
 import { authState } from '../../../slices/auth/authSlice';
 import { loginUser } from '../../../slices/auth/authActions';
 
-import Logo from '../../../assets/images/hc_logo.png';
+import Logo from '../../../assets/images/hc_logo.svg';
 
 const Login = () => {
   const navigate = useNavigate();
