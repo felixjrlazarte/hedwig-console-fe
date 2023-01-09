@@ -1,9 +1,7 @@
-version: '1.0'
-
 services:
-  production:
-    container_name: hedwig-console-app
-    image: hedwig-console-app:production
+  test:
+    platform: linux/amd64
+    image: registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:v1.0.1
     build:
       context: .
       dockerfile: Dockerfile
