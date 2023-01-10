@@ -21,6 +21,9 @@ export const theme = extendTheme({
     },
     button: {
       primary: "#4829AA"
+    },
+    alert: {
+      warning: "#FEF3DD"
     }
   },
 })

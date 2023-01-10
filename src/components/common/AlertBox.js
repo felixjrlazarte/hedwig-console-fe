@@ -3,41 +3,43 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-  Box,
-  CloseButton
+  Box
 } from "@chakra-ui/react";
-import { WarningDiamondIcon } from '../../assets/images/icons';
+import { InfoOutlineIcon } from '../../assets/images/icons';
 
-const AlertBox = ({ title, message, onClose }) => {
+const AlertBox = ({
+  title,
+  message,
+  type = "info"
+}) => {
+  const ALERT_PROPERTIES = {
+    warning: {
+      icon: InfoOutlineIcon,
+      textColor: "text.darkgray",
+      backgroundColor: "alert.warning"
+    }
+  };
+
   return (
     <Alert
       display="flex"
-      bg='bg.warning'
+      bg={ALERT_PROPERTIES[type].backgroundColor}
       color='black'
       mb='24px'
-      borderColor="bg.alert"
-      borderWidth={1}
       borderRadius="4px"
-      p="24px 16px"
+      p="20px"
     >
-      <Box minWidth="26px" minHeight="26px" mr="18px">
-        <img src={WarningDiamondIcon} alt="me" width={26} height={26} />
+      <Box minWidth="24px" minHeight="24px" mr="8px" alignSelf="flex-start">
+        <img src={ALERT_PROPERTIES[type].icon} alt="me" width={26} height={26} />
       </Box>
       <Box>
         {
-          title && <AlertTitle>{title}</AlertTitle>
+          title && <AlertTitle mb="8px">{title}</AlertTitle>
         }
-        <AlertDescription fontSize="14px" fontWeight={600}>
+        <AlertDescription fontSize="14px" color={ALERT_PROPERTIES[type].textColor}>
           {message}
         </AlertDescription>
       </Box>
-      <CloseButton
-        alignSelf='flex-start'
-        position='relative'
-        right={-1}
-        top={-1}
-        onClick={onClose}
-      />
     </Alert>
   );
 }
