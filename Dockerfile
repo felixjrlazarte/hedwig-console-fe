@@ -2,6 +2,10 @@
 FROM node:18.12.1-alpine as builder
 RUN apk add --no-cache git
 
+ARG REACT_APP_NODE_ENV
+
+ENV REACT_APP_NODE_ENV $REACT_APP_NODE_ENV
+
 # Set the working directory to /app inside the container
 WORKDIR /app
 # Copy app files
@@ -16,8 +20,6 @@ RUN npm run build
 
 # Create
 FROM nginx:1.21.0-alpine as production
-
-ENV NODE_ENV production
 # Copy built assets from `builder` image
 COPY --from=builder /app/build /usr/share/nginx/html
 # Add your nginx.conf

@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        REACT_APP_NODE_ENV: test
     volumes:
       - '.:/hedwig_console_fe'
       - '/hedwig_console_fe/node_modules'

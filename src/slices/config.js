@@ -6,7 +6,7 @@ export const configData = {
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
   "test": {
-    "SERVER_URL": "http://localhost:3002/",
+    "SERVER_URL": "https://hedwig-console-test.voyagerapis.com",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
   "staging": {
