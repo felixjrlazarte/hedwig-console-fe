@@ -5,6 +5,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 import LoginForm from './LoginForm';
 import AlertBox from '../../common/AlertBox';
+import Loader from '../../common/Loader';
 
 import { configState } from '../../../slices/config';
 import { authState } from '../../../slices/auth/authSlice';
@@ -16,7 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { HEDWIG_TOKEN } = useSelector(configState);
-  const { isLoggedIn, error } = useSelector(authState);
+  const { isLoggedIn, isLoading, error } = useSelector(authState);
   const [openAlertBox, setOpenAlertBox] = useState(false);
 
   const HAS_SESSION_TOKEN = sessionStorage.getItem(HEDWIG_TOKEN);
@@ -47,6 +48,8 @@ const Login = () => {
         <Text pt="28px" fontSize='20px' fontWeight={500}>Maya Communications Console</Text>
       </Box>
       <Flex w='640px' flexDirection="column">
+        <Loader isLoading={isLoading} />
+
         <Flex flex="1" flexDirection="column" justifyContent="center" pl="80px" pr="80px" minWidth='100%'>
           <Text fontSize='32px' color='text.black' mb="24px" fontWeight={600}>
             Log in to Hedwig
