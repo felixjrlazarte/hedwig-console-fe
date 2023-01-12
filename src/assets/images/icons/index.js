@@ -6,6 +6,7 @@ export { default as ChevronDownDarkIcon } from './ChevronDownDarkIcon.svg';
 export { default as ChevronRightIcon } from './ChevronRightIcon.svg';
 export { default as ChevronUpIcon } from './ChevronUpIcon.svg';
 export { default as CollapseIcon } from './CollapseIcon.svg';
+export { default as ViewIcon } from './ViewIcon.svg';
 export { default as ViewOffIcon } from './ViewOffIcon.svg';
 export { default as WarningDiamondIcon } from './WarningDiamondIcon.svg';
 

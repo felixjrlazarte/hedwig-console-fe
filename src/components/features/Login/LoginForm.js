@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button, Link } from "@chakra-ui/react";
 import TextInput from '../../common/TextInput';
 
-import { ViewOffIcon } from '../../../assets/images/icons';
+import { ViewIcon, ViewOffIcon } from '../../../assets/images/icons';
 
 const LoginForm = ({
   onSubmit
@@ -36,7 +36,7 @@ const LoginForm = ({
         errors={errors}
         register={register}
         icon={
-          <img src={ViewOffIcon} alt="me" width={22} height={19} onClick={() => setShow(!show)} />
+          <img src={show ? ViewIcon : ViewOffIcon} alt="me" width={22} height={19} onClick={() => setShow(!show)} />
         }
         validations={{
           required: "Please enter your password"
