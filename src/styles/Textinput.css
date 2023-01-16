@@ -91,9 +91,20 @@
 }
 
 /* Custom select style */
+.custom__select {
+  position: relative;
+}
+
 .floating__select {
-  width: 98%;
+  cursor: pointer;
   padding: 1.6rem 4rem 0.3rem 1rem;
+  background-image: url('../assets/images/icons/ArrowDropDownIcon.svg');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  background-size: 26px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 .floating__select-placeholder {

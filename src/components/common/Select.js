@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormErrorMessage,
   FormControl,
   InputGroup,
-  InputRightElement,
   Text
 } from "@chakra-ui/react";
-import { ArrowDropDownIcon } from '../../assets/images/icons';
 
 export default function Select({
   name,
   placeholder,
-  icon,
   errors,
   register,
   label,
@@ -32,7 +29,7 @@ export default function Select({
       }
       <FormControl isInvalid={errors[name]} pb="24px">
         <InputGroup>
-          <div className={`floating ${ERROR_CLASS}`}>
+          <div className={`floating custom__select ${ERROR_CLASS}`}>
             <select
               defaultValue={defaultValue}
               className={`custom__input floating__select ${HAS_VALUE_CLASS} ${INPUT_ERROR_CLASS}`}
@@ -57,14 +54,6 @@ export default function Select({
               </label>
             }
           </div>
-
-          {
-            icon &&
-            <InputRightElement width='4.5rem' alignItems="flex-end" cursor="pointer">
-              {icon}
-            </InputRightElement>
-          }
-
         </InputGroup>
         <FormErrorMessage fontSize="12px">
           {errors[name] && errors[name].message}
