@@ -7,9 +7,14 @@ import {
   Text as Title,
 } from "@chakra-ui/react";
 import AlertBox from '../../../../common/AlertBox';
+import SendSMSForm from './SendSMSForm';
 
 const SendSMS = () => {
   const navigate = useNavigate();
+
+  const onSubmit = (values) => {
+    console.log(values);
+  }
 
   return (
     <Box>
@@ -23,6 +28,8 @@ const SendSMS = () => {
         title="Reminder"
         message="NTC Guideline states that SMS Blasts between 9PM to 7AM are not allowed. Please refrain from doing such activities during said time or you will be sanctioned ☠️"
       />
+
+      <SendSMSForm onSubmit={onSubmit} />
     </Box>
   );
 }
