@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Button, Link } from "@chakra-ui/react";
+import { Flex, Box, Text } from "@chakra-ui/react";
 import TextInput from '../../../../common/TextInput';
 import Select from '../../../../common/Select';
+import Button from '../../../../common/Button';
+
+import { ArrowForwardIcon } from '../../../../../assets/images/icons';
 
 const SendSMSForm = ({
   onSubmit
@@ -10,9 +13,9 @@ const SendSMSForm = ({
   const { handleSubmit, register, watch, formState: { errors, isSubmitting } } = useForm();
 
   const OPTIONS = [
-    { text: "Maya", value: "maya"},
-    { text: "MayaRewards", value: "mayaRewards"},
-    { text: "MayaAgent", value: "mayaAgent"}
+    { text: "Maya", value: "maya" },
+    { text: "MayaRewards", value: "mayaRewards" },
+    { text: "MayaAgent", value: "mayaAgent" }
   ];
 
   return (
@@ -42,9 +45,38 @@ const SendSMSForm = ({
         watch={watch}
       />
 
-      {/* <Button mt="40px" w="full" bg="button.primary" borderRadius="100px" isLoading={isSubmitting} type="submit">
-        Log In
-      </Button> */}
+      <TextInput
+        name="blastMessage"
+        type="text"
+        label="Message"
+        placeholder="Message"
+        errors={errors}
+        register={register}
+        validations={{
+          required: "Please enter an SMS Blast message"
+        }}
+      />
+
+      <Box
+        color="text.lightgray"
+        fontSize="12px"
+        fontWeight={500}
+        textAlign="right"
+        mt="-16px"
+      >
+        <Text>Character count: 160</Text>
+        <Text>Message count: 1</Text>
+      </Box>
+
+
+      <Flex mt="64px" justifyContent="space-between">
+        <Button type="submit" width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }}>
+          Cancel
+        </Button>
+        <Button type="submit" width="121px" rightIcon={ArrowForwardIcon}>
+          Next
+        </Button>
+      </Flex>
     </form>
   );
 }
