@@ -15,7 +15,8 @@ export default function Select({
   options,
   defaultValue = "",
   validations = {},
-  watch
+  watch,
+  ...rest
 }) {
   const currentValue = watch(name);
   const HAS_VALUE_CLASS = !currentValue ? "floating__select-placeholder" : "";
@@ -27,7 +28,7 @@ export default function Select({
       {
         label && <Text mb="16px">{label}</Text>
       }
-      <FormControl isInvalid={errors[name]} pb="24px">
+      <FormControl isInvalid={errors[name]} pb="24px" {...rest}>
         <InputGroup>
           <div className={`floating custom__select ${ERROR_CLASS}`}>
             <select

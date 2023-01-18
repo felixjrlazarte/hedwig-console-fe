@@ -4,18 +4,24 @@ import { Flex, Box, Text } from "@chakra-ui/react";
 import TextInput from '../../../../common/TextInput';
 import Select from '../../../../common/Select';
 import Button from '../../../../common/Button';
+import Radio from '../../../../common/Radio';
 
 import { ArrowForwardIcon } from '../../../../../assets/images/icons';
 
 const SendSMSForm = ({
   onSubmit
 }) => {
-  const { handleSubmit, register, watch, formState: { errors, isSubmitting } } = useForm();
+  const { handleSubmit, register, watch, formState: { errors, isSubmitting }, control } = useForm();
 
-  const OPTIONS = [
+  const SENDER_MASK_OPTIONS = [
     { text: "Maya", value: "maya" },
     { text: "MayaRewards", value: "mayaRewards" },
     { text: "MayaAgent", value: "mayaAgent" }
+  ];
+
+  const RECIPIENT_TYPE_OPTIONS = [
+    { text: "Single Recipient", value: "single" },
+    { text: "Multiple Recipients", value: "multiple" }
   ];
 
   return (
@@ -30,6 +36,19 @@ const SendSMSForm = ({
         validations={{
           required: "Please enter an SMS Blast name"
         }}
+        mb="16px"
+      />
+
+      <Radio
+        name="recipientType"
+        label="Indicate Audience for the SMS Blast"
+        errors={errors}
+        register={register}
+        validations={{
+          required: "Please select recipient type"
+        }}
+        options={RECIPIENT_TYPE_OPTIONS}
+        mb="16px"
       />
 
       <Select
@@ -41,8 +60,9 @@ const SendSMSForm = ({
         validations={{
           required: "Please select sender mask"
         }}
-        options={OPTIONS}
+        options={SENDER_MASK_OPTIONS}
         watch={watch}
+        mb="16px"
       />
 
       <TextInput

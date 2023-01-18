@@ -15,7 +15,8 @@ const TextInput = ({
   errors,
   register,
   label,
-  validations = {}
+  validations = {},
+  ...rest
 }) => {
   const ERROR_CLASS = errors[name] ? "floating__error" : "";
   const INPUT_ERROR_CLASS = errors[name] ? "floating__input__error" : "";
@@ -26,7 +27,7 @@ const TextInput = ({
         label && <Text mb="16px">{ label }</Text>
       }
 
-      <FormControl isInvalid={errors[name]} pb="24px">
+      <FormControl isInvalid={errors[name]} pb="24px" {...rest}>
         <InputGroup>
           <div className={`floating ${ERROR_CLASS}`}>
             <input

@@ -47,7 +47,7 @@ const Layout = ({ authorize, type }) => {
           <img src={Logo} alt="blaster-icon" width={28} height={32} />
           <Text ml="8px" fontSize="24px" color="bg.secondary" fontFamily="sans-serif" fontWeight="bold">HEDWIG</Text>
         </Center>
-        <Box w="620px" bg="white" py="40px" px="24px" borderRadius='lg' borderWidth='1px' borderColor="#E0E4E6">
+        <Box w="620px" bg="white" py="40px" px="24px" mb="25px" borderRadius='lg' borderWidth='1px' borderColor="#E0E4E6">
           <Outlet />
         </Box>
       </Flex>

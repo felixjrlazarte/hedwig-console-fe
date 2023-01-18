@@ -111,3 +111,25 @@
   color: var(--label__color);
   padding: 0.95rem 4rem 0.95rem 1rem;
 }
+
+/* Custom radio style */
+.custom__radio > input[type="radio"] {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #A8ADB0;
+	border-radius: 50%;
+	background-clip: content-box;
+	padding: 3px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.custom__radio > input[type="radio"]:checked {
+	background-color: #00B464;
+  border-color: #00B464;
+}
+
+#radio__error {
+  border-color: var(--label__color__error);
+}
