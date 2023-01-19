@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 import TextInput from '../../../../common/TextInput';
 import Select from '../../../../common/Select';
@@ -11,7 +12,8 @@ import { ArrowForwardIcon } from '../../../../../assets/images/icons';
 const SendSMSForm = ({
   onSubmit
 }) => {
-  const { handleSubmit, register, watch, formState: { errors, isSubmitting }, control } = useForm();
+  const navigate = useNavigate();
+  const { handleSubmit, register, watch, formState: { errors, isSubmitting } } = useForm();
 
   const SENDER_MASK_OPTIONS = [
     { text: "Maya", value: "maya" },
@@ -90,7 +92,7 @@ const SendSMSForm = ({
 
 
       <Flex mt="64px" justifyContent="space-between">
-        <Button type="submit" width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }}>
+        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={() => navigate(-1)}>
           Cancel
         </Button>
         <Button type="submit" width="121px" rightIcon={ArrowForwardIcon}>
