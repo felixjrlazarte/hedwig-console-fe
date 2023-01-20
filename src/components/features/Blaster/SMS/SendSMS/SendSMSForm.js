@@ -52,27 +52,26 @@ const SendSMSForm = ({
           required: "Please select recipient type"
         }}
         options={RECIPIENT_TYPE_OPTIONS}
-        components={{
-          single: <NumberInput
-            name="mobileNumber"
-            type="text"
-            placeholder="Mobile Number"
-            errors={errors}
-            register={register}
-            validations={{
-              required: "Please enter a mobile number",
-              maxLength: { value: 11, message: "Invalid phone number" },
-              minLength: { value: 10, message: "Invalid phone number" }
-            }}
-            mt="8px"
-            ml="36px"
-            w="auto"
-          />
+        subComponents={{
+          "single":
+            <NumberInput
+              name="mobileNumber"
+              type="text"
+              placeholder="Mobile Number"
+              errors={errors}
+              register={register}
+              validations={{
+                required: "Please enter a mobile number",
+                maxLength: { value: 11, message: "Invalid phone number" },
+                minLength: { value: 10, message: "Invalid phone number" }
+              }}
+              mt="8px"
+              ml="36px"
+              w="auto"
+            />
         }}
         mb="16px"
-      >
-
-      </Radio>
+      />
 
       <Select
         name="senderMask"

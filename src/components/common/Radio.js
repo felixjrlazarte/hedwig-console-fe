@@ -14,7 +14,7 @@ export default function Radio({
   options,
   register,
   validations,
-  components,
+  subComponents,
   watch,
   ...rest
 }) {
@@ -44,7 +44,7 @@ export default function Radio({
                 </Flex>
 
                 {
-                  (components && currentValue === value) && components[currentValue]
+                  (subComponents && currentValue === value) && subComponents[currentValue]
                 }
               </Flex>
             ))
