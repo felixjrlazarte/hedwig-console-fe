@@ -14,9 +14,13 @@ export default function Radio({
   options,
   register,
   validations,
+  components,
+  watch,
   ...rest
 }) {
+  const currentValue = watch && watch(name);
   const ERROR_CLASS = errors[name] ? "radio__error" : "";
+
   return (
     <>
       {
@@ -27,18 +31,25 @@ export default function Radio({
         <Stack spacing="26px">
           {
             options && options.map(({ text, value }) => (
-              <Flex key={value} alignItems="center" className="custom__radio">
-                <input
-                  id={`${ERROR_CLASS}`}
-                  type="radio"
-                  name={name}
-                  value={value}
-                  {...register(name, validations)}
-                />
-                <Text>{text}</Text>
+              <Flex flexDirection="column" key={value}>
+                <Flex key={value} alignItems="center" className="custom__radio">
+                  <input
+                    id={`${ERROR_CLASS}`}
+                    type="radio"
+                    name={name}
+                    value={value}
+                    {...register(name, validations)}
+                  />
+                  <Text>{text}</Text>
+                </Flex>
+
+                {
+                  (components && currentValue === value) && components[currentValue]
+                }
               </Flex>
             ))
           }
+
         </Stack>
         <FormErrorMessage fontSize="12px">
           {errors[name] && errors[name].message}

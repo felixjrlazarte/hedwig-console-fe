@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 import TextInput from '../../../../common/TextInput';
+import NumberInput from '../../../../common/NumberInput';
 import Select from '../../../../common/Select';
 import Button from '../../../../common/Button';
 import Radio from '../../../../common/Radio';
@@ -13,7 +14,7 @@ const SendSMSForm = ({
   onSubmit
 }) => {
   const navigate = useNavigate();
-  const { handleSubmit, register, watch, formState: { errors, isSubmitting } } = useForm();
+  const { handleSubmit, register, watch, formState: { errors } } = useForm();
 
   const SENDER_MASK_OPTIONS = [
     { text: "Maya", value: "maya" },
@@ -46,12 +47,32 @@ const SendSMSForm = ({
         label="Indicate Audience for the SMS Blast"
         errors={errors}
         register={register}
+        watch={watch}
         validations={{
           required: "Please select recipient type"
         }}
         options={RECIPIENT_TYPE_OPTIONS}
+        components={{
+          single: <NumberInput
+            name="mobileNumber"
+            type="text"
+            placeholder="Mobile Number"
+            errors={errors}
+            register={register}
+            validations={{
+              required: "Please enter a mobile number",
+              maxLength: { value: 11, message: "Invalid phone number" },
+              minLength: { value: 10, message: "Invalid phone number" }
+            }}
+            mt="8px"
+            ml="36px"
+            w="auto"
+          />
+        }}
         mb="16px"
-      />
+      >
+
+      </Radio>
 
       <Select
         name="senderMask"
@@ -99,7 +120,7 @@ const SendSMSForm = ({
           Next
         </Button>
       </Flex>
-    </form>
+    </form >
   );
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
 import {
   Flex,
   Box,
@@ -10,8 +9,6 @@ import AlertBox from '../../../../common/AlertBox';
 import SendSMSForm from './SendSMSForm';
 
 const SendSMS = () => {
-  const navigate = useNavigate();
-
   const onSubmit = (values) => {
     console.log(values);
   }
