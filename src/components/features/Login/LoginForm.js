@@ -19,7 +19,7 @@ const LoginForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
-        name="email"
+        name="username"
         type="email"
         placeholder="Email Address"
         errors={errors}
