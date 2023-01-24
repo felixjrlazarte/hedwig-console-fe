@@ -12,15 +12,8 @@ unit-test:
   script:
     - npm run test:test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  # artifacts:
-  #   paths:
-  #     - coverage/
-  #   when: always
-  #   reports:
-  #     junit:
-  #       - junit.xml
-  # only:
-  #   - tags
+  only:
+    - tags
 
 # code-quality:
 #   stage: pre-build
