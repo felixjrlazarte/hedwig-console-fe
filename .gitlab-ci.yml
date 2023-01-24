@@ -4,14 +4,21 @@ stages:
   - post-build
   - test
 
-# unit-test:
-#   stage: pre-build
-#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.0-buster
-#   script:
-#     - echo "Hello, $GITLAB_USER_LOGIN!"
-#     - node -v
-#     - ls -al
-#     - whoami
+unit-test:
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  stage: pre-build
+  before_script:
+    - npm install
+  script:
+    - npm run test:ci
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    paths:
+      - coverage/
+    when: always
+    reports:
+      junit:
+        - junit.xml
 
 # code-quality:
 #   stage: pre-build

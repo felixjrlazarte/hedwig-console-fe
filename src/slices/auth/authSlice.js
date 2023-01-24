@@ -14,37 +14,35 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers: {
+  extraReducers: (builder) => {
     // user login lifecycle
-    [loginUser.pending]: (state) => {
+    builder.addCase(loginUser.pending, (state) => {
       state.isLoading = true
       state.error = null
-    },
-    [loginUser.fulfilled]: (state, { payload }) => {
+    }),
+    builder.addCase(loginUser.fulfilled, (state, { payload }) => {
       state.isLoggedIn = true
       state.isLoading = false
       state.userInfo = payload
-    },
-    [loginUser.rejected]: (state, { payload }) => {
+    }),
+    builder.addCase(loginUser.rejected, (state, { payload }) => {
       state.isLoading = false
       state.error = payload
-    },
-    
-    // user logout lifecycle
-    [logoutUser.pending]: (state) => {
+    }),
+    builder.addCase(logoutUser.pending, (state) => {
       state.isLoading = true
       state.error = null
-    },
-    [logoutUser.fulfilled]: (state) => {
+    }),
+    builder.addCase(logoutUser.fulfilled, (state) => {
       state.isLoggedIn = false
       state.isLoading = false
       state.userInfo = {}
-    },
-    [logoutUser.rejected]: (state, { payload }) => {
+    }),
+    builder.addCase(logoutUser.rejected, (state, { payload }) => {
       state.isLoading = false
       state.error = payload
-    }
-  },
+    })
+  }
 });
 
 export const authState = (state) => state.auth;
