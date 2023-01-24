@@ -1,14 +1,14 @@
+ARG dproxy_url
+
 # Create build image
-FROM node:18.12.1-alpine as builder
+FROM $dproxy_url/node:18.12.1-alpine as builder
 RUN apk add --no-cache git
 
-ARG REACT_APP_NODE_ENV
+ARG ENV=test
+ENV REACT_APP_NODE_ENV=${ENV}
 
-ENV REACT_APP_NODE_ENV $REACT_APP_NODE_ENV
-
-# Set the working directory to /app inside the container
 WORKDIR /app
-# Copy app files
+
 COPY . .
 # ==== BUILD =====
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
@@ -18,15 +18,18 @@ RUN npm run build
 
 ######## Stage 2 ########
 
-# Create
-FROM nginx:1.21.0-alpine as production
-# Copy built assets from `builder` image
+# Create runner
+FROM $dproxy_url/nginx:1.21.0-alpine as runner
+
 COPY --from=builder /app/build /usr/share/nginx/html
-# Add your nginx.conf
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Expose port
-EXPOSE 80
-# Start nginx
+
+ARG port=80
+ENV PORT=${port}
+
+EXPOSE ${port}
+
 CMD ["nginx", "-g", "daemon off;"]
 
 # docker-compose up -d
