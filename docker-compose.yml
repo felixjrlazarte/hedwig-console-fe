@@ -1,0 +1,14 @@
+services:
+  test:
+    platform: linux/amd64
+    image: registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:v1.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_NODE_ENV: test
+    volumes:
+      - '.:/hedwig_console_fe'
+      - '/hedwig_console_fe/node_modules'
+    ports:
+      - 8080:80
