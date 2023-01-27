@@ -33,7 +33,7 @@ const SMS = () => {
         </Flex>
       </Header>
 
-      <Divider mb="16px" />
+      <Divider mb="16px" opacity={1} />
     </Box>
   );
 }
