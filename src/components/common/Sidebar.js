@@ -78,7 +78,7 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
             </NavItem>
           </Box>
         </PopoverTrigger>
-        <PopoverContent bg="#4829AA" border="none">
+        <PopoverContent bg="#4829AA" border="none" ml="-8px" w="230px">
           <PopoverBody px={0}>
             {
               link.subItems && link.subItems.map((subItem) => (
@@ -210,7 +210,7 @@ const NavItem = ({
         justifyContent={isToggle ? (isSubitem ? "flex-start" : "center") : "flex-start"}
         height="46px"
         py="4"
-        px={isToggle ? isSubitem ? "26px" : "0" : "26px"}
+        px={isToggle ? isSubitem ? "16px" : "0" : "26px"}
         role="group"
         cursor="pointer"
         bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : 'none'}
@@ -226,9 +226,12 @@ const NavItem = ({
         }
         {
           (!isToggle || (isToggle && isSubitem)) &&
-          <Box ml={!isToggle ? (isSubitem ? "33px" : "17px") : "0"}>
-            {children}
-          </Box>
+          <Flex ml={!isToggle ? (isSubitem ? "33px" : "17px") : "0"} justifyContent="space-between" w="full">
+            <span>{children}</span>
+            {
+              (isToggle && isSubitem && pathname === url) && <span>✔</span>
+            }
+          </Flex>
         }
         {
           (subItems && !isToggle) &&
