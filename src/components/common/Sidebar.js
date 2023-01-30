@@ -60,46 +60,6 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
     }
   }
 
-  const WithPopover = ({ link }) => {
-    return (
-      <Popover placement='right-start' trigger="hover">
-        <PopoverTrigger trigger="hover">
-          <Box>
-            <NavItem
-              name={link.name}
-              icon={link.icon}
-              url={link.url}
-              subItems={link.subItems}
-              isToggle={isToggle}
-              isOpen={link.isOpen}
-              authorize={link.authorize}
-              handleSubmenuClick={handleSubmenuClick}
-            >
-              {link.name}
-            </NavItem>
-          </Box>
-        </PopoverTrigger>
-        <PopoverContent bg="#4829AA" border="none" ml="-8px" w="230px">
-          <PopoverBody px={0}>
-            {
-              link.subItems && link.subItems.map((subItem) => (
-                <NavItem
-                  key={subItem.name}
-                  isToggle={isToggle}
-                  isSubitem={true}
-                  url={subItem.url}
-                  handleSubmenuClick={handleSubmenuClick}
-                >
-                  {subItem.name}
-                </NavItem>
-              ))
-            }
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
-    )
-  }
-
   return (
     <Box
       display="flex"
@@ -131,7 +91,7 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
       {linkItems.map((link) => {
         if (isToggle && link.subItems) {
           return (
-            <WithPopover key={link.name} link={link} />
+            <WithPopover key={link.name} link={link} isToggle={isToggle} handleSubmenuClick={handleSubmenuClick} />
           )
         }
 
@@ -245,3 +205,47 @@ const NavItem = ({
     </NavLink>
   );
 };
+
+const WithPopover = ({
+  link,
+  isToggle,
+  handleSubmenuClick
+}) => {
+  return (
+    <Popover placement='right-start' trigger="hover">
+      <PopoverTrigger trigger="hover">
+        <Box>
+          <NavItem
+            name={link.name}
+            icon={link.icon}
+            url={link.url}
+            subItems={link.subItems}
+            isToggle={isToggle}
+            isOpen={link.isOpen}
+            authorize={link.authorize}
+            handleSubmenuClick={handleSubmenuClick}
+          >
+            {link.name}
+          </NavItem>
+        </Box>
+      </PopoverTrigger>
+      <PopoverContent bg="#4829AA" border="none" ml="-8px" w="230px">
+        <PopoverBody px={0}>
+          {
+            link.subItems && link.subItems.map((subItem) => (
+              <NavItem
+                key={subItem.name}
+                isToggle={isToggle}
+                isSubitem={true}
+                url={subItem.url}
+                handleSubmenuClick={handleSubmenuClick}
+              >
+                {subItem.name}
+              </NavItem>
+            ))
+          }
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  )
+}
