@@ -1,6 +1,7 @@
 // Common Icons
 export { default as AddIcon } from './AddIcon.svg';
 export { default as BlasterIconPurple } from './BlasterIconPurple.svg';
+export { default as CheckIcon } from './CheckIcon.svg';
 export { default as ChevronDownIcon } from './ChevronDownIcon.svg';
 export { default as ChevronDownDarkIcon } from './ChevronDownDarkIcon.svg';
 export { default as ChevronRightIcon } from './ChevronRightIcon.svg';

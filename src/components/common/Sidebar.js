@@ -17,6 +17,7 @@ import {
   DashboardIcon,
   ActivityIcon,
   BlasterIcon,
+  CheckIcon,
   UsersIcon,
   CollapseIcon,
   ChevronDownIcon,
@@ -215,7 +216,7 @@ const NavItem = ({
         cursor="pointer"
         bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : 'none'}
         _hover={{
-          bg: "#4829AA",
+          bg: isToggle && isSubitem ? "bg.primary" : "#4829AA",
           fontWeight: isToggle && isSubitem ? 500 : "normal"
         }}
         {...rest}
@@ -226,10 +227,11 @@ const NavItem = ({
         }
         {
           (!isToggle || (isToggle && isSubitem)) &&
-          <Flex ml={!isToggle ? (isSubitem ? "33px" : "17px") : "0"} justifyContent="space-between" w="full">
+          <Flex ml={!isToggle ? (isSubitem ? "33px" : "17px") : "0"} justifyContent="space-between" alignItems="center" w="full">
             <span>{children}</span>
             {
-              (isToggle && isSubitem && pathname === url) && <span>✔</span>
+              (isToggle && isSubitem && pathname === url) &&
+              <span><img src={CheckIcon} alt="CheckIcon" width={20} height={20} /></span>
             }
           </Flex>
         }
