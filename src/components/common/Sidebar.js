@@ -175,10 +175,8 @@ const NavItem = ({
         role="group"
         cursor="pointer"
         bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : 'none'}
-        _hover={{
-          bg: isToggle && isSubitem ? "bg.primary" : "#4829AA",
-          fontWeight: isToggle && isSubitem ? 500 : "normal"
-        }}
+        fontWeight={pathname === url && isToggle && isSubitem ? 500 : "normal"}
+        _hover={{ bg: isToggle && isSubitem ? "bg.primary" : "#4829AA" }}
         {...rest}
       >
         {
