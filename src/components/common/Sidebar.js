@@ -25,7 +25,7 @@ import {
 } from '../../assets/images/icons';
 import Logo from '../../assets/images/hc_logo.svg';
 
-export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest }) {
+const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
   const [linkItems, setLinkItems] = useState(
     [
       { name: 'Dashboard', url: '/dashboard', icon: DashboardIcon },
@@ -249,3 +249,5 @@ const WithPopover = ({
     </Popover>
   )
 }
+
+export default Sidebar;
