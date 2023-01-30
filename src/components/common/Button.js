@@ -3,11 +3,7 @@ import {
   Button as ChakraButton
 } from "@chakra-ui/react";
 
-export default function Button({
-  icon,
-  onClick,
-  children
-}) {
+const Button = ({ icon, onClick, children }) => {
   return (
     <ChakraButton
       bg="button.primary"
@@ -27,3 +23,5 @@ export default function Button({
     </ChakraButton>
   );
 }
+
+export default Button;

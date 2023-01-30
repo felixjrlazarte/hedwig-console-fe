@@ -1,9 +1,7 @@
 import React from 'react';
 import { Spinner, Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 
-export default function Loader({
-  isLoading
-}) {
+const Loader = ({ isLoading }) => {
   return (
     <Modal isOpen={isLoading}>
       <ModalOverlay />
@@ -19,3 +17,5 @@ export default function Loader({
     </Modal>
   );
 }
+
+export default Loader;

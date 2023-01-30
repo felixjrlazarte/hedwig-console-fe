@@ -8,7 +8,7 @@ import { authState } from '../../slices/auth/authSlice';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-export default function Layout({ authorize }) {
+const Layout = ({ authorize }) => {
   const { HEDWIG_TOKEN } = useSelector(configState);
   const { userInfo } = useSelector(authState);
   const [isToggle, setIsToggle] = useState(false);
@@ -40,3 +40,5 @@ export default function Layout({ authorize }) {
     </Box>
   );
 }
+
+export default Layout;

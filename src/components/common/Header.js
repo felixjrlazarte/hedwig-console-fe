@@ -18,7 +18,7 @@ import { ChevronDownDarkIcon } from '../../assets/images/icons';
 import { authState } from '../../slices/auth/authSlice';
 import { logoutUser } from '../../slices/auth/authActions';
 
-export default function Header({ sidebarWidth, ...rest }) {
+const Header = ({ sidebarWidth, ...rest }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector(authState);
@@ -69,3 +69,5 @@ export default function Header({ sidebarWidth, ...rest }) {
     </Flex>
   );
 };
+
+export default Header;

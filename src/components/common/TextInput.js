@@ -6,7 +6,7 @@ import {
   InputRightElement
 } from "@chakra-ui/react";
 
-export default function TextInput({
+const TextInput = ({
   name,
   placeholder,
   icon,
@@ -14,7 +14,7 @@ export default function TextInput({
   errors,
   register,
   validations = {}
-}) {
+}) => {
   const ERROR_CLASS = errors[name] ? `floating__input__error` : '';
 
   return (
@@ -50,3 +50,5 @@ export default function TextInput({
     </FormControl>
   );
 }
+
+export default TextInput;
