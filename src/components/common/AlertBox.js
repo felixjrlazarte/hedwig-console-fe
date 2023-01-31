@@ -8,11 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { WarningDiamondIcon } from '../../assets/images/icons';
 
-export default function AlertBox({
-  title,
-  message,
-  onClose
-}) {
+const AlertBox = ({ title, message, onClose }) => {
   return (
     <Alert
       display="flex"
@@ -45,3 +41,5 @@ export default function AlertBox({
     </Alert>
   );
 }
+
+export default AlertBox;

@@ -1,13 +1,23 @@
 import React, { useState, Fragment } from 'react';
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from 'react-router-dom';
-import { Box, Flex, useColorModeValue, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  useColorModeValue,
+  Text,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody
+} from '@chakra-ui/react';
 import { authState } from '../../slices/auth/authSlice';
 
 import {
   DashboardIcon,
   ActivityIcon,
   BlasterIcon,
+  CheckIcon,
   UsersIcon,
   CollapseIcon,
   ChevronDownIcon,
@@ -15,7 +25,7 @@ import {
 } from '../../assets/images/icons';
 import Logo from '../../assets/images/hc_logo.svg';
 
-export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest }) {
+const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
   const [linkItems, setLinkItems] = useState(
     [
       { name: 'Dashboard', url: '/dashboard', icon: DashboardIcon },
@@ -78,36 +88,44 @@ export default function Sidebar({ isToggle, sidebarWidth, toggleSidebar, ...rest
           </Text>
         }
       </Flex>
-      {linkItems.map((link) => (
-        <Fragment key={link.name}>
-          <NavItem
-            name={link.name}
-            icon={link.icon}
-            url={link.url}
-            subItems={link.subItems}
-            isToggle={isToggle}
-            isOpen={link.isOpen}
-            authorize={link.authorize}
-            handleSubmenuClick={handleSubmenuClick}
-          >
-            {link.name}
-          </NavItem>
+      {linkItems.map((link) => {
+        if (isToggle && link.subItems) {
+          return (
+            <WithPopover key={link.name} link={link} isToggle={isToggle} handleSubmenuClick={handleSubmenuClick} />
+          )
+        }
 
-          {
-            (link.subItems && link.isOpen) && link.subItems.map((subItem) => (
-              <NavItem
-                key={subItem.name}
-                isToggle={isToggle}
-                isSubitem={true}
-                url={subItem.url}
-                handleSubmenuClick={handleSubmenuClick}
-              >
-                {subItem.name}
-              </NavItem>
-            ))
-          }
-        </Fragment>
-      ))}
+        return (
+          <Fragment key={link.name}>
+            <NavItem
+              name={link.name}
+              icon={link.icon}
+              url={link.url}
+              subItems={link.subItems}
+              isToggle={isToggle}
+              isOpen={link.isOpen}
+              authorize={link.authorize}
+              handleSubmenuClick={handleSubmenuClick}
+            >
+              {link.name}
+            </NavItem>
+
+            {
+              (link.subItems && link.isOpen) && link.subItems.map((subItem) => (
+                <NavItem
+                  key={subItem.name}
+                  isToggle={isToggle}
+                  isSubitem={true}
+                  url={subItem.url}
+                  handleSubmenuClick={handleSubmenuClick}
+                >
+                  {subItem.name}
+                </NavItem>
+              ))
+            }
+          </Fragment>
+        )
+      })}
       <Box
         position="absolute"
         transition="0.5s ease"
@@ -150,14 +168,15 @@ const NavItem = ({
       <Flex
         transition="0.5s ease"
         align="center"
-        justifyContent={isToggle ? "center" : "flex-start"}
+        justifyContent={isToggle ? (isSubitem ? "flex-start" : "center") : "flex-start"}
         height="46px"
         py="4"
-        px={isToggle ? "0" : "26px"}
+        px={isToggle ? isSubitem ? "16px" : "0" : "26px"}
         role="group"
         cursor="pointer"
-        bg={pathname === url ? '#4829AA' : 'none'}
-        _hover={{ bg: '#4829AA' }}
+        bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : 'none'}
+        fontWeight={pathname === url && isToggle && isSubitem ? 500 : "normal"}
+        _hover={{ bg: isToggle && isSubitem ? "bg.primary" : "#4829AA" }}
         {...rest}
       >
         {
@@ -165,10 +184,14 @@ const NavItem = ({
           <img src={icon} alt="Logo" width={16} height={16} />
         }
         {
-          !isToggle &&
-          <Box ml={isSubitem ? "33px" : "17px"}>
-            {children}
-          </Box>
+          (!isToggle || (isToggle && isSubitem)) &&
+          <Flex ml={!isToggle ? (isSubitem ? "33px" : "17px") : "0"} justifyContent="space-between" alignItems="center" w="full">
+            <span>{children}</span>
+            {
+              (isToggle && isSubitem && pathname === url) &&
+              <span><img src={CheckIcon} alt="CheckIcon" width={20} height={20} /></span>
+            }
+          </Flex>
         }
         {
           (subItems && !isToggle) &&
@@ -180,3 +203,49 @@ const NavItem = ({
     </NavLink>
   );
 };
+
+const WithPopover = ({
+  link,
+  isToggle,
+  handleSubmenuClick
+}) => {
+  return (
+    <Popover placement='right-start' trigger="hover">
+      <PopoverTrigger trigger="hover">
+        <Box>
+          <NavItem
+            name={link.name}
+            icon={link.icon}
+            url={link.url}
+            subItems={link.subItems}
+            isToggle={isToggle}
+            isOpen={link.isOpen}
+            authorize={link.authorize}
+            handleSubmenuClick={handleSubmenuClick}
+          >
+            {link.name}
+          </NavItem>
+        </Box>
+      </PopoverTrigger>
+      <PopoverContent bg="#4829AA" border="none" ml="-8px" w="230px">
+        <PopoverBody px={0}>
+          {
+            link.subItems && link.subItems.map((subItem) => (
+              <NavItem
+                key={subItem.name}
+                isToggle={isToggle}
+                isSubitem={true}
+                url={subItem.url}
+                handleSubmenuClick={handleSubmenuClick}
+              >
+                {subItem.name}
+              </NavItem>
+            ))
+          }
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+export default Sidebar;

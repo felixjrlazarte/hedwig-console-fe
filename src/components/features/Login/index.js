@@ -34,7 +34,7 @@ const Login = () => {
     if (error) {
       setOpenAlertBox(true);
     }
-  }, [isLoggedIn, error, navigate]);
+  }, [isLoggedIn, error, navigate, HAS_SESSION_TOKEN]);
 
   if (HAS_SESSION_TOKEN) {
     return <Navigate to="/dashboard" replace />;
