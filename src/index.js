@@ -20,7 +20,7 @@ const root = createRoot(container);
 axiosInterceptor();
 
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <ChakraProvider theme={theme}>
         <Container h="100vh" maxWidth='100%' p="0">
@@ -28,7 +28,7 @@ root.render(
         </Container>
       </ChakraProvider>
     </Provider>
-  </React.StrictMode>
+  </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -15,13 +15,13 @@ import {
 } from '@chakra-ui/react';
 import { ChevronDownDarkIcon } from '../../assets/images/icons';
 
-import { authState } from '../../slices/auth/authSlice';
+import { userState } from '../../slices/user/userSlice';
 import { logoutUser } from '../../slices/auth/authActions';
 
 const Header = ({ sidebarWidth, ...rest }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userInfo } = useSelector(authState);
+  const { details } = useSelector(userState);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -47,9 +47,9 @@ const Header = ({ sidebarWidth, ...rest }) => {
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack spacing='41px'>
                 <VStack display={{ md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontSize="sm">Juan Dela Cruz</Text>
+                  <Text fontSize="sm">{`${details.firstname} ${details.lastname}`}</Text>
                   <Text fontSize="xs" color="text.lightgray" fontWeight={500}>
-                    {userInfo.email}
+                    {details.email}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>

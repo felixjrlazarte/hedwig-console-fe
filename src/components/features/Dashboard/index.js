@@ -1,12 +1,17 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import { Stack, Text, Box, Flex } from "@chakra-ui/react";
 import Button from '../../common/Button';
 
+import { userState } from '../../../slices/user/userSlice';
+
 const Dashboard = () => {
+  const { details } = useSelector(userState);
+
   return (
     <Box>
       <Stack spacing={2} pb="32px">
-        <Text fontSize='20px' fontWeight={500}>Welcome back, Juan!</Text>
+        <Text fontSize='20px' fontWeight={500}>Welcome back, {details.firstname}</Text>
         <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lorem eros, placerat nec nisl dictum, cursus rutrum lorem.</Text>
       </Stack>
 
