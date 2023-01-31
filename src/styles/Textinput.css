@@ -13,8 +13,7 @@
 
 .floating__input {
   padding: 1.6rem 4rem 0.3rem 1rem;
-  border-bottom: 1px solid var(--input__border);
-  color: #000
+  color: #000;
 }
 
 .floating__input::placeholder {
@@ -58,6 +57,10 @@
 
 .floating__input:placeholder-shown + .floating__label::before {
   transform: translate3d(0, -2.2rem, 0) scale3d(1, 1, 1);
+}
+
+.floating__input:-webkit-autofill + .floating__label::before {
+  transform: translate3d(0, -3.12rem, 0) scale3d(0.82, 0.82, 1);
 }
 
 .floating__label::before,
