@@ -19,6 +19,7 @@ export default function Select({
   validations = {},
   watch,
   setValue,
+  defaultValue= "",
   ...rest
 }) {
   const inputRef = useRef();
@@ -78,6 +79,13 @@ export default function Select({
       window.addEventListener("click", handler);
     }
   });
+
+  useEffect(() => {
+    if (defaultValue !== "") {
+      const selected = options.find(opt => opt.value === defaultValue);
+      handleItemClick(selected);
+    }
+  }, []);
 
   return (
     <>

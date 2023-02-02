@@ -75,6 +75,7 @@ const SendSMSForm = ({
         name="senderMask"
         label="Sender Mask"
         placeholder="Select a Sender Mask"
+        defaultValue="maya"
         errors={errors}
         register={register}
         validations={{
