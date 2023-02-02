@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverBody
 } from '@chakra-ui/react';
-import { authState } from '../../slices/auth/authSlice';
+import { userState } from '../../slices/user/userSlice';
 
 import {
   DashboardIcon,
@@ -155,9 +155,9 @@ const NavItem = ({
   ...rest
 }) => {
   const { pathname } = useLocation();
-  const { userInfo } = useSelector(authState);
+  const { details } = useSelector(userState);
 
-  const role = userInfo && userInfo.role === 1 ? "ADMIN" : "COORDINATOR";
+  const role = details && details.role === 1 ? "ADMIN" : "COORDINATOR";
 
   if (authorize && authorize !== role) {
     return;
