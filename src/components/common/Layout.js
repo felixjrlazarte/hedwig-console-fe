@@ -5,16 +5,21 @@ import { Box, Center, Text, Flex } from '@chakra-ui/react';
 
 import { configState } from '../../slices/config';
 import { userState } from '../../slices/user/userSlice';
+import { blastState } from '../../slices/blast/blastSlice';
 import { getUserInfo } from '../../slices/user/userActions';
+import { getSenderMasks } from '../../slices/blast/blastActions';
 
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Loader from './Loader';
 import Logo from '../../assets/images/hc_logo_purple.svg';
 
+import { isEmpty } from '../../utils/helpers';
+
 const Layout = ({ authorize, type }) => {
   const dispatch = useDispatch();
-  const { details, isLoading } = useSelector(userState);
+  const { details, isLoading: isUserLoading } = useSelector(userState);
+  const { senderMasks, isLoading: isBlastLoading } = useSelector(blastState);
   const { HEDWIG_TOKEN } = useSelector(configState);
 
   const [isToggle, setIsToggle] = useState(false);
@@ -29,7 +34,13 @@ const Layout = ({ authorize, type }) => {
   }
 
   useEffect(() => {
-    dispatch(getUserInfo());
+    if (isEmpty(details)) {
+      dispatch(getUserInfo());
+    }
+
+    if (isEmpty(senderMasks)) {
+      dispatch(getSenderMasks());
+    }
   }, []);
 
   if (!HAS_SESSION_TOKEN) {
@@ -56,7 +67,7 @@ const Layout = ({ authorize, type }) => {
 
   return (
     <Box minH="100vh" bg={"bg.gray.100"}>
-      <Loader isLoading={isLoading} />
+      <Loader isLoading={isUserLoading || isBlastLoading} />
       <Sidebar display="block" isToggle={isToggle} sidebarWidth={sidebarWidth} toggleSidebar={handleToggle} />
       <Header sidebarWidth={sidebarWidth} />
       <Box transition="0.5s ease" ml={sidebarWidth} p="36px" h="100%">
