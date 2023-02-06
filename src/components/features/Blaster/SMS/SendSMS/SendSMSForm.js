@@ -12,6 +12,8 @@ import Button from '../../../../common/Button';
 import Radio from '../../../../common/Radio';
 import { ArrowForwardIcon } from '../../../../../assets/images/icons';
 
+import MultipleRecipientsUploader from './MultipleRecipientsUploader';
+
 const SendSMSForm = ({
   onSubmit
 }) => {
@@ -67,6 +69,14 @@ const SendSMSForm = ({
               mt="8px"
               ml="36px"
               w="auto"
+            />,
+          "multiple":
+            <MultipleRecipientsUploader
+              name="multipleRecipientFile"
+              label="Contacts List"
+              errors={errors}
+              register={register}
+              watch={watch}
             />
         }}
         mb="16px"
