@@ -56,22 +56,13 @@ export default function MultipleRecipientsUploader({
         {...rest}
       />
 
-      <Flex p="24px" h="80px" bg="#F7F7F7" borderRadius="8px" mb="8px" justifyContent="space-between" alignItems="center">
+      <Flex className="file-upload__container">
         <Flex>
           <img src={FileIcon} alt="Logo" width={24} height={24} />
           <Text ml="16px" color="text.darkgray">No file selected</Text>
         </Flex>
 
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          border="1px solid #4829AA"
-          borderRadius="100px"
-          h="32px"
-          width="124px"
-          cursor="pointer"
-          onClick={handleClick}
-        >
+        <Flex className="file-upload__button" onClick={handleClick}>
           <img src={DownloadIcon} alt="Logo" width={16} height={16} />
           <Text ml="8px" color="bg.secondary" fontWeight={500}>Select File</Text>
         </Flex>
