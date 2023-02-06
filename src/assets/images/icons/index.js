@@ -3,6 +3,7 @@ export { default as AddIcon } from './AddIcon.svg';
 export { default as ArrowDropDownIcon } from './ArrowDropDownIcon.svg';
 export { default as ArrowForwardIcon } from './ArrowForwardIcon.svg';
 export { default as BlasterIconPurple } from './BlasterIconPurple.svg';
+export { default as CheckCircleIcon } from './CheckCircleIcon.svg';
 export { default as CheckIcon } from './CheckIcon.svg';
 export { default as ChevronDownIcon } from './ChevronDownIcon.svg';
 export { default as ChevronDownDarkIcon } from './ChevronDownDarkIcon.svg';

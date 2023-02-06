@@ -5,7 +5,8 @@ import {
   Flex,
   Text
 } from "@chakra-ui/react";
-import { FileIcon, DownloadIcon } from '../../../../../assets/images/icons';
+import { FileIcon, DownloadIcon, CheckCircleIcon } from '../../../../../assets/images/icons';
+import { formatBytes } from '../../../../../utils/helpers';
 
 export default function MultipleRecipientsUploader({
   name,
@@ -16,12 +17,16 @@ export default function MultipleRecipientsUploader({
 }) {
   const inputRef = useRef();
   const file = watch && watch(name);
-  const ERROR_CLASS = errors[name] ? "radio__error" : "";
+
+  const ERROR_CLASS = errors[name] ? "file-upload__error" : "";
+  const HAS_SELECTED_FILE = file && file.length > 0;
+  const FILE_NAME = HAS_SELECTED_FILE ? file[0].name : "";
+  const FILE_SIZE = HAS_SELECTED_FILE ? formatBytes(file[0].size) : "";
 
   const { ref, ...rest } = register(name, {
     validate: (value) => {
       if (value.length < 1) {
-        return 'Files is required';
+        return 'Please upload csv file';
       }
 
       for (const file of Array.from(value)) {
@@ -56,16 +61,31 @@ export default function MultipleRecipientsUploader({
         {...rest}
       />
 
-      <Flex className="file-upload__container">
-        <Flex>
-          <img src={FileIcon} alt="Logo" width={24} height={24} />
-          <Text ml="16px" color="text.darkgray">No file selected</Text>
-        </Flex>
+      <Flex className={`file-upload__container ${ERROR_CLASS}`}>
+        {
+          !HAS_SELECTED_FILE &&
+          <>
+            <Flex alignItems="center">
+              <img src={FileIcon} alt="Logo" width={24} height={24} />
+              <Text ml="16px" color={`text.darkgray ${ERROR_CLASS}`}>No file selected</Text>
+            </Flex>
 
-        <Flex className="file-upload__button" onClick={handleClick}>
-          <img src={DownloadIcon} alt="Logo" width={16} height={16} />
-          <Text ml="8px" color="bg.secondary" fontWeight={500}>Select File</Text>
-        </Flex>
+            <Flex className="file-upload__button" onClick={handleClick}>
+              <img src={DownloadIcon} alt="Logo" width={16} height={16} />
+              <Text ml="8px" color="bg.secondary" fontWeight={500}>Select File</Text>
+            </Flex>
+          </>
+        }
+        {
+          HAS_SELECTED_FILE &&
+          <>
+            <Flex alignItems="center">
+              <img src={CheckCircleIcon} alt="Logo" width={20} height={20} />
+              <Text ml="16px" fontSize="12px" fontWeight={500}>{FILE_NAME}</Text>
+              <Text ml="8px" color="text.gray" fontSize="14px" fontWeight={500}>({FILE_SIZE})</Text>
+            </Flex>
+          </>
+        }
       </Flex>
 
       <Text ml="16px" color="text.darkgray" fontSize="12px" fontWeight={500}>

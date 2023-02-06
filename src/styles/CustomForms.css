@@ -167,6 +167,11 @@
   align-items: center;
 }
 
+.file-upload__error {
+  border-bottom: 1px solid var(--label__color__error);
+  color: var(--label__color__error);
+}
+
 .file-upload__button {
   justify-content: center;
   align-items: center;
