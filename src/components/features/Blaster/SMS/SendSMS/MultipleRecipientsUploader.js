@@ -53,7 +53,7 @@ export default function MultipleRecipientsUploader({
         type={'file'}
         multiple={false}
         hidden
-        accept=".csv, text/csv, image/*"
+        accept=".csv"
         ref={(e) => {
           ref(e);
           inputRef.current = e;
