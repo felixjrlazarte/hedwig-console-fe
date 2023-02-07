@@ -13,6 +13,8 @@ export { default as CollapseIcon } from './CollapseIcon.svg';
 export { default as DownloadIcon } from './DownloadIcon.svg';
 export { default as FileIcon } from './FileIcon.svg';
 export { default as InfoOutlineIcon } from './InfoOutlineIcon.svg';
+export { default as ReplaceIcon } from './ReplaceIcon.svg';
+export { default as SearchIcon } from './SearchIcon.svg';
 export { default as ViewIcon } from './ViewIcon.svg';
 export { default as ViewOffIcon } from './ViewOffIcon.svg';
 export { default as WarningDiamondIcon } from './WarningDiamondIcon.svg';

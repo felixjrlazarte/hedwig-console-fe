@@ -5,7 +5,7 @@ import {
   Flex,
   Text
 } from "@chakra-ui/react";
-import { FileIcon, DownloadIcon, CheckCircleIcon } from '../../../../../assets/images/icons';
+import { FileIcon, DownloadIcon, CheckCircleIcon, ReplaceIcon } from '../../../../../assets/images/icons';
 import { formatBytes } from '../../../../../utils/helpers';
 
 export default function MultipleRecipientsUploader({
@@ -41,7 +41,7 @@ export default function MultipleRecipientsUploader({
   });
 
   const handleClick = () => inputRef.current?.click();
-  console.log(file);
+
   return (
     <FormControl isInvalid={errors[name]} pb="24px" mt="8px" ml="36px" w="auto">
       {
@@ -83,6 +83,11 @@ export default function MultipleRecipientsUploader({
               <img src={CheckCircleIcon} alt="Logo" width={20} height={20} />
               <Text ml="16px" fontSize="12px" fontWeight={500}>{FILE_NAME}</Text>
               <Text ml="8px" color="text.gray" fontSize="14px" fontWeight={500}>({FILE_SIZE})</Text>
+            </Flex>
+
+            <Flex onClick={handleClick} cursor="pointer">
+              <img src={ReplaceIcon} alt="Logo" width={16} height={16} />
+              <Text className="file-upload__replace">Replace</Text>
             </Flex>
           </>
         }

@@ -186,3 +186,15 @@
 .file-upload__button:hover {
   box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(115, 117, 118, 0.2);
 }
+
+.file-upload__replace {
+  margin-left: 8px;
+  color: #4829AA;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+
+.file-upload__replace:hover {
+  color: #1F155F;
+}
