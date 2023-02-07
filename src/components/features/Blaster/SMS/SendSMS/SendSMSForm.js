@@ -1,25 +1,26 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
+
+import { blastState } from '../../../../../slices/blast/blastSlice';
+
 import TextInput from '../../../../common/TextInput';
 import Select from '../../../../common/Select';
 import Button from '../../../../common/Button';
 import Radio from '../../../../common/Radio';
-
 import { ArrowForwardIcon } from '../../../../../assets/images/icons';
 
 const SendSMSForm = ({
   onSubmit
 }) => {
   const navigate = useNavigate();
+  const { senderMasks } = useSelector(blastState);
   const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
-  const SENDER_MASK_OPTIONS = [
-    { text: "Maya", value: "maya" },
-    { text: "MayaRewards", value: "mayaRewards" },
-    { text: "MayaAgent", value: "mayaAgent" }
-  ];
 
+  const DEFAULT_MASK = senderMasks ? senderMasks[0].name : "";
+  const SENDER_MASK_OPTIONS = senderMasks ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
     { text: "Single Recipient", value: "single" },
     { text: "Multiple Recipients", value: "multiple" }
@@ -75,7 +76,7 @@ const SendSMSForm = ({
         name="senderMask"
         label="Sender Mask"
         placeholder="Select a Sender Mask"
-        defaultValue="maya"
+        defaultValue={DEFAULT_MASK}
         errors={errors}
         register={register}
         validations={{
