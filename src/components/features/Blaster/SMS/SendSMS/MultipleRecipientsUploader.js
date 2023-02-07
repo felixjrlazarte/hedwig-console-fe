@@ -88,9 +88,12 @@ export default function MultipleRecipientsUploader({
         }
       </Flex>
 
-      <Text ml="16px" color="text.darkgray" fontSize="12px" fontWeight={500}>
-        File must be in .csv format with a maximum file size of 15 MB.
-      </Text>
+      {
+        !HAS_SELECTED_FILE &&
+        <Text ml="16px" color="text.darkgray" fontSize="12px" fontWeight={500}>
+          File must be in .csv format with a maximum file size of 15 MB.
+        </Text>
+      }
 
       <FormErrorMessage fontSize="12px">
         {errors[name] && errors[name].message}
