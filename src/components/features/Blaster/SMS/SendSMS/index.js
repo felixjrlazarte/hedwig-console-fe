@@ -11,7 +11,7 @@ import SendSMSForm from './SendSMSForm';
 const SendSMS = () => {
   const onSubmit = (values) => {
     console.log(values);
-  }
+  };
 
   return (
     <Box>
@@ -29,6 +29,6 @@ const SendSMS = () => {
       <SendSMSForm onSubmit={onSubmit} />
     </Box>
   );
-}
+};
 
 export default SendSMS;

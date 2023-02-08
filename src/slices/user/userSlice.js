@@ -16,17 +16,17 @@ export const userSlice = createSlice({
   extraReducers: (builder) => { builder
     // get user details lifecycle
     .addCase(getUserInfo.pending, (state) => {
-      state.isLoading = true
-      state.error = null
+      state.isLoading = true;
+      state.error = null;
     })
     .addCase(getUserInfo.fulfilled, (state, { payload }) => {
-      state.isLoading = false
-      state.details = payload
+      state.isLoading = false;
+      state.details = payload;
     })
     .addCase(getUserInfo.rejected, (state, { payload }) => {
-      state.isLoading = false
-      state.error = payload
-    })
+      state.isLoading = false;
+      state.error = payload;
+    });
   }
 });
 

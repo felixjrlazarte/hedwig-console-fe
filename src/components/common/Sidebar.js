@@ -58,7 +58,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
 
       setLinkItems(newState);
     }
-  }
+  };
 
   return (
     <Box
@@ -92,7 +92,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
         if (isToggle && link.subItems) {
           return (
             <WithPopover key={link.name} link={link} isToggle={isToggle} handleSubmenuClick={handleSubmenuClick} />
-          )
+          );
         }
 
         return (
@@ -124,7 +124,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
               ))
             }
           </Fragment>
-        )
+        );
       })}
       <Box
         position="absolute"
@@ -245,7 +245,7 @@ const WithPopover = ({
         </PopoverBody>
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
 export default Sidebar;

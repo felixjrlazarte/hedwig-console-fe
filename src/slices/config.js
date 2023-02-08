@@ -17,7 +17,7 @@ export const configData = {
     "SERVER_URL": "http://localhost:3004/",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   }
-}
+};
 
 export const configSlice = createSlice({
   name: "config",

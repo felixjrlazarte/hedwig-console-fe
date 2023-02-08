@@ -13,7 +13,6 @@ import routes from './components/routes';
 import '../src/styles/index.css';
 import '../src/styles/CustomForms.css';
 
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 

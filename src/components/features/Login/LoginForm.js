@@ -52,6 +52,6 @@ const LoginForm = ({
       </Button>
     </form>
   );
-}
+};
 
 export default LoginForm;

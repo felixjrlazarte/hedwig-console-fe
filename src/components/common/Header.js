@@ -28,7 +28,7 @@ const Header = ({ sidebarWidth, ...rest }) => {
 
     await dispatch(logoutUser());
     navigate("/login");
-  }
+  };
 
   return (
     <Flex

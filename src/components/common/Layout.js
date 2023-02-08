@@ -31,7 +31,7 @@ const Layout = ({ authorize, type }) => {
 
   const handleToggle = () => {
     setIsToggle(!isToggle);
-  }
+  };
 
   useEffect(() => {
     if (isEmpty(details)) {
@@ -75,6 +75,6 @@ const Layout = ({ authorize, type }) => {
       </Box>
     </Box>
   );
-}
+};
 
 export default Layout;

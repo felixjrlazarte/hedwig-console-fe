@@ -26,4 +26,4 @@ export const theme = extendTheme({
       warning: "#FEF3DD"
     }
   },
-})
+});

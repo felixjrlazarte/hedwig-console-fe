@@ -16,6 +16,6 @@ const Loader = ({ isLoading }) => {
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default Loader;

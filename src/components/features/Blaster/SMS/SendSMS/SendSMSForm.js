@@ -122,7 +122,6 @@ const SendSMSForm = ({
         <Text>Message count: 1</Text>
       </Box>
 
-
       <Flex mt="64px" justifyContent="space-between">
         <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={() => navigate(-1)}>
           Cancel
@@ -133,6 +132,6 @@ const SendSMSForm = ({
       </Flex>
     </form >
   );
-}
+};
 
 export default SendSMSForm;

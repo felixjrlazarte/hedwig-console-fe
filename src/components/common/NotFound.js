@@ -8,6 +8,6 @@ const NotFound = () => {
       <Text fontSize='4xl'>Page Not Found</Text>
     </Container>
   );
-}
+};
 
 export default NotFound;

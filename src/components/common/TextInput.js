@@ -59,6 +59,6 @@ const TextInput = ({
       </FormControl>
     </>
   );
-}
+};
 
 export default TextInput;

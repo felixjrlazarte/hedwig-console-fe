@@ -39,6 +39,6 @@ const Dashboard = () => {
       </Flex>
     </Box>
   );
-}
+};
 
 export default Dashboard;

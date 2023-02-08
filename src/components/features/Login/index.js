@@ -24,7 +24,7 @@ const Login = () => {
 
   const onSubmit = (values) => {
     dispatch(loginUser(values));
-  }
+  };
 
   useEffect(() => {
     if (HAS_SESSION_TOKEN && isLoggedIn) {
@@ -81,6 +81,6 @@ const Login = () => {
       </Flex>
     </Flex>
   );
-}
+};
 
 export default Login;

@@ -19,8 +19,8 @@ const AllTheProviders = ({children}) => {
         </Container>
       </ChakraProvider>
     </Provider>
-  )
-}
+  );
+};
 
 const customRender = (ui, options) => render(ui, {wrapper: AllTheProviders, ...options});
 

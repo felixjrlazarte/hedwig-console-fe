@@ -39,6 +39,6 @@ const SMS = () => {
       <Divider mb="16px" opacity={1} />
     </Box>
   );
-}
+};
 
 export default SMS;

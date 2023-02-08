@@ -16,17 +16,17 @@ export const blastSlice = createSlice({
   extraReducers: (builder) => { builder
     // get sender masks lifecycle
     .addCase(getSenderMasks.pending, (state) => {
-      state.isLoading = true
-      state.error = null
+      state.isLoading = true;
+      state.error = null;
     })
     .addCase(getSenderMasks.fulfilled, (state, { payload }) => {
-      state.isLoading = false
-      state.senderMasks = payload
+      state.isLoading = false;
+      state.senderMasks = payload;
     })
     .addCase(getSenderMasks.rejected, (state, { payload }) => {
-      state.isLoading = false
-      state.error = payload
-    })
+      state.isLoading = false;
+      state.error = payload;
+    });
   }
 });
 

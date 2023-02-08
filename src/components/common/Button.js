@@ -24,6 +24,6 @@ const Button = ({ icon, rightIcon, onClick, children, ...rest }) => {
       {children}
     </ChakraButton>
   );
-}
+};
 
 export default Button;

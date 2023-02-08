@@ -33,12 +33,12 @@ export default function Select({
 
   const handleInputClick = () => {
     setShowMenu(!showMenu);
-  }
+  };
 
   const handleItemClick = (selected) => {
     setSelectedValue(selected);
     setValue(name, selected.value, { shouldValidate: true });
-  }
+  };
 
   const getDisplayValue = () => {
     if (selectedValue) {
@@ -46,7 +46,7 @@ export default function Select({
     }
 
     return placeholder;
-  }
+  };
 
   const renderOptions = (option) => {
     const isSelected = selectedValue && selectedValue.value === option.value;
@@ -65,7 +65,7 @@ export default function Select({
         }
       </Flex>
     );
-  }
+  };
 
   useEffect(() => {
     const handler = (e) => {
@@ -77,7 +77,7 @@ export default function Select({
     window.addEventListener("click", handler);
     return () => {
       window.addEventListener("click", handler);
-    }
+    };
   });
 
   useEffect(() => {

@@ -4,7 +4,7 @@ export const isEmpty = (arg) => {
     arg.length === 0 || // Check for empty String (Bonus check for empty Array)
     (typeof arg === 'object' && Object.keys(arg).length === 0) // Check for empty Object or Array
   );
-}
+};
 
 export const formatBytes = (bytes, decimals = 2) => {
   if (!+bytes) {
@@ -18,4 +18,4 @@ export const formatBytes = (bytes, decimals = 2) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-}
+};

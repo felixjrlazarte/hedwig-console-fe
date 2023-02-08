@@ -23,8 +23,8 @@ const SidebarComponent = () => {
     <Provider store={store}>
       <RouterProvider router={routes} />
     </Provider>
-  )
-}
+  );
+};
 
 describe("Sidebar component", () => {
   it("should render Sidebar component correctly", () => {
