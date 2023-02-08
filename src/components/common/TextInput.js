@@ -3,7 +3,8 @@ import {
   FormErrorMessage,
   FormControl,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  Text
 } from "@chakra-ui/react";
 
 const TextInput = ({
@@ -13,41 +14,50 @@ const TextInput = ({
   type,
   errors,
   register,
-  validations = {}
+  label,
+  validations = {},
+  ...rest
 }) => {
-  const ERROR_CLASS = errors[name] ? `floating__input__error` : '';
+  const ERROR_CLASS = errors[name] ? "floating__error" : "";
+  const INPUT_ERROR_CLASS = errors[name] ? "floating__input__error" : "";
 
   return (
-    <FormControl isInvalid={errors[name]} pb="24px">
-      <InputGroup>
-        <div className={'floating'}>
-          <input
-            id={name}
-            className={`custom__input floating__input ${ERROR_CLASS}`}
-            type={type ? type : 'text'}
-            placeholder={placeholder}
-            {...register(name, validations)}
-          />
-          <label
-            htmlFor={name} 
-            className={`floating__label ${ERROR_CLASS}`}
-            data-content={placeholder}
-          >
-            <span className={`hidden__visually`}>{placeholder}</span>
-          </label>
-        </div>
+    <>
+      {
+        label && <Text mb="16px">{ label }</Text>
+      }
 
-        {
-          icon &&
-          <InputRightElement width='4.5rem' alignItems="flex-end" cursor="pointer">
-            {icon}
-          </InputRightElement>
-        }
-      </InputGroup>
-      <FormErrorMessage fontSize="12px">
-        {errors[name] && errors[name].message}
-      </FormErrorMessage>
-    </FormControl>
+      <FormControl isInvalid={errors[name]} pb="24px" {...rest}>
+        <InputGroup>
+          <div className={`floating ${ERROR_CLASS}`}>
+            <input
+              id={name}
+              className={`custom__input floating__input`}
+              type={type ? type : 'text'}
+              placeholder={placeholder}
+              {...register(name, validations)}
+            />
+            <label
+              htmlFor={name}
+              className={`floating__label ${INPUT_ERROR_CLASS}`}
+              data-content={placeholder}
+            >
+              <span className={`hidden__visually`}>{placeholder}</span>
+            </label>
+          </div>
+
+          {
+            icon &&
+            <InputRightElement width='4.5rem' alignItems="flex-end" cursor="pointer">
+              {icon}
+            </InputRightElement>
+          }
+        </InputGroup>
+        <FormErrorMessage fontSize="12px">
+          {errors[name] && errors[name].message}
+        </FormErrorMessage>
+      </FormControl>
+    </>
   );
 }
 

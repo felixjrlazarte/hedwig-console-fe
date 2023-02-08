@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import {
   Flex,
   Divider,
@@ -13,6 +14,8 @@ import Button from '../../../common/Button';
 import { AddIcon, BlasterIconPurple, ChevronRightIcon } from '../../../../assets/images/icons';
 
 const SMS = () => {
+  const navigate = useNavigate();
+
   return (
     <Box bg="white" w="full" borderRadius='xl' borderWidth='1px' borderColor="#E0E4E6">
       <Header px="24px" py="28px">
@@ -29,7 +32,7 @@ const SMS = () => {
 
         <Flex justifyContent="space-between">
           <Title ml="8px" fontSize="32px">SMS</Title>
-          <Button icon={AddIcon}>Send an SMS Blast</Button>
+          <Button icon={AddIcon} onClick={() => navigate("send")}>Send an SMS Blast</Button>
         </Flex>
       </Header>
 

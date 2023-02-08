@@ -4,8 +4,8 @@ import { Flex, Box, Text, Link } from "@chakra-ui/react";
 import { useNavigate, Navigate } from "react-router-dom";
 
 import LoginForm from './LoginForm';
-import AlertBox from '../../common/AlertBox';
 import Loader from '../../common/Loader';
+import ErrorAlertBox from '../../common/ErrorAlertBox';
 
 import { configState } from '../../../slices/config';
 import { authState } from '../../../slices/auth/authSlice';
@@ -57,7 +57,7 @@ const Login = () => {
 
           {
             openAlertBox &&
-            <AlertBox
+            <ErrorAlertBox
               message={
                 <>
                   {"Account does not exist. If you would like to log into the dashboard, please "}

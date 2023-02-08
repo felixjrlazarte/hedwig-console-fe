@@ -3,7 +3,7 @@ import {
   Button as ChakraButton
 } from "@chakra-ui/react";
 
-const Button = ({ icon, onClick, children }) => {
+const Button = ({ icon, rightIcon, onClick, children, ...rest }) => {
   return (
     <ChakraButton
       bg="button.primary"
@@ -17,7 +17,9 @@ const Button = ({ icon, onClick, children }) => {
       alignSelf={"center"}
       _hover={{ bg: 'bg.primary' }}
       leftIcon={icon ? <img src={icon} alt="icon" width={20} height={20} /> : null}
+      rightIcon={rightIcon ? <img src={rightIcon} alt="icon" width={20} height={20} /> : null}
       onClick={onClick}
+      {...rest}
     >
       {children}
     </ChakraButton>

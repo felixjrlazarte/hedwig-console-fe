@@ -1,3 +1,4 @@
+/* Custom text input style */
 .custom__input {
   background: none;
   width: 100%;
@@ -9,6 +10,7 @@
   transition: background-color 0.2s ease;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  border-bottom: 1px solid var(--input__border);
 }
 
 .floating__input {
@@ -69,8 +71,11 @@
 }
 
 .floating__input__error {
+  color: var(--label__color__error) !important;
+}
+
+.floating__error {
   border-bottom: 1px solid var(--label__color__error);
-  color: var(--label__color__error);
 }
 
 .hidden__visually {
@@ -83,4 +88,48 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+/* Custom select style */
+.custom__select {
+  position: relative;
+}
+
+.floating__select {
+  cursor: pointer;
+  padding: 1.6rem 4rem 0.3rem 1rem;
+  background-image: url('../assets/images/icons/ArrowDropDownIcon.svg');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  background-size: 26px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.floating__select-placeholder {
+  color: var(--label__color);
+  padding: 0.95rem 4rem 0.95rem 1rem;
+}
+
+/* Custom radio style */
+.custom__radio > input[type="radio"] {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #A8ADB0;
+	border-radius: 50%;
+	background-clip: content-box;
+	padding: 3px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.custom__radio > input[type="radio"]:checked {
+	background-color: #00B464;
+  border-color: #00B464;
+}
+
+#radio__error {
+  border-color: var(--label__color__error);
 }
