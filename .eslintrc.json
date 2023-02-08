@@ -20,6 +20,7 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "react/prop-types": 0,
+        "quotes": ["error", "double"],
         "indent": ["error", 2],
         "semi": ["error", "always"],
         "eol-last": 0,

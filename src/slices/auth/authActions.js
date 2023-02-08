@@ -7,10 +7,10 @@ import jwt_decode from "jwt-decode";
 const CONFIG = configData[process.env.REACT_APP_NODE_ENV];
 
 export const loginUser = createAsyncThunk(
-  'user/login',
+  "user/login",
   async (values, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/user/login', values);
+      const { data } = await axios.post("/user/login", values);
       const user = jwt_decode(data.token);
       sessionStorage.setItem(CONFIG.HEDWIG_TOKEN, data.token);
       return {
@@ -29,7 +29,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  'user/logout',
+  "user/logout",
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get('/user/logout');

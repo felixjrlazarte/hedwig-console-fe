@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 
-import { isEmpty } from '../../../../../utils/helpers';
-import { blastState } from '../../../../../slices/blast/blastSlice';
+import { isEmpty } from "../../../../../utils/helpers";
+import { blastState } from "../../../../../slices/blast/blastSlice";
 
-import TextInput from '../../../../common/TextInput';
-import Select from '../../../../common/Select';
-import Button from '../../../../common/Button';
-import Radio from '../../../../common/Radio';
-import { ArrowForwardIcon } from '../../../../../assets/images/icons';
+import TextInput from "../../../../common/TextInput";
+import Select from "../../../../common/Select";
+import Button from "../../../../common/Button";
+import Radio from "../../../../common/Radio";
+import { ArrowForwardIcon } from "../../../../../assets/images/icons";
 
-import MultipleRecipientsUploader from './MultipleRecipientsUploader';
+import MultipleRecipientsUploader from "./MultipleRecipientsUploader";
 
 const SendSMSForm = ({
   onSubmit

@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import configReducer from './config';
+import { configureStore } from "@reduxjs/toolkit";
+import configReducer from "./config";
 // Reducers
-import authReducer from './auth/authSlice';
-import userReducer from './user/userSlice';
-import blastReducer from './blast/blastSlice';
+import authReducer from "./auth/authSlice";
+import userReducer from "./user/userSlice";
+import blastReducer from "./blast/blastSlice";
 
 export const store = configureStore({
   reducer: {

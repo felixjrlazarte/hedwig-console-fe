@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Button as ChakraButton
 } from "@chakra-ui/react";
@@ -15,7 +15,7 @@ const Button = ({ icon, rightIcon, onClick, children, ...rest }) => {
       colorScheme="none"
       borderRadius="100px"
       alignSelf={"center"}
-      _hover={{ bg: 'bg.primary' }}
+      _hover={{ bg: "bg.primary" }}
       leftIcon={icon ? <img src={icon} alt="icon" width={20} height={20} /> : null}
       rightIcon={rightIcon ? <img src={rightIcon} alt="icon" width={20} height={20} /> : null}
       onClick={onClick}

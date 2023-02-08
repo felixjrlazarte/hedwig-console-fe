@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   Flex,
   Box,
   Text,
   Text as Title,
 } from "@chakra-ui/react";
-import AlertBox from '../../../../common/AlertBox';
-import SendSMSForm from './SendSMSForm';
+import AlertBox from "../../../../common/AlertBox";
+import SendSMSForm from "./SendSMSForm";
 
 const SendSMS = () => {
   const onSubmit = (values) => {

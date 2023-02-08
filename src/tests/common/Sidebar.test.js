@@ -1,5 +1,5 @@
-import { fireEvent, render } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { fireEvent, render } from "@testing-library/react";
+import { Provider } from "react-redux";
 import {
   RouterProvider,
   createBrowserRouter,
@@ -7,8 +7,8 @@ import {
   Route
 } from "react-router-dom";
 
-import { store } from '../../slices/store';
-import Sidebar from '../../components/common/Sidebar';
+import { store } from "../../slices/store";
+import Sidebar from "../../components/common/Sidebar";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(

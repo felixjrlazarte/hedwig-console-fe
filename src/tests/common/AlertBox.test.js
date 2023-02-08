@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react';
-import AlertBox from '../../components/common/AlertBox';
+import { render } from "@testing-library/react";
+import AlertBox from "../../components/common/AlertBox";
 
 describe("AlertBox component", () => {
   it("should render AlertBox component correctly", () => {
