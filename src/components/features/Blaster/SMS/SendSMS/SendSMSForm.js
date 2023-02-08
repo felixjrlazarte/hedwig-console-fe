@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 
+import { isEmpty } from '../../../../../utils/helpers';
 import { blastState } from '../../../../../slices/blast/blastSlice';
 
 import TextInput from '../../../../common/TextInput';
@@ -12,6 +13,8 @@ import Button from '../../../../common/Button';
 import Radio from '../../../../common/Radio';
 import { ArrowForwardIcon } from '../../../../../assets/images/icons';
 
+import MultipleRecipientsUploader from './MultipleRecipientsUploader';
+
 const SendSMSForm = ({
   onSubmit
 }) => {
@@ -19,8 +22,8 @@ const SendSMSForm = ({
   const { senderMasks } = useSelector(blastState);
   const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
 
-  const DEFAULT_MASK = senderMasks ? senderMasks[0].name : "";
-  const SENDER_MASK_OPTIONS = senderMasks ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
+  const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
+  const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
     { text: "Single Recipient", value: "single" },
     { text: "Multiple Recipients", value: "multiple" }
@@ -67,6 +70,14 @@ const SendSMSForm = ({
               mt="8px"
               ml="36px"
               w="auto"
+            />,
+          "multiple":
+            <MultipleRecipientsUploader
+              name="multipleRecipientFile"
+              label="Contacts List"
+              errors={errors}
+              register={register}
+              watch={watch}
             />
         }}
         mb="16px"
