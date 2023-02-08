@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { Stack, Text, Box, Flex } from "@chakra-ui/react";
 import Button from '../../common/Button';
 
@@ -23,13 +24,18 @@ const Dashboard = () => {
         justifyContent="space-between"
       >
         <Flex>
-          <Box w="64px" h="64px" bg="bg.gray.200" borderRadius="md" mr={4}/>
+          <Box w="64px" h="64px" bg="bg.gray.200" borderRadius="md" mr={4} />
           <Stack spacing={2} pb="32px">
             <Text fontWeight={500}>Blast!</Text>
             <Text fontSize="14px">Create an SMS Blastoff</Text>
           </Stack>
         </Flex>
-        <Button>Send an SMS Blast</Button>
+
+        <Flex justifyContent="center">
+          <NavLink to="/blaster/sms/send">
+            <Button>Send an SMS Blast</Button>
+          </NavLink>
+        </Flex>
       </Flex>
     </Box>
   );
