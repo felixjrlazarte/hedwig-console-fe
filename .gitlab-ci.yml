@@ -4,6 +4,14 @@ stages:
   - post-build
   - test
 
+eslint:
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  stage: pre-build
+  before_script:
+    - npm install -g eslint
+  script:
+    - npm run lint
+
 unit-test:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
   stage: pre-build
