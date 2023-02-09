@@ -32,7 +32,7 @@ export const logoutUser = createAsyncThunk(
   "user/logout",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/user/logout');
+      const { data } = await axios.get("/user/logout");
 
       if (data.message) {
         sessionStorage.removeItem(CONFIG.HEDWIG_TOKEN);
