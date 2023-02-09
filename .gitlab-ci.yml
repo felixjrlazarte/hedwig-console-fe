@@ -23,8 +23,8 @@ unit-test:
   script:
     - npm run test:test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  only:
-    - tags
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
 # code-quality:
 #   stage: pre-build
