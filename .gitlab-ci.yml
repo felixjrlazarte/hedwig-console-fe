@@ -12,6 +12,8 @@ eslint:
     - npm install eslint-plugin-react
   script:
     - npm run lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
 unit-test:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
