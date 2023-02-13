@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Users = () => {
   return (
@@ -6,6 +6,6 @@ const Users = () => {
       <h1>Welcome to hedwig console Users</h1>
     </div>
   );
-}
+};
 
 export default Users;

@@ -1,11 +1,11 @@
-import React, { } from 'react';
+import React, { } from "react";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
   Box
 } from "@chakra-ui/react";
-import { InfoOutlineIcon } from '../../assets/images/icons';
+import { InfoOutlineIcon } from "../../assets/images/icons";
 
 const AlertBox = ({
   title,
@@ -24,8 +24,8 @@ const AlertBox = ({
     <Alert
       display="flex"
       bg={ALERT_PROPERTIES[type].backgroundColor}
-      color='black'
-      mb='24px'
+      color="black"
+      mb="24px"
       borderRadius="4px"
       p="20px"
     >
@@ -42,6 +42,6 @@ const AlertBox = ({
       </Box>
     </Alert>
   );
-}
+};
 
 export default AlertBox;

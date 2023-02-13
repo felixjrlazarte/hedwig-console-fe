@@ -1,6 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -10,8 +10,8 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverBody
-} from '@chakra-ui/react';
-import { userState } from '../../slices/user/userSlice';
+} from "@chakra-ui/react";
+import { userState } from "../../slices/user/userSlice";
 
 import {
   DashboardIcon,
@@ -22,27 +22,27 @@ import {
   CollapseIcon,
   ChevronDownIcon,
   ChevronUpIcon
-} from '../../assets/images/icons';
-import Logo from '../../assets/images/hc_logo.svg';
+} from "../../assets/images/icons";
+import Logo from "../../assets/images/hc_logo.svg";
 
 const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
   const [linkItems, setLinkItems] = useState(
     [
-      { name: 'Dashboard', url: '/dashboard', icon: DashboardIcon },
+      { name: "Dashboard", url: "/dashboard", icon: DashboardIcon },
       {
-        name: 'Blaster', icon: BlasterIcon,
-        subItems: [{ name: "SMS", url: '/blaster/sms', }],
+        name: "Blaster", icon: BlasterIcon,
+        subItems: [{ name: "SMS", url: "/blaster/sms", }],
         isOpen: false
       },
       {
-        name: 'Activity', icon: ActivityIcon,
+        name: "Activity", icon: ActivityIcon,
         subItems: [
-          { name: "My Activities", url: '/activity/my-activities', },
-          { name: "Audit Trail", url: '/activity/audit-trail', }
+          { name: "My Activities", url: "/activity/my-activities", },
+          { name: "Audit Trail", url: "/activity/audit-trail", }
         ],
         isOpen: false
       },
-      { name: 'Users', url: '/users', icon: UsersIcon, authorize: "ADMIN" }
+      { name: "Users", url: "/users", icon: UsersIcon, authorize: "ADMIN" }
     ]
   );
 
@@ -58,7 +58,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
 
       setLinkItems(newState);
     }
-  }
+  };
 
   return (
     <Box
@@ -67,7 +67,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
       color="white"
       bg="bg.primary"
       borderRight="1px"
-      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={sidebarWidth}
       pos="fixed"
       h="full"
@@ -92,7 +92,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
         if (isToggle && link.subItems) {
           return (
             <WithPopover key={link.name} link={link} isToggle={isToggle} handleSubmenuClick={handleSubmenuClick} />
-          )
+          );
         }
 
         return (
@@ -124,7 +124,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
               ))
             }
           </Fragment>
-        )
+        );
       })}
       <Box
         position="absolute"
@@ -164,7 +164,7 @@ const NavItem = ({
   }
 
   return (
-    <NavLink to={url ? url : '#'} onClick={() => handleSubmenuClick(name, subItems)}>
+    <NavLink to={url ? url : "#"} onClick={() => handleSubmenuClick(name, subItems)}>
       <Flex
         transition="0.5s ease"
         align="center"
@@ -174,7 +174,7 @@ const NavItem = ({
         px={isToggle ? isSubitem ? "16px" : "0" : "26px"}
         role="group"
         cursor="pointer"
-        bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : 'none'}
+        bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : "none"}
         fontWeight={pathname === url && isToggle && isSubitem ? 500 : "normal"}
         _hover={{ bg: isToggle && isSubitem ? "bg.primary" : "#4829AA" }}
         {...rest}
@@ -210,7 +210,7 @@ const WithPopover = ({
   handleSubmenuClick
 }) => {
   return (
-    <Popover placement='right-start' trigger="hover">
+    <Popover placement="right-start" trigger="hover">
       <PopoverTrigger trigger="hover">
         <Box>
           <NavItem
@@ -245,7 +245,7 @@ const WithPopover = ({
         </PopoverBody>
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};
 
 export default Sidebar;

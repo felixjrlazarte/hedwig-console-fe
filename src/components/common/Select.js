@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import {
   FormErrorMessage,
   FormControl,
@@ -7,7 +7,7 @@ import {
   Flex,
   Box
 } from "@chakra-ui/react";
-import { ArrowDropDownIcon, CheckIcon } from '../../assets/images/icons';
+import { ArrowDropDownIcon, CheckIcon } from "../../assets/images/icons";
 
 export default function Select({
   name,
@@ -33,12 +33,12 @@ export default function Select({
 
   const handleInputClick = () => {
     setShowMenu(!showMenu);
-  }
+  };
 
   const handleItemClick = (selected) => {
     setSelectedValue(selected);
     setValue(name, selected.value, { shouldValidate: true });
-  }
+  };
 
   const getDisplayValue = () => {
     if (selectedValue) {
@@ -46,7 +46,7 @@ export default function Select({
     }
 
     return placeholder;
-  }
+  };
 
   const renderOptions = (option) => {
     const isSelected = selectedValue && selectedValue.value === option.value;
@@ -54,7 +54,7 @@ export default function Select({
     return (
       <Flex
         key={option.value}
-        className={`dropdown__item ${isSelected ? 'dropdown__item-selected' : ''}`}
+        className={`dropdown__item ${isSelected ? "dropdown__item-selected" : ""}`}
         justifyContent="space-between"
         alignItems="center"
         onClick={() => handleItemClick(option)}
@@ -65,7 +65,7 @@ export default function Select({
         }
       </Flex>
     );
-  }
+  };
 
   useEffect(() => {
     const handler = (e) => {
@@ -77,7 +77,7 @@ export default function Select({
     window.addEventListener("click", handler);
     return () => {
       window.addEventListener("click", handler);
-    }
+    };
   });
 
   useEffect(() => {
@@ -110,7 +110,7 @@ export default function Select({
 
             {
               showMenu &&
-              <Box className='dropdown__menu'>
+              <Box className="dropdown__menu">
                 {
                   options.map((option) => renderOptions(option))
                 }
@@ -124,7 +124,7 @@ export default function Select({
                 className={`floating__label ${ERROR_CLASS}`}
                 data-content={placeholder}
               >
-                <span className={`hidden__visually`}>{placeholder}</span>
+                <span className="hidden__visually">{placeholder}</span>
               </label>
             }
           </Box>

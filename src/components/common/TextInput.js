@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   FormErrorMessage,
   FormControl,
@@ -32,8 +32,8 @@ const TextInput = ({
           <div className={`floating ${ERROR_CLASS}`}>
             <input
               id={name}
-              className={`custom__input floating__input`}
-              type={type ? type : 'text'}
+              className="custom__input floating__input"
+              type={type ? type : "text"}
               placeholder={placeholder}
               {...register(name, validations)}
             />
@@ -42,13 +42,13 @@ const TextInput = ({
               className={`floating__label ${INPUT_ERROR_CLASS}`}
               data-content={placeholder}
             >
-              <span className={`hidden__visually`}>{placeholder}</span>
+              <span className="hidden__visually">{placeholder}</span>
             </label>
           </div>
 
           {
             icon &&
-            <InputRightElement width='4.5rem' alignItems="flex-end" cursor="pointer">
+            <InputRightElement width="4.5rem" alignItems="flex-end" cursor="pointer">
               {icon}
             </InputRightElement>
           }
@@ -59,6 +59,6 @@ const TextInput = ({
       </FormControl>
     </>
   );
-}
+};
 
 export default TextInput;

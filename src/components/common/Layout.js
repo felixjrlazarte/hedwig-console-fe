@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Outlet, Navigate } from 'react-router-dom';
-import { Box, Center, Text, Flex } from '@chakra-ui/react';
+import { Outlet, Navigate } from "react-router-dom";
+import { Box, Center, Text, Flex } from "@chakra-ui/react";
 
-import { configState } from '../../slices/config';
-import { userState } from '../../slices/user/userSlice';
-import { blastState } from '../../slices/blast/blastSlice';
-import { getUserInfo } from '../../slices/user/userActions';
-import { getSenderMasks } from '../../slices/blast/blastActions';
+import { configState } from "../../slices/config";
+import { userState } from "../../slices/user/userSlice";
+import { blastState } from "../../slices/blast/blastSlice";
+import { getUserInfo } from "../../slices/user/userActions";
+import { getSenderMasks } from "../../slices/blast/blastActions";
 
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Loader from './Loader';
-import Logo from '../../assets/images/hc_logo_purple.svg';
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import Loader from "./Loader";
+import Logo from "../../assets/images/hc_logo_purple.svg";
 
-import { isEmpty } from '../../utils/helpers';
+import { isEmpty } from "../../utils/helpers";
 
 const Layout = ({ authorize, type }) => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Layout = ({ authorize, type }) => {
 
   const handleToggle = () => {
     setIsToggle(!isToggle);
-  }
+  };
 
   useEffect(() => {
     if (isEmpty(details)) {
@@ -58,7 +58,7 @@ const Layout = ({ authorize, type }) => {
           <img src={Logo} alt="blaster-icon" width={28} height={32} />
           <Text ml="8px" fontSize="24px" color="bg.secondary" fontFamily="sans-serif" fontWeight="bold">HEDWIG</Text>
         </Center>
-        <Box w="620px" bg="white" py="40px" px="24px" mb="25px" borderRadius='lg' borderWidth='1px' borderColor="#E0E4E6">
+        <Box w="620px" bg="white" py="40px" px="24px" mb="25px" borderRadius="lg" borderWidth="1px" borderColor="#E0E4E6">
           <Outlet />
         </Box>
       </Flex>
@@ -75,6 +75,6 @@ const Layout = ({ authorize, type }) => {
       </Box>
     </Box>
   );
-}
+};
 
 export default Layout;

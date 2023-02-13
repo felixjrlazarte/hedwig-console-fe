@@ -4,6 +4,17 @@ stages:
   - post-build
   - test
 
+eslint:
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  stage: pre-build
+  before_script:
+    - npm install eslint@8.33.0
+    - npm install eslint-plugin-react
+  script:
+    - npm run lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
 unit-test:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
   stage: pre-build
@@ -12,8 +23,8 @@ unit-test:
   script:
     - npm run test:test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  only:
-    - tags
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 
 # code-quality:
 #   stage: pre-build

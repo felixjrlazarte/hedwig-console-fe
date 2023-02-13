@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 import {
   FormErrorMessage,
   FormControl,
   Flex,
   Text
 } from "@chakra-ui/react";
-import { FileIcon, DownloadIcon, CheckCircleIcon, ReplaceIcon } from '../../../../../assets/images/icons';
-import { formatBytes } from '../../../../../utils/helpers';
+import { FileIcon, DownloadIcon, CheckCircleIcon, ReplaceIcon } from "../../../../../assets/images/icons";
+import { formatBytes } from "../../../../../utils/helpers";
 
 export default function MultipleRecipientsUploader({
   name,
@@ -26,14 +26,14 @@ export default function MultipleRecipientsUploader({
   const { ref, ...rest } = register(name, {
     validate: (value) => {
       if (value.length < 1) {
-        return 'Please upload csv file';
+        return "Please upload csv file";
       }
 
       for (const file of Array.from(value)) {
         const fsMb = file.size / (1024 * 1024);
         const MAX_FILE_SIZE = 15;
         if (fsMb > MAX_FILE_SIZE) {
-          return 'Max file size 15mb';
+          return "Max file size 15mb";
         }
       }
       return true;
@@ -50,7 +50,7 @@ export default function MultipleRecipientsUploader({
 
       <input
         name={name}
-        type={'file'}
+        type={"file"}
         multiple={false}
         hidden
         accept=".csv"

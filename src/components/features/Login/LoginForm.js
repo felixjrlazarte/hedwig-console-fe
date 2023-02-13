@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Link } from "@chakra-ui/react";
-import TextInput from '../../common/TextInput';
+import TextInput from "../../common/TextInput";
 
-import { ViewIcon, ViewOffIcon } from '../../../assets/images/icons';
+import { ViewIcon, ViewOffIcon } from "../../../assets/images/icons";
 
 const LoginForm = ({
   onSubmit
@@ -43,7 +43,7 @@ const LoginForm = ({
         }}
       />
 
-      <Link color='text.link' fontSize="16px" fontWeight={500} textDecoration="underline" href='#'>
+      <Link color="text.link" fontSize="16px" fontWeight={500} textDecoration="underline" href="#">
         Request for an account
       </Link>
 
@@ -52,6 +52,6 @@ const LoginForm = ({
       </Button>
     </form>
   );
-}
+};
 
 export default LoginForm;

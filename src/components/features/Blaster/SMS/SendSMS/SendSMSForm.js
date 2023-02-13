@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 
-import { isEmpty } from '../../../../../utils/helpers';
-import { blastState } from '../../../../../slices/blast/blastSlice';
+import { isEmpty } from "../../../../../utils/helpers";
+import { blastState } from "../../../../../slices/blast/blastSlice";
 
-import TextInput from '../../../../common/TextInput';
-import Select from '../../../../common/Select';
-import Button from '../../../../common/Button';
-import Radio from '../../../../common/Radio';
-import { ArrowForwardIcon } from '../../../../../assets/images/icons';
+import TextInput from "../../../../common/TextInput";
+import Select from "../../../../common/Select";
+import Button from "../../../../common/Button";
+import Radio from "../../../../common/Radio";
+import { ArrowForwardIcon } from "../../../../../assets/images/icons";
 
-import MultipleRecipientsUploader from './MultipleRecipientsUploader';
+import MultipleRecipientsUploader from "./MultipleRecipientsUploader";
 
 const SendSMSForm = ({
   onSubmit
@@ -122,7 +122,6 @@ const SendSMSForm = ({
         <Text>Message count: 1</Text>
       </Box>
 
-
       <Flex mt="64px" justifyContent="space-between">
         <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={() => navigate(-1)}>
           Cancel
@@ -133,6 +132,6 @@ const SendSMSForm = ({
       </Flex>
     </form >
   );
-}
+};
 
 export default SendSMSForm;

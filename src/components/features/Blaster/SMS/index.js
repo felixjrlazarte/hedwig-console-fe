@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Flex,
@@ -10,23 +10,23 @@ import {
   Text as Title,
   Box as Header
 } from "@chakra-ui/react";
-import Button from '../../../common/Button';
-import { AddIcon, BlasterIconPurple, ChevronRightIcon } from '../../../../assets/images/icons';
+import Button from "../../../common/Button";
+import { AddIcon, BlasterIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
 
 const SMS = () => {
   const navigate = useNavigate();
 
   return (
-    <Box bg="white" w="full" borderRadius='xl' borderWidth='1px' borderColor="#E0E4E6">
+    <Box bg="white" w="full" borderRadius="xl" borderWidth="1px" borderColor="#E0E4E6">
       <Header px="24px" py="28px">
-        <Breadcrumb fontSize={"14px"} spacing='8px' mb="28px" separator={<img src={ChevronRightIcon} alt="right-icon" width={20} height={20} />}>
+        <Breadcrumb fontSize={"14px"} spacing="8px" mb="28px" separator={<img src={ChevronRightIcon} alt="right-icon" width={20} height={20} />}>
           <BreadcrumbItem>
             <img src={BlasterIconPurple} alt="blaster-icon" width={20} height={20} />
-            <BreadcrumbLink color="text.link" ml="8px" href='#'>Blaster</BreadcrumbLink>
+            <BreadcrumbLink color="text.link" ml="8px" href="#">Blaster</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href='#'>SMS</BreadcrumbLink>
+            <BreadcrumbLink href="#">SMS</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
 
@@ -39,6 +39,6 @@ const SMS = () => {
       <Divider mb="16px" opacity={1} />
     </Box>
   );
-}
+};
 
 export default SMS;

@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { } from "react";
 import {
   Alert,
   AlertDescription,
@@ -6,7 +6,7 @@ import {
   Box,
   CloseButton
 } from "@chakra-ui/react";
-import { WarningDiamondIcon } from '../../assets/images/icons';
+import { WarningDiamondIcon } from "../../assets/images/icons";
 
 export default function ErrorAlertBox({
   title,
@@ -16,9 +16,9 @@ export default function ErrorAlertBox({
   return (
     <Alert
       display="flex"
-      bg='bg.warning'
-      color='black'
-      mb='24px'
+      bg="bg.warning"
+      color="black"
+      mb="24px"
       borderColor="bg.alert"
       borderWidth={1}
       borderRadius="4px"
@@ -36,8 +36,8 @@ export default function ErrorAlertBox({
         </AlertDescription>
       </Box>
       <CloseButton
-        alignSelf='flex-start'
-        position='relative'
+        alignSelf="flex-start"
+        position="relative"
         right={-1}
         top={-1}
         onClick={onClose}
