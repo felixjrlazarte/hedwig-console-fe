@@ -1,8 +1,17 @@
 export const isEmpty = (arg) => {
+  const checkProperties = (obj) => {
+    for (var key in obj) {
+      if (obj[key] === null || obj[key] === "") {
+        return true;
+      }
+    }
+    return false;
+  };
+
   return (
     arg == null || // Check for null or undefined
     arg.length === 0 || // Check for empty String (Bonus check for empty Array)
-    (typeof arg === "object" && Object.keys(arg).length === 0) // Check for empty Object or Array
+    (typeof arg === "object" && (Object.keys(arg).length === 0 || checkProperties(arg))) // Check for empty Object or Array
   );
 };
 
