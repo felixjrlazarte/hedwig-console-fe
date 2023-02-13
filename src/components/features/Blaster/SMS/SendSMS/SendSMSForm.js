@@ -22,6 +22,7 @@ const SendSMSForm = ({
   const { senderMasks } = useSelector(blastState);
   const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
 
+  const IS_BUTTON_DISABLED = isEmpty(watch());
   const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
   const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
@@ -39,7 +40,11 @@ const SendSMSForm = ({
         errors={errors}
         register={register}
         validations={{
-          required: "Please enter an SMS Blast name"
+          required: "Please enter an SMS Blast name",
+          pattern: {
+            value: /^[\w-_.]+$/i,
+            message: "Please enter a valid Blast name"
+          }
         }}
         mb="16px"
       />
@@ -126,7 +131,7 @@ const SendSMSForm = ({
         <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={() => navigate(-1)}>
           Cancel
         </Button>
-        <Button type="submit" width="121px" rightIcon={ArrowForwardIcon}>
+        <Button type="submit" width="121px" rightIcon={ArrowForwardIcon} disabled={IS_BUTTON_DISABLED}>
           Next
         </Button>
       </Flex>
