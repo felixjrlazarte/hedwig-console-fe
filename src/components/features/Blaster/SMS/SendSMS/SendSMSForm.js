@@ -22,8 +22,13 @@ const SendSMSForm = ({
   const { senderMasks } = useSelector(blastState);
   const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
 
+  const MAX_NON_UNICODE_CHAR = 800;
+  const MAX_WITH_UNICODE_CHAR = 350;
+  const BLAST_MESSAGE_CHAR_COUNT = watch("blastMessage").length;
+  const BLAST_MESSAGE_COUNT = BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160)/154) + 1;
   const IS_BUTTON_DISABLED = isEmpty(watch());
   const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
+
   const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
     { text: "Single Recipient", value: "single" },
@@ -123,8 +128,8 @@ const SendSMSForm = ({
         textAlign="right"
         mt="-16px"
       >
-        <Text>Character count: 160</Text>
-        <Text>Message count: 1</Text>
+        <Text>{`Character count: ${BLAST_MESSAGE_CHAR_COUNT}/${MAX_NON_UNICODE_CHAR}`}</Text>
+        <Text>{`Message count: ${BLAST_MESSAGE_COUNT}`}</Text>
       </Box>
 
       <Flex mt="64px" justifyContent="space-between">
