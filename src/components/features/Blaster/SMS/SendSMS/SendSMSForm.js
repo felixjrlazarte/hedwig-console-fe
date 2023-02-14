@@ -56,7 +56,7 @@ const SendSMSForm = ({
         validations={{
           required: "Please enter an SMS Blast name",
           pattern: {
-            value: /^[\w-_.]+$/i,
+            value: /^[\w-_. ]+$/i,
             message: "Please enter a valid Blast name"
           }
         }}
