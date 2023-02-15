@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 
 import { isEmpty, containsDoubleByte } from "../../../../../utils/helpers";
@@ -16,9 +15,9 @@ import { ArrowForwardIcon } from "../../../../../assets/images/icons";
 import MultipleRecipientsUploader from "./MultipleRecipientsUploader";
 
 const SendSMSForm = ({
-  onSubmit
+  onSubmit,
+  handleCancelAction
 }) => {
-  const navigate = useNavigate();
   const { senderMasks } = useSelector(blastState);
   const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
   const blastMessageValue = watch("blastMessage");
@@ -143,7 +142,7 @@ const SendSMSForm = ({
       </Box>
 
       <Flex mt="64px" justifyContent="space-between">
-        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={() => navigate(-1)}>
+        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={handleCancelAction}>
           Cancel
         </Button>
         <Button type="submit" width="121px" rightIcon={ArrowForwardIcon} disabled={IS_BUTTON_DISABLED}>

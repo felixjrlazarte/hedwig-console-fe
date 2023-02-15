@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Flex,
   Box,
@@ -7,12 +8,23 @@ import {
 } from "@chakra-ui/react";
 import AlertBox from "../../../../common/AlertBox";
 import SendSMSForm from "./SendSMSForm";
+import SendSMSConfirmation from "./SendSMSConfirmation";
 
 const SendSMS = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const [blastDetails, setBlastDetails] = useState({});
+
+  const handleCancelAction = () => {
+    navigate(-1);
+  };
+
+  const handlePreviousAction = () => {
+    setStep(step - 1);
+  };
 
   const onSubmit = (values) => {
-    console.log(values);
+    setBlastDetails(values);
     setStep(2);
   };
 
@@ -23,17 +35,27 @@ const SendSMS = () => {
         <Text color="text.darkgray">{`Step ${step} of 2`}</Text>
       </Flex>
 
+      <AlertBox
+        type="warning"
+        title="Reminder"
+        message="NTC Guideline states that SMS Blasts between 9PM to 7AM are not allowed. Please refrain from doing such activities during said time or you will be sanctioned ☠️"
+      />
+
       {
         step === 1 &&
-        <>
-          <AlertBox
-            type="warning"
-            title="Reminder"
-            message="NTC Guideline states that SMS Blasts between 9PM to 7AM are not allowed. Please refrain from doing such activities during said time or you will be sanctioned ☠️"
-          />
+        <SendSMSForm
+          onSubmit={onSubmit}
+          handleCancelAction={handleCancelAction}
+        />
+      }
 
-          <SendSMSForm onSubmit={onSubmit} />
-        </>
+      {
+        step === 2 &&
+        <SendSMSConfirmation
+          blastDetails={blastDetails}
+          handleCancelAction={handleCancelAction}
+          handlePreviousAction={handlePreviousAction}
+        />
       }
     </Box>
   );
