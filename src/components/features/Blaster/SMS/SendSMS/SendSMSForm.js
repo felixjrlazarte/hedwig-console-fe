@@ -27,7 +27,7 @@ const SendSMSForm = ({
   const MAX_WITH_UNICODE_CHAR = 400;
   const HAS_UNICODE = blastMessageValue && containsDoubleByte(blastMessageValue);
   const BLAST_MESSAGE_CHAR_COUNT = blastMessageValue ? HAS_UNICODE ? [...blastMessageValue].length : blastMessageValue.length : 0;
-  const IS_BUTTON_DISABLED = isEmpty(watch());
+  const IS_BUTTON_DISABLED = isEmpty(watch()) || !isEmpty(errors);
   const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
 
   const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
