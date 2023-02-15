@@ -44,6 +44,7 @@ const SendSMS = () => {
       {
         step === 1 &&
         <SendSMSForm
+          blastDetails={blastDetails}
           onSubmit={onSubmit}
           handleCancelAction={handleCancelAction}
         />

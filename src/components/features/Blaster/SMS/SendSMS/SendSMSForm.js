@@ -15,11 +15,12 @@ import { ArrowForwardIcon } from "../../../../../assets/images/icons";
 import MultipleRecipientsUploader from "./MultipleRecipientsUploader";
 
 const SendSMSForm = ({
+  blastDetails,
   onSubmit,
   handleCancelAction
 }) => {
   const { senderMasks } = useSelector(blastState);
-  const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
+  const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm({defaultValues: blastDetails});
   const blastMessageValue = watch("blastMessage");
 
   const MAX_NON_UNICODE_CHAR = 800;
