@@ -28,3 +28,11 @@ export const formatBytes = (bytes, decimals = 2) => {
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 };
+
+export const containsDoubleByte = (arg) => {
+  const regex = /[^\u0000-\u00ff]/;
+
+  if (!arg.length) return false;
+  if (arg.charCodeAt(0) > 255) return true;
+  return regex.test(arg);
+};
