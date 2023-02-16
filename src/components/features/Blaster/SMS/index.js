@@ -38,7 +38,7 @@ const SMS = () => {
 
       <Divider mb="16px" opacity={1} />
 
-      <Box h="650px">
+      <Box h="680px">
 
       </Box>
     </Box>
