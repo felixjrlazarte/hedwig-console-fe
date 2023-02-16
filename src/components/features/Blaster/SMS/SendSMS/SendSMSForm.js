@@ -136,7 +136,13 @@ const SendSMSForm = ({
         register={register}
         validations={{
           required: "Please enter an SMS Blast message",
-          maxLength: { value: MAX_NON_UNICODE_CHAR, message: "Max character count exceeded" },
+          validate: (value) => {
+            const MAX_LIMIT = HAS_UNICODE ? MAX_WITH_UNICODE_CHAR : MAX_NON_UNICODE_CHAR;
+            if ([...value].length > MAX_LIMIT) {
+              return "Max character count exceeded";
+            }
+            return true;
+          }
         }}
       />
 
