@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Flex, Box, Text } from "@chakra-ui/react";
@@ -20,7 +20,7 @@ const SendSMSForm = ({
   handleCancelAction
 }) => {
   const { senderMasks } = useSelector(blastState);
-  const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm({defaultValues: blastDetails});
+  const { handleSubmit, setValue, register, unregister, watch, formState: { errors } } = useForm({ defaultValues: blastDetails });
   const blastMessageValue = watch("blastMessage");
 
   const MAX_NON_UNICODE_CHAR = 800;
@@ -29,6 +29,7 @@ const SendSMSForm = ({
   const BLAST_MESSAGE_CHAR_COUNT = blastMessageValue ? HAS_UNICODE ? [...blastMessageValue].length : blastMessageValue.length : 0;
   const IS_BUTTON_DISABLED = isEmpty(watch()) || !isEmpty(errors);
   const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
+  const RECIPIENT_TYPE = watch("recipientType");
 
   const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
@@ -43,6 +44,14 @@ const SendSMSForm = ({
       BLAST_MESSAGE_CHAR_COUNT <= 70 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 70) / 70) + 1 :
       BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160) / 154) + 1;
   };
+
+  useEffect(() => {
+    if (RECIPIENT_TYPE === "single") {
+      unregister("multipleRecipientFile");
+    } else {
+      unregister("mobileNumber");
+    }
+  }, [RECIPIENT_TYPE]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
