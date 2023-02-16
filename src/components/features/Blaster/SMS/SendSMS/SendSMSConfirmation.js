@@ -18,7 +18,7 @@ const SendSMSConfirmation = ({
   handleCancelAction,
   handlePreviousAction
 }) => {
-  const [isDialogOpen,setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const isSingleRecipient = blastDetails.recipientType === "single";
   const file = !isSingleRecipient ? blastDetails.multipleRecipientFile[0] : null;
   const fileName = file && file.name;
@@ -44,7 +44,7 @@ const SendSMSConfirmation = ({
   const RenderBlastDetails = ({ label, value }) => (
     <Grid templateColumns="repeat(5, 1fr)" mb="12px" key={label}>
       <GridItem colSpan="2" color="text.darkgray" fontWeight="600" fontSize="14px">{label}</GridItem>
-      <GridItem colSpan="3" fontSize="14px">{value}</GridItem>
+      <GridItem colSpan="3" fontSize="14px" maxHeight="75px" overflow="scroll">{value}</GridItem>
     </Grid>
   );
 
@@ -63,12 +63,9 @@ const SendSMSConfirmation = ({
         <GridItem colSpan="3">
           {
             isSingleRecipient ? blastDetails.mobileNumber :
-              <Flex>
-                <Text textDecoration="underline" mr="16px">{fileName}</Text>
-                <Flex cursor="pointer" onClick={downloadFile}>
-                  <img src={DownloadIcon} alt="Logo" width={16} height={16} />
-                  <Text className="file-upload__replace">Download</Text>
-                </Flex>
+              <Flex cursor="pointer" onClick={downloadFile}>
+                <Text className="file-upload__replace" mr="8px">{fileName}</Text>
+                <img src={DownloadIcon} alt="Logo" width={16} height={16} />
               </Flex>
           }
         </GridItem>
