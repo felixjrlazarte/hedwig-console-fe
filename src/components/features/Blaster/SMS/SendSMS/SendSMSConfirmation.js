@@ -7,19 +7,34 @@ import {
   GridItem
 } from "@chakra-ui/react";
 import Button from "../../../../common/Button";
-import { ArrowForwardIcon, ArrowBackIcon } from "../../../../../assets/images/icons";
+import { ArrowForwardIcon, ArrowBackIcon, DownloadIcon } from "../../../../../assets/images/icons";
 
 const SendSMSConfirmation = ({
   blastDetails,
   handleCancelAction,
   handlePreviousAction
 }) => {
+  const isSingleRecipient = blastDetails.recipientType === "single";
+  const file = !isSingleRecipient ? blastDetails.multipleRecipientFile[0] : null;
+  const fileName = file && file.name;
+
   const details = [
     { label: "Name", value: blastDetails.blastName },
-    { label: "Audience", value: blastDetails.recipientType === "single" ? "Single Recipient" : "Multiple Recipients" },
+    { label: "Audience", value: isSingleRecipient ? "Single Recipient" : "Multiple Recipients" },
     { label: "Sender Mask", value: blastDetails.senderMask },
     { label: "Message", value: blastDetails.blastMessage }
   ];
+
+  const downloadFile = () => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(file);
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+  };
 
   const RenderBlastDetails = ({ label, value }) => (
     <Grid templateColumns="repeat(5, 1fr)" mb="12px" key={label}>
@@ -32,9 +47,27 @@ const SendSMSConfirmation = ({
     <Box>
       <Text mb="16px">Your current settlement details are as follows:</Text>
 
-      <Box h="213px" borderRadius="4px" bg="#F6F8FE" p="20px">
-        { details.map((item) => RenderBlastDetails(item)) }
+      <Box h="213px" borderRadius="4px" bg="#F6F8FE" p="20px" mb="32px">
+        {details.map((item) => RenderBlastDetails(item))}
       </Box>
+
+      <Grid templateColumns="repeat(5, 1fr)" mb="12px">
+        <GridItem colSpan="2" fontWeight="600">
+          {isSingleRecipient ? "Recipient" : "Recipients"}
+        </GridItem>
+        <GridItem colSpan="3">
+          {
+            isSingleRecipient ? blastDetails.mobileNumber :
+              <Flex>
+                <Text textDecoration="underline" mr="16px">{fileName}</Text>
+                <Flex cursor="pointer" onClick={downloadFile}>
+                  <img src={DownloadIcon} alt="Logo" width={16} height={16} />
+                  <Text className="file-upload__replace">Download</Text>
+                </Flex>
+              </Flex>
+          }
+        </GridItem>
+      </Grid>
 
       <Flex mt="64px" justifyContent="space-between">
         <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={handleCancelAction}>
