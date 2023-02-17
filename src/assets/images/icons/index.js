@@ -1,5 +1,6 @@
 // Common Icons
 export { default as AddIcon } from "./AddIcon.svg";
+export { default as ArrowBackIcon } from "./ArrowBackIcon.svg";
 export { default as ArrowDropDownIcon } from "./ArrowDropDownIcon.svg";
 export { default as ArrowForwardIcon } from "./ArrowForwardIcon.svg";
 export { default as BlasterIconPurple } from "./BlasterIconPurple.svg";

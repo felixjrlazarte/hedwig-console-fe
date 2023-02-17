@@ -37,6 +37,10 @@ const SMS = () => {
       </Header>
 
       <Divider mb="16px" opacity={1} />
+
+      <Box h="680px">
+
+      </Box>
     </Box>
   );
 };

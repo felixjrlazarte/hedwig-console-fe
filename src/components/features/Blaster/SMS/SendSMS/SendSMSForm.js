@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 
 import { isEmpty, containsDoubleByte } from "../../../../../utils/helpers";
@@ -16,11 +15,12 @@ import { ArrowForwardIcon } from "../../../../../assets/images/icons";
 import MultipleRecipientsUploader from "./MultipleRecipientsUploader";
 
 const SendSMSForm = ({
-  onSubmit
+  blastDetails,
+  onSubmit,
+  handleCancelAction
 }) => {
-  const navigate = useNavigate();
   const { senderMasks } = useSelector(blastState);
-  const { handleSubmit, setValue, register, watch, formState: { errors } } = useForm();
+  const { handleSubmit, setValue, register, unregister, watch, formState: { errors } } = useForm({ defaultValues: blastDetails });
   const blastMessageValue = watch("blastMessage");
 
   const MAX_NON_UNICODE_CHAR = 800;
@@ -29,6 +29,7 @@ const SendSMSForm = ({
   const BLAST_MESSAGE_CHAR_COUNT = blastMessageValue ? HAS_UNICODE ? [...blastMessageValue].length : blastMessageValue.length : 0;
   const IS_BUTTON_DISABLED = isEmpty(watch()) || !isEmpty(errors);
   const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
+  const RECIPIENT_TYPE = watch("recipientType");
 
   const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
@@ -43,6 +44,14 @@ const SendSMSForm = ({
       BLAST_MESSAGE_CHAR_COUNT <= 70 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 70) / 70) + 1 :
       BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160) / 154) + 1;
   };
+
+  useEffect(() => {
+    if (RECIPIENT_TYPE === "single") {
+      unregister("multipleRecipientFile");
+    } else {
+      unregister("mobileNumber");
+    }
+  }, [RECIPIENT_TYPE]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -127,7 +136,13 @@ const SendSMSForm = ({
         register={register}
         validations={{
           required: "Please enter an SMS Blast message",
-          maxLength: { value: MAX_NON_UNICODE_CHAR, message: "Max character count exceeded" },
+          validate: (value) => {
+            const MAX_LIMIT = HAS_UNICODE ? MAX_WITH_UNICODE_CHAR : MAX_NON_UNICODE_CHAR;
+            if ([...value].length > MAX_LIMIT) {
+              return "Max character count exceeded";
+            }
+            return true;
+          }
         }}
       />
 
@@ -143,7 +158,7 @@ const SendSMSForm = ({
       </Box>
 
       <Flex mt="64px" justifyContent="space-between">
-        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={() => navigate(-1)}>
+        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={handleCancelAction}>
           Cancel
         </Button>
         <Button type="submit" width="121px" rightIcon={ArrowForwardIcon} disabled={IS_BUTTON_DISABLED}>
