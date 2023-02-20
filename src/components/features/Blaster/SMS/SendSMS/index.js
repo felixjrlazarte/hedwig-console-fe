@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   Flex,
@@ -6,12 +7,14 @@ import {
   Text,
   Text as Title,
 } from "@chakra-ui/react";
+import { sendSMSBlast } from "../../../../../slices/blast/blastActions";
 import AlertBox from "../../../../common/AlertBox";
 import SendSMSForm from "./SendSMSForm";
 import SendSMSConfirmation from "./SendSMSConfirmation";
 
 const SendSMS = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [step, setStep] = useState(1);
   const [blastDetails, setBlastDetails] = useState({});
 
@@ -26,6 +29,10 @@ const SendSMS = () => {
   const onSubmit = (values) => {
     setBlastDetails(values);
     setStep(2);
+  };
+
+  const handleSendSMSBlast = () => {
+    dispatch(sendSMSBlast(blastDetails));
   };
 
   return (
@@ -56,6 +63,7 @@ const SendSMS = () => {
           blastDetails={blastDetails}
           handleCancelAction={handleCancelAction}
           handlePreviousAction={handlePreviousAction}
+          sendSMSBlast={handleSendSMSBlast}
         />
       }
     </Box>

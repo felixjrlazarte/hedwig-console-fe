@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Flex,
   Box,
   Text,
   Grid,
-  GridItem,
-  AlertDialog,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogBody
+  GridItem
 } from "@chakra-ui/react";
 import Button from "../../../../common/Button";
 import { ArrowForwardIcon, ArrowBackIcon, DownloadIcon } from "../../../../../assets/images/icons";
@@ -16,9 +12,9 @@ import { ArrowForwardIcon, ArrowBackIcon, DownloadIcon } from "../../../../../as
 const SendSMSConfirmation = ({
   blastDetails,
   handleCancelAction,
-  handlePreviousAction
+  handlePreviousAction,
+  sendSMSBlast
 }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const isSingleRecipient = blastDetails.recipientType === "single";
   const file = !isSingleRecipient ? blastDetails.multipleRecipientFile[0] : null;
   const fileName = file && file.name;
@@ -80,21 +76,11 @@ const SendSMSConfirmation = ({
           <Button width="156px" mr="12px" variant="outlined" icon={ArrowBackIcon} onClick={handlePreviousAction}>
             Previous
           </Button>
-          <Button type="submit" width="201px" rightIcon={ArrowForwardIcon} onClick={() => setIsDialogOpen(true)}>
+          <Button type="submit" width="201px" rightIcon={ArrowForwardIcon} onClick={sendSMSBlast}>
             Send SMS Blast
           </Button>
         </Flex>
       </Flex>
-
-      <AlertDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogBody fontSize="30px" textAlign="center" textColor="#0FBD1E">
-              Submitted!!
-            </AlertDialogBody>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
     </Box>
   );
 };
