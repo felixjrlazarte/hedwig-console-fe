@@ -21,7 +21,11 @@ export const sendSMSBlast = createAsyncThunk(
   "blasts",
   async (values, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/blasts", values);
+      const { data } = await axios.post("/blasts", values, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
       return data;
     } catch (error) {
       if (error.response && error.response.data) {

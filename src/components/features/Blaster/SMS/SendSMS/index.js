@@ -32,7 +32,26 @@ const SendSMS = () => {
   };
 
   const handleSendSMSBlast = () => {
-    dispatch(sendSMSBlast(blastDetails));
+    let values = {
+      name: blastDetails.blastName,
+      recipient_type: blastDetails.recipientType,
+      message: blastDetails.blastMessage,
+      sender_masks_id: blastDetails.senderMask,
+    };
+
+    if (blastDetails.recipientType === "single") {
+      values = {
+        ...values,
+        phone_number: blastDetails.mobileNumber
+      };
+    } else {
+      values = {
+        ...values,
+        file: blastDetails.multipleRecipientFile[0]
+      };
+    }
+
+    dispatch(sendSMSBlast(values));
   };
 
   return (
