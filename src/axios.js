@@ -8,7 +8,6 @@ export function axiosInterceptor() {
   axios.interceptors.request.use(
     config => {
       config.headers["Accept"] = "application/json";
-      config.headers["Content-Type"] = "application/json";
       config.headers["Authorization"] = sessionStorage.getItem(CONFIG.HEDWIG_TOKEN);
       config.baseURL = CONFIG.SERVER_URL;
       return config;

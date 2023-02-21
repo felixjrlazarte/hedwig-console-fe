@@ -28,10 +28,10 @@ const SendSMSForm = ({
   const HAS_UNICODE = blastMessageValue && containsDoubleByte(blastMessageValue);
   const BLAST_MESSAGE_CHAR_COUNT = blastMessageValue ? HAS_UNICODE ? [...blastMessageValue].length : blastMessageValue.length : 0;
   const IS_BUTTON_DISABLED = isEmpty(watch()) || !isEmpty(errors);
-  const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].name : "";
+  const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].id : "";
   const RECIPIENT_TYPE = watch("recipientType");
 
-  const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name }) => ({ text: name, value: name })) : [];
+  const SENDER_MASK_OPTIONS = !isEmpty(senderMasks) ? senderMasks.map(({ name, id }) => ({ text: name, value: id })) : [];
   const RECIPIENT_TYPE_OPTIONS = [
     { text: "Single Recipient", value: "single" },
     { text: "Multiple Recipients", value: "multiple" }
@@ -92,8 +92,10 @@ const SendSMSForm = ({
               register={register}
               validations={{
                 required: "Please enter a mobile number",
-                maxLength: { value: 11, message: "Invalid phone number" },
-                minLength: { value: 11, message: "Invalid phone number" }
+                validate: (value) => {
+                  const regex = /^(639)\d{9}$/gm;
+                  return regex.test(value) ? true : "Invalid phone number format (ex. 639XXXXXXXXX)";
+                }
               }}
               mt="8px"
               ml="36px"
