@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   Flex,
@@ -7,14 +7,17 @@ import {
   Text,
   Text as Title,
 } from "@chakra-ui/react";
+import { blastState } from "../../../../../slices/blast/blastSlice";
 import { sendSMSBlast } from "../../../../../slices/blast/blastActions";
 import AlertBox from "../../../../common/AlertBox";
+import Loader from "../../../../common/Loader";
 import SendSMSForm from "./SendSMSForm";
 import SendSMSConfirmation from "./SendSMSConfirmation";
 
 const SendSMS = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(blastState);
   const [step, setStep] = useState(1);
   const [blastDetails, setBlastDetails] = useState({});
 
@@ -51,11 +54,20 @@ const SendSMS = () => {
       };
     }
 
-    dispatch(sendSMSBlast(values));
+    dispatch(sendSMSBlast(values)).unwrap()
+      .then((result) => {
+        navigate("/blaster/sms");
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   return (
     <Box>
+      <Loader isLoading={isLoading} />
+
       <Flex justifyContent="space-between" alignItems="center" fontWeight={500} mb="32px">
         <Title fontSize="24px">{step === 1 ? "Send an SMS Blast" : "Review SMS Blast"}</Title>
         <Text color="text.darkgray">{`Step ${step} of 2`}</Text>
