@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { blastState } from "../../../../../slices/blast/blastSlice";
 import {
   Flex,
   Box,
@@ -15,14 +17,17 @@ const SendSMSConfirmation = ({
   handlePreviousAction,
   sendSMSBlast
 }) => {
+  const { senderMasks } = useSelector(blastState);
+
   const isSingleRecipient = blastDetails.recipientType === "single";
+  const selectedSenderMask = senderMasks.find((mask) => mask.id === blastDetails.senderMask).name;
   const file = !isSingleRecipient ? blastDetails.multipleRecipientFile[0] : null;
   const fileName = file && file.name;
 
   const details = [
     { label: "Name", value: blastDetails.blastName },
     { label: "Audience", value: isSingleRecipient ? "Single Recipient" : "Multiple Recipients" },
-    { label: "Sender Mask", value: blastDetails.senderMask },
+    { label: "Sender Mask", value: selectedSenderMask },
     { label: "Message", value: blastDetails.blastMessage }
   ];
 
