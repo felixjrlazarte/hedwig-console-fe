@@ -92,8 +92,10 @@ const SendSMSForm = ({
               register={register}
               validations={{
                 required: "Please enter a mobile number",
-                maxLength: { value: 11, message: "Invalid phone number" },
-                minLength: { value: 11, message: "Invalid phone number" }
+                validate: (value) => {
+                  const regex = /^(639)\d{9}$/gm;
+                  return regex.test(value) ? true : "Invalid phone number format (ex. 639XXXXXXXXX)";
+                }
               }}
               mt="8px"
               ml="36px"
