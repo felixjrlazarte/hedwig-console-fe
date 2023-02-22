@@ -15,6 +15,7 @@ import { showSMSBlastPrompt } from "../../../../slices/blast/blastActions";
 import { blastState } from "../../../../slices/blast/blastSlice";
 import Button from "../../../common/Button";
 import AlertBox from "../../../common/AlertBox";
+import Table from "../../../common/Table";
 import { AddIcon, BlasterIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
 
 const SMS = () => {
@@ -68,7 +69,7 @@ const SMS = () => {
         <Divider mb="16px" opacity={1} />
 
         <Box h="680px">
-
+          <Table />
         </Box>
       </Box>
     </Box>
