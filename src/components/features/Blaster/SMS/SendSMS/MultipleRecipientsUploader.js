@@ -33,7 +33,11 @@ export default function MultipleRecipientsUploader({
         const fsMb = file.size / (1024 * 1024);
         const MAX_FILE_SIZE = 15;
         if (fsMb > MAX_FILE_SIZE) {
-          return "Max file size 15mb";
+          return "The file size should not be greater than 15MB";
+        }
+
+        if (fsMb === 0) {
+          return "The file size should not be 0 bytes";
         }
       }
       return true;
