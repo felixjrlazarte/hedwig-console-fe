@@ -67,6 +67,10 @@ const SendSMSForm = ({
           pattern: {
             value: /^[\w-_. ]+$/i,
             message: "Please enter a valid Blast name"
+          },
+          setValueAs: value => value.trim(),
+          onChange: (event) => {
+            event.target.value = event.target.value.replace(/^\s+/g, "");
           }
         }}
         mb="16px"
