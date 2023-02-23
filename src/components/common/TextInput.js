@@ -15,6 +15,7 @@ const TextInput = ({
   errors,
   register,
   label,
+  maxLength,
   validations = {},
   ...rest
 }) => {
@@ -35,6 +36,7 @@ const TextInput = ({
               className="custom__input floating__input"
               type={type ? type : "text"}
               placeholder={placeholder}
+              maxLength={maxLength}
               {...register(name, validations)}
             />
             <label

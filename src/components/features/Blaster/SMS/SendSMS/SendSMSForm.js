@@ -67,6 +67,10 @@ const SendSMSForm = ({
           pattern: {
             value: /^[\w-_. ]+$/i,
             message: "Please enter a valid Blast name"
+          },
+          setValueAs: value => value.trim(),
+          onChange: (event) => {
+            event.target.value = event.target.value.replace(/^\s+/g, "");
           }
         }}
         mb="16px"
@@ -86,8 +90,9 @@ const SendSMSForm = ({
           "single":
             <TextInput
               name="mobileNumber"
-              type="number"
+              type="text"
               placeholder="Mobile Number"
+              maxLength={12}
               errors={errors}
               register={register}
               validations={{
@@ -95,6 +100,9 @@ const SendSMSForm = ({
                 validate: (value) => {
                   const regex = /^(639)\d{9}$/gm;
                   return regex.test(value) ? true : "Invalid phone number format (ex. 639XXXXXXXXX)";
+                },
+                onChange: (event) => {
+                  event.target.value = event.target.value.replace(/\D/g, "");
                 }
               }}
               mt="8px"
