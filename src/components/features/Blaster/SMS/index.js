@@ -20,8 +20,15 @@ const SMS = () => {
   return (
     <Box>
       <AlertBox
-        type="warning"
+        type="success"
         message="SMS Sent! Please monitor the status to check if the SMS Blast has completed."
+        onClose={() => null}
+      />
+
+      <AlertBox
+        type="error"
+        message="SMS Blast not set. Please send an SMS blast again. Try sending a blast again."
+        onClose={() => null}
       />
 
       <Box bg="white" w="full" borderRadius="xl" borderWidth="1px" borderColor="#E0E4E6">
@@ -46,7 +53,7 @@ const SMS = () => {
         <Divider mb="16px" opacity={1} />
 
         <Box h="680px">
-  
+
         </Box>
       </Box>
     </Box>
