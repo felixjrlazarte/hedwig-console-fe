@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Flex,
   Divider,
@@ -10,26 +11,40 @@ import {
   Text as Title,
   Box as Header
 } from "@chakra-ui/react";
+import { showSMSBlastPrompt } from "../../../../slices/blast/blastActions";
+import { blastState } from "../../../../slices/blast/blastSlice";
 import Button from "../../../common/Button";
 import AlertBox from "../../../common/AlertBox";
 import { AddIcon, BlasterIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
 
 const SMS = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { blastPromptType } = useSelector(blastState);
+
+  const handlePromptOnClose = () => {
+    dispatch(showSMSBlastPrompt({ type: null }));
+  };
 
   return (
     <Box>
-      <AlertBox
-        type="success"
-        message="SMS Sent! Please monitor the status to check if the SMS Blast has completed."
-        onClose={() => null}
-      />
+      {
+        blastPromptType === "success" &&
+        <AlertBox
+          type="success"
+          message="SMS Sent! Please monitor the status to check if the SMS Blast has completed."
+          onClose={handlePromptOnClose}
+        />
+      }
 
-      <AlertBox
-        type="error"
-        message="SMS Blast not set. Please send an SMS blast again. Try sending a blast again."
-        onClose={() => null}
-      />
+      {
+        blastPromptType === "error" &&
+        <AlertBox
+          type="error"
+          message="SMS Blast not set. Please send an SMS blast again. Try sending a blast again."
+          onClose={handlePromptOnClose}
+        />
+      }
 
       <Box bg="white" w="full" borderRadius="xl" borderWidth="1px" borderColor="#E0E4E6">
         <Header px="24px" py="28px">

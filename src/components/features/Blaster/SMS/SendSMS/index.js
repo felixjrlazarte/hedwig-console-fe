@@ -8,7 +8,7 @@ import {
   Text as Title,
 } from "@chakra-ui/react";
 import { blastState } from "../../../../../slices/blast/blastSlice";
-import { sendSMSBlast } from "../../../../../slices/blast/blastActions";
+import { sendSMSBlast, showSMSBlastPrompt } from "../../../../../slices/blast/blastActions";
 import AlertBox from "../../../../common/AlertBox";
 import Loader from "../../../../common/Loader";
 import SendSMSForm from "./SendSMSForm";
@@ -56,11 +56,14 @@ const SendSMS = () => {
 
     dispatch(sendSMSBlast(values)).unwrap()
       .then((result) => {
+        console.log("success", result);
+        dispatch(showSMSBlastPrompt({ type: "success" }));
         navigate("/blaster/sms");
-        console.log(result);
       })
       .catch((error) => {
         console.log("error", error);
+        dispatch(showSMSBlastPrompt({ type: "error" }));
+        navigate("/blaster/sms");
       });
   };
 

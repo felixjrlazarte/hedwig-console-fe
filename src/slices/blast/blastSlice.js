@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSenderMasks, sendSMSBlast } from "./blastActions";
+import { getSenderMasks, sendSMSBlast, showSMSBlastPrompt } from "./blastActions";
 
 // Initial state
 const initialState = {
   senderMasks: {},
   newBlastDetails: {},
+  blastPromptType: null,
   isLoading: false,
   error: null
 };
@@ -40,6 +41,10 @@ export const blastSlice = createSlice({
     .addCase(sendSMSBlast.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
+    })
+    // show send sms blast success or failed prompt
+    .addCase(showSMSBlastPrompt, (state, { payload }) => {
+      state.blastPromptType = payload.type;
     });
   }
 });

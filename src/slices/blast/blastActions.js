@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
 export const getSenderMasks = createAsyncThunk(
   "sendermasks",
@@ -36,3 +36,5 @@ export const sendSMSBlast = createAsyncThunk(
     }
   }
 );
+
+export const showSMSBlastPrompt = createAction("SHOW_BLAST_PROMPT");
