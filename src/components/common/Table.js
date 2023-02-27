@@ -9,20 +9,10 @@ import {
   Th
 } from "@chakra-ui/react";
 
-const headers = [
-  { key: "date", displayText: "Date" },
-  { key: "name", displayText: "Name" },
-  { key: "id", displayText: "ID" },
-  { key: "senderMask", displayText: "Sender Mask" },
-  { key: "status", displayText: "Status" }
-];
-
-const data = [
-  { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: "Completed" },
-  { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: "Completed" }
-];
-
-const Table = () => {
+const Table = ({
+  headers,
+  data
+}) => {
   return (
     <TableContainer>
       <ChakraTable variant='simple'>
@@ -41,7 +31,9 @@ const Table = () => {
               <Tr key={`table-row-${index}`}>
                 {
                   headers.map(({ key }) => (
-                    <Td key={`table-data-${index}-${key}`} borderColor="#E0E4E6">{row[key]}</Td>
+                    <Td key={`table-data-${index}-${key}`} borderColor="#E0E4E6">
+                      {row[key]}
+                    </Td>
                   ))
                 }
               </Tr>

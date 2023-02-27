@@ -27,6 +27,33 @@ const SMS = () => {
     dispatch(showSMSBlastPrompt({ type: null }));
   };
 
+  const transformStatus = (status) => {
+    const colors = {
+      "Completed": "#71C422",
+      "Failed": "#F04747"
+    };
+
+    return (
+      <Box color={colors[status]} fontWeight={500}>
+        <Box h="10px" w="10px" bg={colors[status]} borderRadius="50%" display="inline-block" mr="8px"></Box>
+        {status}
+      </Box>
+    );
+  };
+
+  const headers = [
+    { key: "date", displayText: "Date" },
+    { key: "name", displayText: "Name" },
+    { key: "id", displayText: "ID" },
+    { key: "senderMask", displayText: "Sender Mask" },
+    { key: "status", displayText: "Status" }
+  ];
+
+  const data = [
+    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
+    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") }
+  ];
+
   return (
     <Box>
       {
@@ -69,7 +96,10 @@ const SMS = () => {
         <Divider mb="16px" opacity={1} />
 
         <Box h="680px">
-          <Table />
+          <Table
+            headers={headers}
+            data={data}
+          />
         </Box>
       </Box>
     </Box>
