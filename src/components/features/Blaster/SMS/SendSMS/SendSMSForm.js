@@ -20,7 +20,7 @@ const SendSMSForm = ({
   handleCancelAction
 }) => {
   const { senderMasks } = useSelector(blastState);
-  const { handleSubmit, setValue, register, unregister, watch, formState: { errors } } = useForm({ defaultValues: blastDetails });
+  const { handleSubmit, setValue, register, unregister, watch, trigger, formState: { errors } } = useForm({ defaultValues: blastDetails });
   const blastMessageValue = watch("blastMessage");
 
   const MAX_NON_UNICODE_CHAR = 800;
@@ -103,6 +103,7 @@ const SendSMSForm = ({
                 },
                 onChange: (event) => {
                   event.target.value = event.target.value.replace(/\D/g, "");
+                  trigger("mobileNumber");
                 }
               }}
               mt="8px"
