@@ -3,6 +3,7 @@ import {
   Box
 } from "@chakra-ui/react";
 import Table from "../../../../common/Table";
+import Paginator from "../../../../common/Paginator";
 
 const transformStatus = (status) => {
   const colors = {
@@ -38,6 +39,8 @@ const ActivityList = () => {
         headers={headers}
         data={data}
       />
+
+      <Paginator />
     </Box>
   );
 };
