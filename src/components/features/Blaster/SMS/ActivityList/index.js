@@ -20,7 +20,8 @@ const transformStatus = (status) => {
 };
 
 const ActivityList = () => {
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [pageLimit, setPageLimit] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const headers = [
     { key: "date", displayText: "Date" },
@@ -44,8 +45,10 @@ const ActivityList = () => {
 
       <Paginator
         totalCount={100}
-        itemsPerPage={itemsPerPage}
-        setItemsPerPage={setItemsPerPage}
+        limit={pageLimit}
+        setLimit={setPageLimit}
+        page={currentPage}
+        setPage={setCurrentPage}
       />
     </Box>
   );
