@@ -33,7 +33,7 @@ const Paginator = ({
         setValue={setItemsPerPage}
       />
 
-      <Text ml="13px" mr="26px">of 10</Text>
+      <Text ml="13px" mr="26px">of {totalCount}</Text>
 
       <Box mr="8px" cursor="pointer">
         <img src={ChevronLeftLIcon} alt="blaster-icon" width={24} height={24} />
