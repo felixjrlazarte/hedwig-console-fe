@@ -6,12 +6,34 @@ import {
   Center
 } from "@chakra-ui/react";
 import { ChevronLeftLIcon, ChevronRightLIcon } from "../../assets/images/icons";
+import Dropdown from "./Dropdown";
 
-const Paginator = () => {
+const Paginator = ({
+  totalCount,
+  itemsPerPage,
+  setItemsPerPage
+}) => {
+  const totalPageCount = Math.ceil(totalCount / itemsPerPage);
+
+  const OPTIONS = [
+    { text: "10", value: 10 },
+    { text: "50", value: 50 },
+    { text: "100", value: 100 }
+  ];
+
   return (
     <Flex py="14px" px="24px" justifyContent="flex-end" alignItems="center">
       <Text mr="13px">Showing</Text>
-      <Text mr="26px">of 10</Text>
+
+      <Dropdown
+        width="60px"
+        height="36px"
+        defaultValue={10}
+        options={OPTIONS}
+        setValue={setItemsPerPage}
+      />
+
+      <Text ml="13px" mr="26px">of 10</Text>
 
       <Box mr="8px" cursor="pointer">
         <img src={ChevronLeftLIcon} alt="blaster-icon" width={24} height={24} />
@@ -21,7 +43,7 @@ const Paginator = () => {
         1
       </Center>
 
-      <Text ml="8px">of 2</Text>
+      <Text ml="8px">of {totalPageCount}</Text>
 
       <Box ml="8px" cursor="pointer">
         <img src={ChevronRightLIcon} alt="blaster-icon" width={24} height={24} />

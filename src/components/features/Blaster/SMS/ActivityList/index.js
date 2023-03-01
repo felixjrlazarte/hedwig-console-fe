@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box
 } from "@chakra-ui/react";
@@ -20,6 +20,8 @@ const transformStatus = (status) => {
 };
 
 const ActivityList = () => {
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
   const headers = [
     { key: "date", displayText: "Date" },
     { key: "name", displayText: "Name" },
@@ -40,7 +42,11 @@ const ActivityList = () => {
         data={data}
       />
 
-      <Paginator />
+      <Paginator
+        totalCount={100}
+        itemsPerPage={itemsPerPage}
+        setItemsPerPage={setItemsPerPage}
+      />
     </Box>
   );
 };
