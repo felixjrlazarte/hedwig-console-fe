@@ -10,6 +10,7 @@ export { default as ChevronDownIcon } from "./ChevronDownIcon.svg";
 export { default as ChevronDownDarkIcon } from "./ChevronDownDarkIcon.svg";
 export { default as ChevronRightIcon } from "./ChevronRightIcon.svg";
 export { default as ChevronUpIcon } from "./ChevronUpIcon.svg";
+export { default as CloseIcon } from "./CloseIcon.svg";
 export { default as CollapseIcon } from "./CollapseIcon.svg";
 export { default as DownloadIcon } from "./DownloadIcon.svg";
 export { default as FileIcon } from "./FileIcon.svg";

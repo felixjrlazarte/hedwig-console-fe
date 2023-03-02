@@ -23,6 +23,8 @@ export const theme = extendTheme({
       primary: "#4829AA"
     },
     alert: {
+      success: "#F6FEF6",
+      error: "#FEF6F6",
       warning: "#FEF3DD"
     }
   },
