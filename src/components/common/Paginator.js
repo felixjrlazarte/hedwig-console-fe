@@ -37,6 +37,13 @@ const Paginator = ({
     }
   };
 
+  const handlePageLimitOnChange = (newValue) => {
+    if (newValue != limit) {
+      setPage(1);
+      setLimit(newValue);
+    }
+  };
+
   return (
     <Flex py="14px" px="24px" justifyContent="flex-end" alignItems="center" fontSize="14px">
       <Text mr="13px">Showing</Text>
@@ -46,7 +53,7 @@ const Paginator = ({
         height="36px"
         defaultValue={10}
         options={OPTIONS}
-        setValue={setLimit}
+        setValue={handlePageLimitOnChange}
       />
 
       <Text ml="13px" mr="26px">of {totalCount}</Text>

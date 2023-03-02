@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box
 } from "@chakra-ui/react";
@@ -43,6 +43,10 @@ const ActivityList = () => {
     { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
     { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") },
   ];
+
+  useEffect(() => {
+    console.log(pageLimit, "-", currentPage);
+  }, [pageLimit, currentPage]);
 
   return (
     <Box>
