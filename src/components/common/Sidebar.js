@@ -71,6 +71,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
       w={sidebarWidth}
       pos="fixed"
       h="full"
+      zIndex={2}
       {...rest}
     >
       <Flex

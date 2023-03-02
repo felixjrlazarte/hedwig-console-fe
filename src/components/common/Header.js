@@ -18,7 +18,7 @@ import { ChevronDownDarkIcon } from "../../assets/images/icons";
 import { userState } from "../../slices/user/userSlice";
 import { logoutUser } from "../../slices/auth/authActions";
 
-const Header = ({ sidebarWidth, ...rest }) => {
+const Header = ({ ...rest }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { details } = useSelector(userState);
@@ -32,8 +32,10 @@ const Header = ({ sidebarWidth, ...rest }) => {
 
   return (
     <Flex
+      position="fixed"
+      w="full"
+      zIndex={1}
       transition="0.5s ease"
-      ml={sidebarWidth}
       px={{ base: 4, md: 4 }}
       height="56px"
       alignItems="center"

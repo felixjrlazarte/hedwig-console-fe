@@ -66,11 +66,11 @@ const Layout = ({ authorize, type }) => {
   }
 
   return (
-    <Box minH="100vh" bg={"bg.gray.100"}>
+    <Box bg={"bg.gray.100"}>
       <Loader isLoading={isUserLoading || isBlastLoading} />
       <Sidebar display="block" isToggle={isToggle} sidebarWidth={sidebarWidth} toggleSidebar={handleToggle} />
-      <Header sidebarWidth={sidebarWidth} />
-      <Box transition="0.5s ease" ml={sidebarWidth} p="36px" h="100vh" overflow="scroll">
+      <Header />
+      <Box transition="0.5s ease" ml={sidebarWidth} p="92px 36px 36px 36px" h="100vh" overflow="scroll" scrollbarWidth="thin">
         <Outlet />
       </Box>
     </Box>
