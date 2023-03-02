@@ -38,7 +38,7 @@ const Paginator = ({
   };
 
   return (
-    <Flex py="14px" px="24px" justifyContent="flex-end" alignItems="center">
+    <Flex py="14px" px="24px" justifyContent="flex-end" alignItems="center" fontSize="14px">
       <Text mr="13px">Showing</Text>
 
       <Dropdown
