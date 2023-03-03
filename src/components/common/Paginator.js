@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Flex,
   Text,
-  Box,
-  Center
+  Box
 } from "@chakra-ui/react";
 import { ChevronLeftLIcon, ChevronRightLIcon } from "../../assets/images/icons";
 import Dropdown from "./Dropdown";
@@ -15,6 +14,7 @@ const Paginator = ({
   page,
   setPage
 }) => {
+  const pageNumberRef = useRef();
   const totalPageCount = Math.ceil(totalCount / limit);
 
   const DISABLED_NEXT = page >= totalPageCount;
@@ -28,12 +28,14 @@ const Paginator = ({
   const handleNextPageButton = () => {
     if (!DISABLED_NEXT) {
       setPage(page + 1);
+      pageNumberRef.current.value = page + 1;
     }
   };
 
   const handlePrevPageButton = () => {
     if (!DISABLED_PREV) {
       setPage(page - 1);
+      pageNumberRef.current.value = page - 1;
     }
   };
 
@@ -41,6 +43,18 @@ const Paginator = ({
     if (newValue != limit) {
       setPage(1);
       setLimit(newValue);
+      pageNumberRef.current.value = 1;
+    }
+  };
+
+  const handlePageNumberOnChange = (event) => {
+    if (event.key === "Enter") {
+      const value = parseInt(pageNumberRef.current.value);
+      if (value > totalPageCount || value < 1) {
+        pageNumberRef.current.value = page;
+      } else {
+        setPage(value);
+      }
     }
   };
 
@@ -67,9 +81,13 @@ const Paginator = ({
         <img src={ChevronLeftLIcon} alt="blaster-icon" width={24} height={24} />
       </Box>
 
-      <Center w="33px" h="32px" border="1px solid #E0E4E6" borderRadius="2px" color="#A8ADB0">
-        {page}
-      </Center>
+      <input
+        ref={pageNumberRef}
+        style={{ width: "33px", height: "32px", border: "1px solid #E0E4E6", borderRadius: "2px", color: "#A8ADB0", textAlign: "center" }}
+        type="number"
+        defaultValue={page}
+        onKeyUp={handlePageNumberOnChange}
+      />
 
       <Text ml="8px">of {totalPageCount}</Text>
 
