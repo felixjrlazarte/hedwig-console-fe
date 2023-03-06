@@ -16,6 +16,7 @@ import { blastState } from "../../../../slices/blast/blastSlice";
 import Button from "../../../common/Button";
 import AlertBox from "../../../common/AlertBox";
 import { AddIcon, BlasterIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
+import ActivityList from "./ActivityList";
 
 const SMS = () => {
   const navigate = useNavigate();
@@ -67,8 +68,8 @@ const SMS = () => {
 
         <Divider mb="16px" opacity={1} />
 
-        <Box h="680px">
-
+        <Box>
+          <ActivityList />
         </Box>
       </Box>
     </Box>
