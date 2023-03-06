@@ -41,7 +41,7 @@ export const getBlastActivityList = createAsyncThunk(
   "blastActivityList",
   async (params, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("/list", { params: params });
+      const { data } = await axios.get("/blasts/list", { params: params });
       return data;
     } catch (error) {
       if (error.response && error.response.data) {
