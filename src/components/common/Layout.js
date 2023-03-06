@@ -54,11 +54,11 @@ const Layout = ({ authorize, type }) => {
   if (type === "modal") {
     return (
       <Flex minH="100vh" bg={"bg.gray.100"} flexDirection="column" alignItems="center">
-        <Center h="56px" bg="white" mb="25px" w="full">
+        <Center h="56px" bg="white" w="full" position="fixed" zIndex={1}>
           <img src={Logo} alt="blaster-icon" width={28} height={32} />
           <Text ml="8px" fontSize="24px" color="bg.secondary" fontFamily="sans-serif" fontWeight="bold">HEDWIG</Text>
         </Center>
-        <Box w="620px" bg="white" py="40px" px="24px" mb="25px" borderRadius="lg" borderWidth="1px" borderColor="#E0E4E6">
+        <Box w="620px" bg="white" py="40px" px="24px" mt="81px" mb="25px" borderRadius="lg" borderWidth="1px" borderColor="#E0E4E6">
           <Outlet />
         </Box>
       </Flex>

@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Box
 } from "@chakra-ui/react";
+import moment from "moment";
+import { getBlastActivityList } from "../../../../../slices/blast/blastActions";
+import { blastState } from "../../../../../slices/blast/blastSlice";
 import Table from "../../../../common/Table";
 import Paginator from "../../../../common/Paginator";
+import { isEmpty } from "../../../../../utils/helpers";
 
 const transformStatus = (status) => {
   const colors = {
-    "Completed": "#71C422",
-    "Failed": "#F04747"
+    "completed": "#71C422",
+    "failed": "#F04747",
+    "in-progress": "#158DD6"
   };
 
   return (
-    <Box color={colors[status]} fontWeight={500}>
+    <Box color={colors[status]} fontWeight={500} textTransform="capitalize">
       <Box h="10px" w="10px" bg={colors[status]} borderRadius="50%" display="inline-block" mr="8px"></Box>
       {status}
     </Box>
@@ -20,8 +26,24 @@ const transformStatus = (status) => {
 };
 
 const ActivityList = () => {
+  const dispatch = useDispatch();
+  const { activityList } = useSelector(blastState);
+
   const [pageLimit, setPageLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const TOTAL_COUNT = !isEmpty(activityList) ? activityList.total_count : 0;
+  const LIST = !isEmpty(activityList) ? activityList.list.map((data) => {
+    const formattedDate = moment(data["createdAt"]).format("YYYY-MM-DD HH:mm:ss");
+
+    return {
+      date: formattedDate,
+      name: data["blast_name"],
+      id: data["blast_id"],
+      senderMask: data["sender_mask_name"],
+      status: transformStatus(data["status"])
+    };
+  }) : [];
 
   const headers = [
     { key: "date", displayText: "Date" },
@@ -31,32 +53,19 @@ const ActivityList = () => {
     { key: "status", displayText: "Status" }
   ];
 
-  const data = [
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Completed") },
-    { date: "2021-07-08 00:12:09", name: "OTC SMS Blast Batch 1", id: "b93af4bdd76c", senderMask: "MayaRewards", status: transformStatus("Failed") },
-  ];
-
   useEffect(() => {
-    console.log(pageLimit, "-", currentPage);
+    dispatch(getBlastActivityList({ page: currentPage, limit: pageLimit }));
   }, [pageLimit, currentPage]);
 
   return (
     <Box>
       <Table
         headers={headers}
-        data={data}
+        data={LIST}
       />
 
       <Paginator
-        totalCount={100}
+        totalCount={TOTAL_COUNT}
         limit={pageLimit}
         setLimit={setPageLimit}
         page={currentPage}

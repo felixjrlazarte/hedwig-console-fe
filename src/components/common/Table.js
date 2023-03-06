@@ -20,7 +20,7 @@ const Table = ({
           <Tr>
             {
               headers.map(({ key, displayText }) => (
-                <Th key={key} borderColor="#E0E4E6">{displayText}</Th>
+                <Th key={key} textTransform="capitalize" borderColor="#E0E4E6">{displayText}</Th>
               ))
             }
           </Tr>
