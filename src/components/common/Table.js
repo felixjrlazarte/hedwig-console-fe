@@ -2,6 +2,7 @@ import React from "react";
 import {
   TableContainer,
   Table as ChakraTable,
+  Center,
   Thead,
   Tbody,
   Tr,
@@ -41,6 +42,12 @@ const Table = ({
           }
         </Tbody>
       </ChakraTable>
+      {
+        data.length === 0 &&
+        <Center p="20px" fontWeight={500}>
+          No Records Found
+        </Center>
+      }
     </TableContainer>
   );
 };
