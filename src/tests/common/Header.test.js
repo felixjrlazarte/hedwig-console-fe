@@ -1,4 +1,4 @@
-import renderWithProviders from "../../utils/test-utils";
+import renderWithProviders, { fireEvent } from "../../utils/test-utils";
 import Header from "../../components/common/Header";
 
 const preloadedState = {
@@ -14,5 +14,11 @@ describe("Header component", () => {
     const { getByText } = renderWithProviders(<Header />, preloadedState);
 
     expect(getByText(/Juan Dela Cruz/i)).toBeInTheDocument();
+  });
+
+  it("should expand item with submenu items", () => {
+    const { getByText } = renderWithProviders(<Header />, preloadedState);
+
+    fireEvent.click(getByText("Sign out"));
   });
 });
