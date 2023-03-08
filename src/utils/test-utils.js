@@ -1,29 +1,43 @@
 import React from "react";
-import {render} from "@testing-library/react";
-import { RouterProvider } from "react-router-dom";
+import { render } from "@testing-library/react";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route
+} from "react-router-dom";
 import { Provider } from "react-redux";
-import { ChakraProvider, Container } from "@chakra-ui/react";
-
-import { store } from "../slices/store";
+import { ChakraProvider } from "@chakra-ui/react";
+import { store as setupStore } from "../slices/store";
 import { theme } from "../styles/theme";
-import routes from "../components/routes";
 
-const AllTheProviders = ({children}) => {
-  return (
-    <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <Container h="100vh" maxWidth="100%" p="0">
-          <RouterProvider router={routes}>
-            {children}
-          </RouterProvider>
-        </Container>
-      </ChakraProvider>
-    </Provider>
-  );
+const renderWithProviders = (
+  ui,
+  {
+    customRoutes,
+    preloadedState = {},
+    store = setupStore(preloadedState),
+    ...renderOptions
+  } = {}
+) => {
+  const Wrapper = ({ children }) => {
+    const routes = createBrowserRouter(
+      createRoutesFromElements(
+        <Route>
+          <Route path="/" element={children} />
+        </Route>
+      ));
+
+    return (
+      <Provider store={store}>
+        <ChakraProvider theme={theme}>
+          <RouterProvider router={customRoutes || routes} />
+        </ChakraProvider>
+      </Provider>
+    );
+  }
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
 };
 
-const customRender = (ui, options) => render(ui, {wrapper: AllTheProviders, ...options});
-
 export * from "@testing-library/react";
-
-export { customRender as render };
+export default renderWithProviders;

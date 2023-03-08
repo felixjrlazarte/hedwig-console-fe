@@ -20,7 +20,7 @@ axiosInterceptor();
 
 root.render(
   <React.Fragment>
-    <Provider store={store}>
+    <Provider store={store()}>
       <ChakraProvider theme={theme}>
         <Container h="100vh" maxWidth="100%" p="0">
           <RouterProvider router={routes} />
