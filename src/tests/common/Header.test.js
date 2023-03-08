@@ -16,7 +16,7 @@ describe("Header component", () => {
     expect(getByText(/Juan Dela Cruz/i)).toBeInTheDocument();
   });
 
-  it("should expand item with submenu items", () => {
+  it("should redirect to login component on sign out click", () => {
     const { getByText } = renderWithProviders(<Header />, preloadedState);
 
     fireEvent.click(getByText("Sign out"));
