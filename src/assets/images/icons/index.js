@@ -1,4 +1,5 @@
 // Common Icons
+export { default as ActivityIconPurple } from "./ActivityIconPurple.svg";
 export { default as AddIcon } from "./AddIcon.svg";
 export { default as ArrowBackIcon } from "./ArrowBackIcon.svg";
 export { default as ArrowDropDownIcon } from "./ArrowDropDownIcon.svg";

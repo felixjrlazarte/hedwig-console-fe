@@ -9,7 +9,7 @@ import {
   BreadcrumbLink,
   Box as Header
 } from "@chakra-ui/react";
-import { BlasterIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
+import { ActivityIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
 import ActivityList from "./ActivityList";
 
 const MyActivities = () => {
@@ -19,7 +19,7 @@ const MyActivities = () => {
         <Header px="24px" py="28px">
           <Breadcrumb fontSize={"14px"} spacing="8px" mb="28px" separator={<img src={ChevronRightIcon} alt="right-icon" width={20} height={20} />}>
             <BreadcrumbItem>
-              <img src={BlasterIconPurple} alt="blaster-icon" width={20} height={20} />
+              <img src={ActivityIconPurple} alt="blaster-icon" width={20} height={20} />
               <BreadcrumbLink color="text.link" ml="8px" href="#">Activity</BreadcrumbLink>
             </BreadcrumbItem>
 
