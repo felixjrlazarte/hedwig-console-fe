@@ -12,6 +12,7 @@ import Dashboard from "./features/Dashboard";
 import Users from "./features/Users";
 import SMS from "./features/Blaster/SMS";
 import SendSMS from "./features/Blaster/SMS/SendSMS";
+import MyActivities from "./features/Activity/MyActivities";
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,10 @@ export default createBrowserRouter(
         <Route
           path="blaster/sms"
           element={<SMS />}
+        />
+        <Route
+          path="activity/my-activities"
+          element={<MyActivities />}
         />
       </Route>
 
