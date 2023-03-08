@@ -16,7 +16,7 @@ import { blastState } from "../../../../slices/blast/blastSlice";
 import Button from "../../../common/Button";
 import AlertBox from "../../../common/AlertBox";
 import { AddIcon, BlasterIconPurple, ChevronRightIcon } from "../../../../assets/images/icons";
-import ActivityList from "./ActivityList";
+import ActivityList from "../../Activity/MyActivities/ActivityList";
 
 const SMS = () => {
   const navigate = useNavigate();
