@@ -72,7 +72,7 @@ const AlertBox = ({
       </Box>
       {
         onClose &&
-        <Box minWidth="20px" minHeight="20px" ml="auto" cursor="pointer" onClick={onClose}>
+        <Box minWidth="20px" minHeight="20px" ml="auto" cursor="pointer" data-testid="alertbox-close-button" onClick={onClose}>
           <img src={CloseIcon} alt="me" width={20} height={20} />
         </Box>
       }
