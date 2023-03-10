@@ -10,7 +10,7 @@ const customConfig = {
           sender_mask_name: "Maya",
           blast_name: "blast name",
           status: "completed",
-          createdAt: new Date()
+          createdAt: "2023-03-07T10:06:21.000Z"
         }],
         total_count: 1
       }
