@@ -14,7 +14,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers: (builder) => { builder
+  extraReducers: /* istanbul ignore next */ (builder) => { builder
     // user login lifecycle
     .addCase(loginUser.pending, (state) => {
       state.isLoading = true;

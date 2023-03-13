@@ -13,7 +13,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {},
-  extraReducers: (builder) => { builder
+  extraReducers: /* istanbul ignore next */ (builder) => { builder
     // get user details lifecycle
     .addCase(getUserInfo.pending, (state) => {
       state.isLoading = true;

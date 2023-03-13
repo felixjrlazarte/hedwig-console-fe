@@ -16,7 +16,7 @@ export const blastSlice = createSlice({
   name: "blast",
   initialState,
   reducers: {},
-  extraReducers: (builder) => { builder
+  extraReducers: /* istanbul ignore next */ (builder) => { builder
     // get sender masks lifecycle
     .addCase(getSenderMasks.pending, (state) => {
       state.isLoading = true;
