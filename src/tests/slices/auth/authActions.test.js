@@ -1,6 +1,7 @@
 import axios from "axios";
 import { configureStore } from "@reduxjs/toolkit";
 import { loginUser, logoutUser } from "../../../slices/auth/authActions";
+import { authState } from "../../../slices/auth/authSlice";
 
 const store = configureStore({
   reducer: (state = "", action) => {
@@ -53,5 +54,11 @@ describe("AuthActions", () => {
       jest.spyOn(axios, "get").mockRejectedValueOnce({ response: { error: "error" } });
       await store.dispatch(logoutUser());
     });
+  });
+
+  it("should return state values", async () => {
+    const state = authState({ auth: "test" });
+
+    expect(state).toBe("test");
   });
 });
