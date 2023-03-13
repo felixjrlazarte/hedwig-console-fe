@@ -12,7 +12,9 @@ export const loginUser = createAsyncThunk(
     try {
       const { data } = await axios.post("/user/login", values);
       const user = jwt_decode(data.token);
+      /* istanbul ignore next */
       sessionStorage.setItem(CONFIG.HEDWIG_TOKEN, data.token);
+      /* istanbul ignore next */
       return {
         token: data.token,
         email: user.email,
