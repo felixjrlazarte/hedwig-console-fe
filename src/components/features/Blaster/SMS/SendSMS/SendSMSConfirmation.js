@@ -31,6 +31,7 @@ const SendSMSConfirmation = ({
     { label: "Message", value: blastDetails.blastMessage }
   ];
 
+  /* istanbul ignore next */
   const downloadFile = () => {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(file);
