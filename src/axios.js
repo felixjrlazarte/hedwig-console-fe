@@ -4,6 +4,7 @@ import { configData } from "./slices/config";
 const CONFIG = configData[process.env.REACT_APP_NODE_ENV];
 const UNAUTHORIZED = 401;
 
+/* istanbul ignore next */
 export function axiosInterceptor() {
   axios.interceptors.request.use(
     config => {

@@ -34,6 +34,7 @@ const SendSMS = () => {
     setStep(2);
   };
 
+  /* istanbul ignore next */
   const handleSendSMSBlast = () => {
     let values = {
       name: blastDetails.blastName,

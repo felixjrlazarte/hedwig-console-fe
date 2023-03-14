@@ -38,6 +38,7 @@ export default function ErrorAlertBox({
       <CloseButton
         alignSelf="flex-start"
         position="relative"
+        data-testid="error-alertbox-close-btn"
         right={-1}
         top={-1}
         onClick={onClose}

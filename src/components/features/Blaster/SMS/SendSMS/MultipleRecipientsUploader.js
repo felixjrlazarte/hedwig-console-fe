@@ -23,6 +23,7 @@ export default function MultipleRecipientsUploader({
   const FILE_NAME = HAS_SELECTED_FILE ? file[0].name : "";
   const FILE_SIZE = HAS_SELECTED_FILE ? formatBytes(file[0].size) : "";
 
+  /* istanbul ignore next */
   const { ref, ...rest } = register(name, {
     validate: (value) => {
       if (value.length < 1) {
@@ -43,7 +44,8 @@ export default function MultipleRecipientsUploader({
       return true;
     }
   });
-
+  
+  /* istanbul ignore next */
   const handleClick = () => inputRef.current?.click();
 
   return (

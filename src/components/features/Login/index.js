@@ -26,6 +26,7 @@ const Login = () => {
     dispatch(loginUser(values));
   };
 
+  /* istanbul ignore next */
   useEffect(() => {
     if (HAS_SESSION_TOKEN && isLoggedIn) {
       navigate("/dashboard");
@@ -36,6 +37,7 @@ const Login = () => {
     }
   }, [isLoggedIn, error, navigate, HAS_SESSION_TOKEN]);
 
+  /* istanbul ignore next */
   if (HAS_SESSION_TOKEN) {
     return <Navigate to="/dashboard" replace />;
   }

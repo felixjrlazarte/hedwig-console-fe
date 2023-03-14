@@ -1,34 +1,25 @@
-import { fireEvent, render } from "@testing-library/react";
-import { Provider } from "react-redux";
 import {
-  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
   Route
 } from "react-router-dom";
+import renderWithProviders, { fireEvent } from "../../utils/test-utils";
 
-import { store } from "../../slices/store";
 import Sidebar from "../../components/common/Sidebar";
 
-const routes = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<Sidebar />} />
-      <Route path="/dashboard" element={<Sidebar isToggle={true} />} />
-    </Route>
-  ));
-
-const SidebarComponent = () => {
-  return (
-    <Provider store={store}>
-      <RouterProvider router={routes} />
-    </Provider>
-  );
+const customRoutes = {
+  customRoutes: createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route path="/" element={<Sidebar />} />
+        <Route path="/dashboard" element={<Sidebar isToggle={true} />} />
+      </Route>
+    ))
 };
 
 describe("Sidebar component", () => {
   it("should render Sidebar component correctly", () => {
-    const { getByText } = render(<SidebarComponent />);
+    const { getByText } = renderWithProviders(<Sidebar />, customRoutes);
 
     expect(getByText(/HEDWIG/i)).toBeInTheDocument();
     expect(getByText(/Dashboard/i)).toBeInTheDocument();
@@ -36,7 +27,7 @@ describe("Sidebar component", () => {
   });
 
   it("should expand item with submenu items", () => {
-    const { getByText } = render(<SidebarComponent />);
+    const { getByText } = renderWithProviders(<Sidebar />, customRoutes);
 
     fireEvent.click(getByText("Blaster"));
 
@@ -44,7 +35,7 @@ describe("Sidebar component", () => {
   });
 
   it("should toggle Sidebar component on toggle button click and render item with popover", () => {
-    const { getByText } = render(<SidebarComponent />);
+    const { getByText } = renderWithProviders(<Sidebar />, customRoutes);
 
     const dashboardLink = getByText(/Dashboard/i);
     const blasterLink = getByText(/Blaster/i);

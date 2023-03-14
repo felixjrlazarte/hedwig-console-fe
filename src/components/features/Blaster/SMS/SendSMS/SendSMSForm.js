@@ -169,10 +169,10 @@ const SendSMSForm = ({
       </Box>
 
       <Flex mt="64px" justifyContent="space-between">
-        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} onClick={handleCancelAction}>
+        <Button width="auto" bg="none" color="button.primary" _hover={{ bg: "none", color: "bg.primary" }} data-testid="sendSMS-cancel-btn" onClick={handleCancelAction}>
           Cancel
         </Button>
-        <Button type="submit" width="121px" rightIcon={ArrowForwardIcon} disabled={IS_BUTTON_DISABLED}>
+        <Button type="submit" width="121px" data-testid="sendSMS-next-btn" rightIcon={ArrowForwardIcon} disabled={IS_BUTTON_DISABLED}>
           Next
         </Button>
       </Flex>

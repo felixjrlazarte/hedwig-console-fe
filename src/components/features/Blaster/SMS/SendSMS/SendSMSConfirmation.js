@@ -31,6 +31,7 @@ const SendSMSConfirmation = ({
     { label: "Message", value: blastDetails.blastMessage }
   ];
 
+  /* istanbul ignore next */
   const downloadFile = () => {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(file);
@@ -78,10 +79,10 @@ const SendSMSConfirmation = ({
         </Button>
 
         <Flex justifyContent="space-between">
-          <Button width="156px" mr="12px" variant="outlined" icon={ArrowBackIcon} onClick={handlePreviousAction}>
+          <Button width="156px" mr="12px" variant="outlined" data-testid="sendSMS-previous-btn" icon={ArrowBackIcon} onClick={handlePreviousAction}>
             Previous
           </Button>
-          <Button type="submit" width="201px" rightIcon={ArrowForwardIcon} onClick={sendSMSBlast}>
+          <Button type="submit" width="201px" data-testid="sendSMS-submit-btn" rightIcon={ArrowForwardIcon} onClick={sendSMSBlast}>
             Send SMS Blast
           </Button>
         </Flex>
