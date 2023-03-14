@@ -5,7 +5,8 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
-  DrawerBody
+  DrawerBody,
+  Divider
 } from "@chakra-ui/react";
 
 const Drawer = ({
@@ -18,8 +19,9 @@ const Drawer = ({
     <ChakraDrawer onClose={onClose} isOpen={isOpen} size="md">
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>{title}</DrawerHeader>
+        <DrawerCloseButton my="20px"/>
+        <DrawerHeader py="29px">{title}</DrawerHeader>
+        <Divider mb="16px" opacity={1} />
         <DrawerBody>
           {children}
         </DrawerBody>

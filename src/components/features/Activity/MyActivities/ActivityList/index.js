@@ -33,6 +33,7 @@ const ActivityList = () => {
   const [pageLimit, setPageLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [activityDetailsOpen, setActivityDetailsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const TOTAL_COUNT = !isEmpty(activityList) ? activityList.total_count : 0;
   const LIST = !isEmpty(activityList) ? activityList.list.map((data) => {
@@ -55,7 +56,8 @@ const ActivityList = () => {
     { key: "status", displayText: "Status" }
   ];
 
-  const handleItemClick = () => {
+  const handleItemClick = (values) => {
+    setSelectedItem(values);
     setActivityDetailsOpen(!activityDetailsOpen);
   };
 
@@ -80,6 +82,7 @@ const ActivityList = () => {
       />
 
       <ActivityDetails
+        details={selectedItem}
         isOpen={activityDetailsOpen}
         onClose={handleItemClick}
       />

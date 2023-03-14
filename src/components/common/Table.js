@@ -30,7 +30,7 @@ const Table = ({
         <Tbody bg="#F7F7F7" fontSize="14px" fontWeight={400}>
           {
             data.map((row, index) => (
-              <Tr key={`table-row-${index}`} _hover={{ bg: "white" }} cursor="pointer" transition="0.5s ease" onClick={itemClickAction}>
+              <Tr key={`table-row-${index}`} _hover={{ bg: "white" }} cursor="pointer" transition="0.5s ease" onClick={() => itemClickAction(row)}>
                 {
                   headers.map(({ key }) => (
                     <Td key={`table-data-${index}-${key}`} borderColor="#E0E4E6">
