@@ -16,8 +16,8 @@ const ActivityDetails = ({
     { label: "Status", value: details && details["status"] }
   ];
 
-  const RenderDetails = ({ label, value }) => (
-    <Grid templateColumns="repeat(5, 1fr)" mb="20px" key={value}>
+  const RenderDetails = ({ label, value }, index) => (
+    <Grid templateColumns="repeat(5, 1fr)" mb="20px" key={`${value}-${index}-ac`}>
       <GridItem colSpan="2" color="text.lightgray">{label}</GridItem>
       <GridItem colSpan="3" maxHeight="75px" fontWeight={500} overflow="scroll">{value}</GridItem>
     </Grid>
@@ -29,7 +29,7 @@ const ActivityDetails = ({
       isOpen={isOpen}
       title="Activity Details"
     >
-      {firstSectionDetails.map((item) => RenderDetails(item))}
+      {firstSectionDetails.map((item, index) => RenderDetails(item, index))}
     </Drawer>
   );
 };
