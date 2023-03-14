@@ -36,7 +36,7 @@ const LoginForm = ({
         errors={errors}
         register={register}
         icon={
-          <img src={show ? ViewIcon : ViewOffIcon} alt="me" width={22} height={19} onClick={() => setShow(!show)} />
+          <img src={show ? ViewIcon : ViewOffIcon} alt="me" width={22} height={19} onClick={() => setShow(!show)} data-testid="show-password-btn" />
         }
         validations={{
           required: "Please enter your password"
