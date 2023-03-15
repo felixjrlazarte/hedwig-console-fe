@@ -48,6 +48,8 @@ const ActivityDetails = ({
       <Divider mb="32px" opacity={1} />
 
       <SendOutRate values={[10, 20]} />
+
+      <Divider mb="32px" opacity={1} />
     </Drawer>
   );
 };
