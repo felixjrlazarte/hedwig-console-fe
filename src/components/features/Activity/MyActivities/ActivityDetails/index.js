@@ -5,6 +5,7 @@ import {
   Divider
 } from "@chakra-ui/react";
 import Drawer from "../../../../common/Drawer";
+import SendOutRate from "./SendOutRate";
 
 const ActivityDetails = ({
   details,
@@ -45,6 +46,8 @@ const ActivityDetails = ({
       {secondSectionDetails.map((item, index) => RenderDetails(item, index))}
 
       <Divider mb="32px" opacity={1} />
+
+      <SendOutRate values={[10, 20]} />
     </Drawer>
   );
 };
