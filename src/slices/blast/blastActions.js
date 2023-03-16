@@ -53,4 +53,20 @@ export const getBlastActivityList = createAsyncThunk(
   }
 );
 
+export const getBlastDetails = createAsyncThunk(
+  "blastDetails",
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/blasts/details/${id}`);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const showSMSBlastPrompt = createAction("SHOW_BLAST_PROMPT");

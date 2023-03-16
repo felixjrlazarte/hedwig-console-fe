@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSenderMasks, sendSMSBlast, showSMSBlastPrompt, getBlastActivityList } from "./blastActions";
+import {
+  getSenderMasks,
+  sendSMSBlast,
+  showSMSBlastPrompt,
+  getBlastActivityList,
+  getBlastDetails
+} from "./blastActions";
 
 // Initial state
 const initialState = {
@@ -7,6 +13,7 @@ const initialState = {
   newBlastDetails: {},
   blastPromptType: null,
   activityList: {},
+  blastDetails: {},
   isLoading: false,
   error: null
 };
@@ -54,6 +61,20 @@ export const blastSlice = createSlice({
     })
     .addCase(getBlastActivityList.rejected, (state, { payload }) => {
       state.activityList = {};
+      state.isLoading = false;
+      state.error = payload;
+    })
+    // get blast details lifecycle
+    .addCase(getBlastDetails.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    })
+    .addCase(getBlastDetails.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.blastDetails = payload;
+    })
+    .addCase(getBlastDetails.rejected, (state, { payload }) => {
+      state.blastDetails = {};
       state.isLoading = false;
       state.error = payload;
     })
