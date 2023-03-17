@@ -24,6 +24,8 @@ const ActivityDetails = ({
 
   const BLAST_ID = details && details["id"];
   const BLAST_DETAILS = blastDetails && blastDetails.blast;
+  const SENDOUT_RATE = blastDetails && blastDetails.sendoutRate ? [blastDetails.sendoutRate["delivered"], blastDetails.sendoutRate["undelivered"]] : [];
+  const FILE_NAME = blastDetails && blastDetails.file && blastDetails.file.name;
   const RECIPIENT_TYPE = BLAST_DETAILS && BLAST_DETAILS.recipient_type;
 
   const getMessageCount = () => {
@@ -77,9 +79,9 @@ const ActivityDetails = ({
       <Divider mb="32px" opacity={1} />
 
       {
-        RECIPIENT_TYPE === "multiple" &&
+        SENDOUT_RATE.length > 0 &&
         <>
-          <SendOutRate values={[10, 20]} />
+          <SendOutRate values={SENDOUT_RATE} />
           <Divider mb="32px" opacity={1} />
         </>
       }
@@ -90,7 +92,7 @@ const ActivityDetails = ({
           {
             RECIPIENT_TYPE === "single" ? BLAST_DETAILS && BLAST_DETAILS["phone_number"] :
               <Flex cursor="pointer" border="1px solid #4829AA" borderRadius="100px" w="fit-content" p="4px 16px">
-                <Text className="file-upload__replace" mr="8px">test.csv</Text>
+                <Text className="file-upload__replace" mr="8px">{FILE_NAME}</Text>
                 <img src={DownloadIcon} alt="Logo" width={16} height={16} />
               </Flex>
           }

@@ -9,10 +9,11 @@ import { Doughnut } from "react-chartjs-2";
 
 const SendOutRate = ({ values }) => {
   const data = {
+    labels: ["Delivered", "Undelivered"],
     datasets: [
       {
         data: values,
-        backgroundColor: ["#F04747", "#0FBD1E"],
+        backgroundColor: ["#0FBD1E", "#F04747"],
         borderWidth: 0,
         cutout: 45
       }
