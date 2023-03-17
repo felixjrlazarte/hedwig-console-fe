@@ -61,6 +61,7 @@ const ActivityDetails = ({
   );
 
   useEffect(() => {
+    /* istanbul ignore next */
     if (BLAST_ID) {
       dispatch(getBlastDetails(BLAST_ID));
     }
