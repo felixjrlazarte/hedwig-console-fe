@@ -84,7 +84,7 @@ const Dropdown = ({
 
       {
         showMenu &&
-        <Box className="dropdown__menu" w={width} transform="translateX(-1px)">
+        <Box className="dropdown__menu" position="unset" w={width} transform="translateX(-1px)">
           {
             options.map((option) => renderOptions(option))
           }

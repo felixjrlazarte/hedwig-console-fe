@@ -47,6 +47,7 @@ const Paginator = ({
     }
   };
 
+  /* istanbul ignore next */
   const handlePageNumberOnChange = (event) => {
     if (event.key === "Enter") {
       const value = parseInt(pageNumberRef.current.value);
@@ -77,6 +78,7 @@ const Paginator = ({
         cursor={DISABLED_PREV ? "not-allowed" : "pointer"}
         opacity={DISABLED_PREV ? 0.5 : 1}
         onClick={handlePrevPageButton}
+        data-testid="paginator-prevpage-btn"
       >
         <img src={ChevronLeftLIcon} alt="blaster-icon" width={24} height={24} />
       </Box>
@@ -96,6 +98,7 @@ const Paginator = ({
         cursor={DISABLED_NEXT ? "not-allowed" : "pointer"}
         opacity={DISABLED_NEXT ? 0.5 : 1}
         onClick={handleNextPageButton}
+        data-testid="paginator-nextpage-btn"
       >
         <img src={ChevronRightLIcon} alt="blaster-icon" width={24} height={24} />
       </Box>

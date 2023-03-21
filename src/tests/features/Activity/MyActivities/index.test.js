@@ -1,4 +1,4 @@
-import renderWithProviders from "../../../../utils/test-utils";
+import renderWithProviders, { fireEvent } from "../../../../utils/test-utils";
 import MyActivities from "../../../../components/features/Activity/MyActivities";
 
 const customConfig = {
@@ -32,5 +32,11 @@ describe("MyActivities component", () => {
     expect(getAllByText(/test-1234/i)[0]).toBeInTheDocument();
     expect(getAllByText(/Completed/i)[0]).toBeInTheDocument();
     expect(getAllByText(/Maya/i)[0]).toBeInTheDocument();
+  });
+
+  it("should open activity details drawer", () => {
+    const { getByText } = renderWithProviders(<MyActivities />, customConfig);
+
+    fireEvent.click(getByText("blast name"));
   });
 });

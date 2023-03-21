@@ -4,11 +4,12 @@ import {
   Box
 } from "@chakra-ui/react";
 import moment from "moment";
+import { isEmpty } from "../../../../../utils/helpers";
 import { getBlastActivityList } from "../../../../../slices/blast/blastActions";
 import { blastState } from "../../../../../slices/blast/blastSlice";
 import Table from "../../../../common/Table";
 import Paginator from "../../../../common/Paginator";
-import { isEmpty } from "../../../../../utils/helpers";
+import ActivityDetails from "../ActivityDetails";
 
 const transformStatus = (status) => {
   const colors = {
@@ -31,6 +32,8 @@ const ActivityList = () => {
 
   const [pageLimit, setPageLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activityDetailsOpen, setActivityDetailsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const TOTAL_COUNT = !isEmpty(activityList) ? activityList.total_count : 0;
   const LIST = !isEmpty(activityList) ? activityList.list.map((data) => {
@@ -53,6 +56,11 @@ const ActivityList = () => {
     { key: "status", displayText: "Status" }
   ];
 
+  const handleItemClick = (values) => {
+    setSelectedItem(values);
+    setActivityDetailsOpen(!activityDetailsOpen);
+  };
+
   useEffect(() => {
     dispatch(getBlastActivityList({ page: currentPage, limit: pageLimit }));
   }, [pageLimit, currentPage]);
@@ -62,6 +70,7 @@ const ActivityList = () => {
       <Table
         headers={headers}
         data={LIST}
+        itemClickAction={handleItemClick}
       />
 
       <Paginator
@@ -70,6 +79,12 @@ const ActivityList = () => {
         setLimit={setPageLimit}
         page={currentPage}
         setPage={setCurrentPage}
+      />
+
+      <ActivityDetails
+        details={selectedItem}
+        isOpen={activityDetailsOpen}
+        onClose={handleItemClick}
       />
     </Box>
   );
