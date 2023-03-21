@@ -35,7 +35,7 @@ describe("MyActivities component", () => {
   });
 
   it("should open activity details drawer", () => {
-    const { getByText, getAllByText } = renderWithProviders(<MyActivities />, customConfig);
+    const { getByText } = renderWithProviders(<MyActivities />, customConfig);
 
     fireEvent.click(getByText("blast name"));
   });

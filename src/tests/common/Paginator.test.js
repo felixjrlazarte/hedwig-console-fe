@@ -1,4 +1,4 @@
-import renderWithProviders, { fireEvent, getByTestId } from "../../utils/test-utils";
+import renderWithProviders, { fireEvent } from "../../utils/test-utils";
 import Paginator from "../../components/common/Paginator";
 
 describe("Paginator component", () => {
@@ -19,7 +19,7 @@ describe("Paginator component", () => {
       totalCount={100}
       limit={10}
       page={currentPage}
-      setPage={() => { currentPage = currentPage + 1 }}
+      setPage={() => { currentPage = currentPage + 1; }}
       setLimit={() => null}
     />);
 
@@ -35,7 +35,7 @@ describe("Paginator component", () => {
       totalCount={100}
       limit={10}
       page={currentPage}
-      setPage={() => { currentPage = currentPage + 1 }}
+      setPage={() => { currentPage = currentPage + 1; }}
       setLimit={() => null}
     />);
 
