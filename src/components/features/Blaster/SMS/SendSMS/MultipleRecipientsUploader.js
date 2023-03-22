@@ -30,8 +30,8 @@ export default function MultipleRecipientsUploader({
         return "Please upload csv file";
       }
 
-      for (const file of Array.from(value)) {
-        const fsMb = file.size / (1024 * 1024);
+      for (const currentFile of Array.from(value)) {
+        const fsMb = currentFile.size / (1024 * 1024);
         const MAX_FILE_SIZE = 15;
         if (fsMb > MAX_FILE_SIZE) {
           return "The file size should not be greater than 15MB";

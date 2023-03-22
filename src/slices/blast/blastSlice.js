@@ -80,7 +80,7 @@ export const blastSlice = createSlice({
     })
     // show send sms blast success or failed prompt
     .addCase(showSMSBlastPrompt, (state, { payload }) => {
-      state.blastPromptType = payload.type;
+      state.blastPromptType = payload ? payload.type : null;
     });
   }
 });
