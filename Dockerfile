@@ -19,7 +19,7 @@ RUN npm run build
 ######## Stage 2 ########
 
 # Create runner
-FROM $dproxy_url/nginx:1.21.0-alpine as runner
+FROM $dproxy_url/nginx:1.22.1-alpine as runner
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
