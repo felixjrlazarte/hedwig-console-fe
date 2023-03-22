@@ -136,6 +136,7 @@ const SendSMSForm = ({
         watch={watch}
         setValue={setValue}
         mb="16px"
+        zIndex={1}
       />
 
       <TextInput

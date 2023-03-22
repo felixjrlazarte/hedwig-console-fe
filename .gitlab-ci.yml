@@ -4,6 +4,17 @@ stages:
   - post-build
   - test
 
+include:
+  - project: isse/service-engineering/gitlab-ci-templates
+    ref: main
+    file:
+      - security/snyk.gitlab-ci.yml
+      - security/sonar-scanner.gitlab-ci.yml
+
+#-------------------#
+# Stage: Pre Build  #
+#-------------------#
+
 eslint:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
   stage: pre-build
@@ -22,72 +33,52 @@ unit-test:
   before_script:
     - npm install
   script:
-    - npm run test:test
+    - npm run test:test -- --coverage
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    expire_in: 1 days
+    when: on_success
+    paths:
+      - node_modules
+      - coverage
   only:
     - merge_requests
     - tags
 
-# code-quality:
-#   stage: pre-build
-#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:19.03.12
-#   services:
-#     - name: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:19.03.12-dind
-#       alias: docker
-#       command: ["--registry-mirror", "https://mirror.gcr.io"]
-#   variables:
-#     DOCKER_DRIVER: overlay2
-#     DOCKER_TLS_CERTDIR: ""
-#     CODE_QUALITY_IMAGE: "registry.gitlab.com/gitlab-org/ci-cd/codequality:0.85.29"
-#     REPORT_FORMAT: html
-#   script:
-#     - export SOURCE_CODE=$PWD
-#     - |
-#       if ! docker info &>/dev/null; then
-#         if [ -z "$DOCKER_HOST" ] && [ -n "$KUBERNETES_PORT" ]; then
-#           export DOCKER_HOST='tcp://localhost:2375'
-#         fi
-#       fi
-#     - | # this is required to avoid undesirable reset of Docker image ENV variables being set on build stage
-#       function propagate_env_vars() {
-#         CURRENT_ENV=$(printenv)
+code-quality:
+  stage: pre-build
+  needs: ["unit-test"]
+  extends: .sonar-scanner
+  variables:
+    SONAR_PROJECT_KEY: $CI_PROJECT_NAME
+    SONAR_LOGIN: $SONAR_TOKEN
+    SONAR_PROJECT_BASE_DIR: $PROJECT_DIR
+  only:
+    - merge_requests
+    - tags
 
-#         for VAR_NAME; do
-#           echo $CURRENT_ENV | grep "${VAR_NAME}=" > /dev/null && echo "--env $VAR_NAME "
-#         done
-#       }
-#     - docker pull --quiet "$CODE_QUALITY_IMAGE"
-#     - |
-#       docker run --rm \
-#         $(propagate_env_vars \
-#           SOURCE_CODE \
-#           TIMEOUT_SECONDS \
-#           CODECLIMATE_DEBUG \
-#           CODECLIMATE_DEV \
-#           REPORT_STDOUT \
-#           REPORT_FORMAT \
-#           ENGINE_MEMORY_LIMIT_BYTES \
-#           CODECLIMATE_PREFIX \
-#         ) \
-#         --volume "$PWD":/code \
-#         --volume /var/run/docker.sock:/var/run/docker.sock \
-#         "$CODE_QUALITY_IMAGE" /code
-#   artifacts:
-#     paths:
-#       - gl-code-quality-report.html
+sast:
+  stage: pre-build
+  extends: .snyk:code
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  allow_failure: true
+  only:
+    - merge_requests
+    - tags
 
-# sca:
-#   stage: pre-build
-#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.0-buster
-#   script:
-#     - npm install -g snyk snyk-to-html
-#     - snyk auth ${SNYK_TOKEN}
-#     - snyk monitor --project-name=${CI_PROJECT_NAME}
-#     - snyk test --json | tee snyk_sca_results.json && true
-#     - snyk-to-html -i snyk_sca_results.json -o snyk_sca_results.html
-#   artifacts:
-#     paths:
-#       - snyk_sca_results.html
+sca:
+  stage: pre-build
+  extends: .snyk:sca
+  variables:
+    SNYK_PROJECT_NAME: $CI_PROJECT_NAME
+    SNYK_SCAN_DIR: $CI_PROJECT_DIR
+  only:
+    - merge_requests
+    - tags
+
+#-------------------#
+# Stage: Build      #
+#-------------------#
 
 build:
   stage: build
@@ -107,3 +98,15 @@ build:
   only:
     - tags
 
+#-------------------#
+# Stage: Post Build #
+#-------------------#
+
+container-scanning:
+  stage: post-build
+  needs: ["build"]
+  extends: .snyk:container
+  variables:
+    SNYK_CONTAINER_TAG: $CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}
+  only:
+    - tags

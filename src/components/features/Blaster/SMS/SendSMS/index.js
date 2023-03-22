@@ -56,13 +56,11 @@ const SendSMS = () => {
     }
 
     dispatch(sendSMSBlast(values)).unwrap()
-      .then((result) => {
-        console.log("success", result);
+      .then(() => {
         dispatch(showSMSBlastPrompt({ type: "success" }));
         navigate("/blaster/sms");
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch(() => {
         dispatch(showSMSBlastPrompt({ type: "error" }));
         navigate("/blaster/sms");
       });
