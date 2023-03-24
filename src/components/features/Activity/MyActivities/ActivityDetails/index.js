@@ -11,7 +11,7 @@ import { containsDoubleByte } from "../../../../../utils/helpers";
 import { blastState } from "../../../../../slices/blast/blastSlice";
 import { getBlastDetails } from "../../../../../slices/blast/blastActions";
 import Drawer from "../../../../common/Drawer";
-import SendOutRate from "./SendOutRate";
+// import SendOutRate from "./SendOutRate";
 import { DownloadIcon } from "../../../../../assets/images/icons";
 
 const ActivityDetails = ({
@@ -24,7 +24,7 @@ const ActivityDetails = ({
 
   const BLAST_ID = details && details["id"];
   const BLAST_DETAILS = blastDetails && blastDetails.blast;
-  const SENDOUT_RATE = blastDetails && blastDetails.sendoutRate ? [blastDetails.sendoutRate["delivered"], blastDetails.sendoutRate["undelivered"]] : [];
+  // const SENDOUT_RATE = blastDetails && blastDetails.sendoutRate ? [blastDetails.sendoutRate["delivered"], blastDetails.sendoutRate["undelivered"]] : [];
   const FILE_NAME = blastDetails && blastDetails.file && blastDetails.file.name;
   const RECIPIENT_TYPE = BLAST_DETAILS && BLAST_DETAILS.recipient_type;
 
@@ -79,13 +79,13 @@ const ActivityDetails = ({
       {secondSectionDetails.map((item, index) => RenderDetails(item, index))}
       <Divider mb="32px" opacity={1} />
 
-      {
+      {/* {
         SENDOUT_RATE.length > 0 &&
         <>
           <SendOutRate values={SENDOUT_RATE} />
           <Divider mb="32px" opacity={1} />
         </>
-      }
+      } */}
 
       <Grid templateColumns="repeat(5, 1fr)" mb="20px">
         <GridItem colSpan="2" color="text.lightgray">{RECIPIENT_TYPE === "single" ? "Recipient" : "Recipients"}</GridItem>
