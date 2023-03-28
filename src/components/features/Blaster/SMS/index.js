@@ -42,7 +42,7 @@ const SMS = () => {
         blastPromptType === "error" &&
         <AlertBox
           type="error"
-          message="SMS Blast not set. Please send an SMS blast again. Try sending a blast again."
+          message="SMS blast not sent. Try sending a blast again."
           onClose={handlePromptOnClose}
         />
       }
