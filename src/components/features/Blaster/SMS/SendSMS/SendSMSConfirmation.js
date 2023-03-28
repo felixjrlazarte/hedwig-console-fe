@@ -52,7 +52,7 @@ const SendSMSConfirmation = ({
 
   return (
     <Box>
-      <Text mb="16px">Your current settlement details are as follows:</Text>
+      <Text mb="16px">Your current blast details are as follows:</Text>
 
       <Box h="213px" borderRadius="4px" bg="#F6F8FE" p="20px" mb="32px">
         {details.map((item) => RenderBlastDetails(item))}
