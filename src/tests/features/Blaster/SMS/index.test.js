@@ -56,7 +56,7 @@ describe("SMS component", () => {
       }
     });
 
-    const alertBox = getByText(/SMS Blast not set. Please send an SMS blast again. Try sending a blast again./i);
+    const alertBox = getByText(/SMS blast not sent. Try sending a blast again./i);
 
     fireEvent.click(getByTestId("alertbox-close-button"));
 
