@@ -16,6 +16,7 @@ const initialState = {
   activityList: {},
   blastDetails: {},
   downloadURL: "",
+  isDownloadLoading: false,
   isLoading: false,
   error: null
 };
@@ -82,16 +83,16 @@ export const blastSlice = createSlice({
     })
     // download blast file lifecycle
     .addCase(downloadBlastFile.pending, (state) => {
-      state.isLoading = true;
+      state.isDownloadLoading = true;
       state.error = null;
     })
     .addCase(downloadBlastFile.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isDownloadLoading = false;
       state.downloadURL = payload;
     })
     .addCase(downloadBlastFile.rejected, (state, { payload }) => {
       state.downloadURL = "";
-      state.isLoading = false;
+      state.isDownloadLoading = false;
       state.error = payload;
     })
     // show send sms blast success or failed prompt

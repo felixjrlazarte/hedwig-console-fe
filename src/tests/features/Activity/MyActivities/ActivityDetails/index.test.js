@@ -40,7 +40,7 @@ const customConfig2 = {
           undelivered: 0
         },
         file: {
-          name: "mobile_numbers.csv"
+          master_file: "mobile_numbers.csv"
         }
       }
     }
