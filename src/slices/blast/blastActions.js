@@ -69,4 +69,20 @@ export const getBlastDetails = createAsyncThunk(
   }
 );
 
+export const downloadBlastFile = createAsyncThunk(
+  "downloadBlastFile",
+  async ({ blastId, params }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`/blasts/${blastId}/download`, { params: params });
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const showSMSBlastPrompt = createAction("SHOW_BLAST_PROMPT");

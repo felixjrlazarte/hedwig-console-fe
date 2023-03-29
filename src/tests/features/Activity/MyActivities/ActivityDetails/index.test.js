@@ -35,12 +35,9 @@ const customConfig2 = {
           message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lorem eros, placerat nec nisl dictum, cursus rutrum lorem. Duis lorem eros, placerat nec nisl dictum, cursus rutrum lorem.",
           recipient_type: "multiple",
         },
-        sendoutRate: {
-          delivered: 10,
-          undelivered: 0
-        },
         file: {
-          name: "mobile_numbers.csv"
+          master_file: "mobile_numbers.csv",
+          invalid_mdns_file: "invalid_numbers.csv"
         }
       }
     }
@@ -71,7 +68,7 @@ describe("ActivityDetails component", () => {
       isOpen={true}
     />, customConfig2);
 
-    expect(getByText(/Recipients/i)).toBeInTheDocument();
     expect(getByText(/mobile_numbers.csv/i)).toBeInTheDocument();
+    expect(getByText(/invalid_numbers.csv/i)).toBeInTheDocument();
   });
 });
