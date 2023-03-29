@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { containsDoubleByte } from "../../../../../utils/helpers";
 import { blastState } from "../../../../../slices/blast/blastSlice";
-import { getBlastDetails } from "../../../../../slices/blast/blastActions";
+import { getBlastDetails, downloadBlastFile } from "../../../../../slices/blast/blastActions";
 import Drawer from "../../../../common/Drawer";
 // import SendOutRate from "./SendOutRate";
 import { DownloadIcon } from "../../../../../assets/images/icons";
@@ -60,6 +60,19 @@ const ActivityDetails = ({
     </Grid>
   );
 
+  const handleDownloadFile = (type) => {
+    dispatch(downloadBlastFile({
+      blastId: BLAST_ID,
+      ...(type === "invalid" && { params: { type } })
+    })).unwrap()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     /* istanbul ignore next */
     if (BLAST_ID) {
@@ -95,7 +108,7 @@ const ActivityDetails = ({
           }
           {
             RECIPIENT_TYPE === "multiple" && FILE_NAME &&
-            <Flex cursor="pointer" border="1px solid #4829AA" borderRadius="100px" w="fit-content" p="4px 16px">
+            <Flex cursor="pointer" border="1px solid #4829AA" borderRadius="100px" w="fit-content" p="4px 16px" onClick={handleDownloadFile}>
               <Text className="file-upload__replace" mr="8px">{FILE_NAME}</Text>
               <img src={DownloadIcon} alt="Logo" width={16} height={16} />
             </Flex>

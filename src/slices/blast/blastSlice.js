@@ -4,7 +4,8 @@ import {
   sendSMSBlast,
   showSMSBlastPrompt,
   getBlastActivityList,
-  getBlastDetails
+  getBlastDetails,
+  downloadBlastFile
 } from "./blastActions";
 
 // Initial state
@@ -14,6 +15,7 @@ const initialState = {
   blastPromptType: null,
   activityList: {},
   blastDetails: {},
+  downloadURL: "",
   isLoading: false,
   error: null
 };
@@ -75,6 +77,20 @@ export const blastSlice = createSlice({
     })
     .addCase(getBlastDetails.rejected, (state, { payload }) => {
       state.blastDetails = {};
+      state.isLoading = false;
+      state.error = payload;
+    })
+    // download blast file lifecycle
+    .addCase(downloadBlastFile.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    })
+    .addCase(downloadBlastFile.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.downloadURL = payload;
+    })
+    .addCase(downloadBlastFile.rejected, (state, { payload }) => {
+      state.downloadURL = "";
       state.isLoading = false;
       state.error = payload;
     })
