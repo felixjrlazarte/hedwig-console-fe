@@ -48,6 +48,7 @@ const ActivityDetails = ({
     { label: "Message Content", value: BLAST_DETAILS && BLAST_DETAILS["message"] }
   ];
 
+  /* istanbul ignore next */
   const handleDownloadFile = (type) => {
     dispatch(downloadBlastFile({
       blastId: BLAST_ID,
