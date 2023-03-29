@@ -33,7 +33,7 @@ const MyActivities = () => {
           </Flex>
         </Header>
 
-        <Divider mb="16px" opacity={1} />
+        <Divider opacity={1} />
 
         <Box>
           <ActivityList />
