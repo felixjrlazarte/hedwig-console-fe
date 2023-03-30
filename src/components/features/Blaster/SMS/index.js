@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -26,6 +26,12 @@ const SMS = () => {
   const handlePromptOnClose = () => {
     dispatch(showSMSBlastPrompt({ type: null }));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(showSMSBlastPrompt({ type: null }));
+    };
+  }, []);
 
   return (
     <Box>
