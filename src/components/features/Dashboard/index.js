@@ -6,6 +6,7 @@ import Button from "../../common/Button";
 import { BlasterIconPurple } from "../../../assets/images/icons";
 
 import { userState } from "../../../slices/user/userSlice";
+import LatestActivity from "./LatestActivity";
 
 const Dashboard = () => {
   const { details } = useSelector(userState);
@@ -39,6 +40,8 @@ const Dashboard = () => {
           </NavLink>
         </Flex>
       </Flex>
+
+      <LatestActivity />
     </Box>
   );
 };
