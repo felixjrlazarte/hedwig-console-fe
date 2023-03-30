@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,6 +14,7 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { ChevronDownDarkIcon } from "../../assets/images/icons";
+import Modal from "./Modal";
 
 import { userState } from "../../slices/user/userSlice";
 import { logoutUser } from "../../slices/auth/authActions";
@@ -22,6 +23,11 @@ const Header = ({ ...rest }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { details } = useSelector(userState);
+  const [showSignOutConfirmation, setShowSignOutConfirmation] = useState(false);
+
+  const handleLogoutConfirmation = () => {
+    setShowSignOutConfirmation(!showSignOutConfirmation);
+  };
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -63,11 +69,21 @@ const Header = ({ ...rest }) => {
             <MenuList
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}>
-              <MenuItem onClick={handleLogout}>Sign out</MenuItem>
+              <MenuItem onClick={handleLogoutConfirmation}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
       </HStack>
+
+      <Modal
+        title="Log out?"
+        message="Are you sure you want to log out of Hedwig?"
+        primaryBtnText="Log Out"
+        secondaryBtnText="Go Back"
+        primaryBtnAction={handleLogout}
+        secondaryBtnAction={handleLogoutConfirmation}
+        isOpen={showSignOutConfirmation}
+      />
     </Flex>
   );
 };

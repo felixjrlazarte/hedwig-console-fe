@@ -20,5 +20,6 @@ describe("Header component", () => {
     const { getByText } = renderWithProviders(<Header />, preloadedState);
 
     fireEvent.click(getByText("Sign out"));
+    fireEvent.click(getByText("Log Out"));
   });
 });
