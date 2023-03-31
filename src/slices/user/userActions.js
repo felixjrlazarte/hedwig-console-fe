@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 
 export const getUserInfo = createAsyncThunk(
   "user/me",
@@ -16,3 +16,5 @@ export const getUserInfo = createAsyncThunk(
     }
   }
 );
+
+export const resetUserState = createAction("RESET_USER_STATE");

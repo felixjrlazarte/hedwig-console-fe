@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserInfo } from "./userActions";
+import { getUserInfo, resetUserState } from "./userActions";
 
 // Initial state
 const initialState = {
@@ -26,7 +26,9 @@ export const userSlice = createSlice({
     .addCase(getUserInfo.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
-    });
+    })
+    // reset state
+    .addCase(resetUserState, () => initialState);
   }
 });
 

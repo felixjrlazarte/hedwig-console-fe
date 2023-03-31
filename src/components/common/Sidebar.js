@@ -38,7 +38,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
         name: "Activity", icon: ActivityIcon,
         subItems: [
           { name: "My Activities", url: "/activity/my-activities", },
-          { name: "Audit Trail", url: "/activity/audit-trail", }
+          { name: "Audit Trail", url: "/activity/audit-trail", authorize: "ADMIN" }
         ],
         isOpen: false
       },
@@ -118,6 +118,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
                   isToggle={isToggle}
                   isSubitem={true}
                   url={subItem.url}
+                  authorize={subItem.authorize}
                   handleSubmenuClick={handleSubmenuClick}
                 >
                   {subItem.name}

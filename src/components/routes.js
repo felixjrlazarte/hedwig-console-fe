@@ -13,6 +13,7 @@ import Users from "./features/Users";
 import SMS from "./features/Blaster/SMS";
 import SendSMS from "./features/Blaster/SMS/SendSMS";
 import MyActivities from "./features/Activity/MyActivities";
+import AuditTrail from "./features/Activity/AuditTrail";
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,10 @@ export default createBrowserRouter(
         <Route
           path="users"
           element={<Users />}
+        />
+        <Route
+          path="activity/audit-trail"
+          element={<AuditTrail />}
         />
       </Route>
 

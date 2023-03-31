@@ -18,6 +18,7 @@ import Modal from "./Modal";
 
 import { userState } from "../../slices/user/userSlice";
 import { logoutUser } from "../../slices/auth/authActions";
+import { resetUserState } from "../../slices/user/userActions";
 
 const Header = ({ ...rest }) => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Header = ({ ...rest }) => {
     e.preventDefault();
 
     await dispatch(logoutUser());
+    await dispatch(resetUserState());
     navigate("/login");
   };
 
