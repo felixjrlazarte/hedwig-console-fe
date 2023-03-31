@@ -9,6 +9,7 @@ import { getAuditTrailList } from "../../../../../slices/auditTrail/auditTrailAc
 import { auditTrailState } from "../../../../../slices/auditTrail/auditTrailSlice";
 import Table from "../../../../common/Table";
 import Paginator from "../../../../common/Paginator";
+import ActivityDetails from "../../MyActivities/ActivityDetails";
 
 const transformStatus = (status) => {
   const colors = {
@@ -31,13 +32,15 @@ const AuditTrailList = () => {
 
   const [pageLimit, setPageLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  // const [activityDetailsOpen, setActivityDetailsOpen] = useState(false);
+  const [activityDetailsOpen, setActivityDetailsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const TOTAL_COUNT = !isEmpty(auditTrailList) ? auditTrailList.total_count : 0;
   const LIST = !isEmpty(auditTrailList) ? auditTrailList.list.map((data) => {
     const formattedDate = moment(data["createdAt"]).format("YYYY-MM-DD HH:mm:ss");
 
     return {
+      id: data["blast_id"],
       date: formattedDate,
       name: data["blast_name"],
       user: `${data["firstname"]} ${data["lastname"]}`,
@@ -54,10 +57,10 @@ const AuditTrailList = () => {
     { key: "status", displayText: "Status" }
   ];
 
-  // const handleItemClick = (values) => {
-  //   setSelectedItem(values);
-  //   setActivityDetailsOpen(!activityDetailsOpen);
-  // };
+  const handleItemClick = (values) => {
+    setSelectedItem(values);
+    setActivityDetailsOpen(!activityDetailsOpen);
+  };
 
   useEffect(() => {
     dispatch(getAuditTrailList({ page: currentPage, limit: pageLimit }));
@@ -68,7 +71,7 @@ const AuditTrailList = () => {
       <Table
         headers={headers}
         data={LIST}
-        // itemClickAction={handleItemClick}
+        itemClickAction={handleItemClick}
       />
 
       <Paginator
@@ -77,6 +80,12 @@ const AuditTrailList = () => {
         setLimit={setPageLimit}
         page={currentPage}
         setPage={setCurrentPage}
+      />
+
+      <ActivityDetails
+        details={selectedItem}
+        isOpen={activityDetailsOpen}
+        onClose={handleItemClick}
       />
     </Box>
   );
