@@ -154,6 +154,10 @@ const SendSMSForm = ({
               return "Max character count exceeded";
             }
             return true;
+          },
+          setValueAs: value => value.trim(),
+          onChange: (event) => {
+            event.target.value = event.target.value.replace(/^\s+/g, "");
           }
         }}
       />
