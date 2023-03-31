@@ -3,21 +3,21 @@ import {
   Divider,
   Box
 } from "@chakra-ui/react";
-import ActivityList from "./ActivityList";
+import AuditTrailList from "./AuditTrailList";
 import ActivityHeader from "../Header";
 
-const MyActivities = () => {
+const AuditTrail = () => {
   return (
     <Box bg="white" w="full" borderRadius="xl" borderWidth="1px" borderColor="#E0E4E6">
-      <ActivityHeader title="My Activities" />
+      <ActivityHeader title="Audit Trail" />
 
       <Divider opacity={1} />
 
       <Box>
-        <ActivityList />
+        <AuditTrailList />
       </Box>
     </Box>
   );
 };
 
-export default MyActivities;
+export default AuditTrail;

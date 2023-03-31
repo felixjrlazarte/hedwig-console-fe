@@ -37,7 +37,9 @@ const ActivityDetails = ({
   const firstSectionDetails = [
     { label: "Name", value: details && details["name"] },
     { label: "Date", value: details && details["date"] },
-    { label: "Status", value: details && details["status"] }
+    { label: "Status", value: details && details["status"] },
+    ...(details && details.activityType ? [{ label: "Activity Type", value: details && details["activityType"] }] : []),
+    ...(details && details.user ? [{ label: "User", value: details && details["user"] }] : [])
   ];
 
   const secondSectionDetails = [

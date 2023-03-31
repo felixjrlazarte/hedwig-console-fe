@@ -10,6 +10,7 @@ import LatestActivity from "./LatestActivity";
 
 const Dashboard = () => {
   const { details } = useSelector(userState);
+  const IS_ADMIN = details && details.role === 1;
 
   return (
     <Box>
@@ -42,29 +43,32 @@ const Dashboard = () => {
           </Flex>
         </Flex>
 
-        <Flex bg="white" px="24px" py="28px" w="343px" h="234px"
-          borderRadius="xl"
-          borderWidth="1px"
-          borderColor="#E0E4E6"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <Flex>
-            <Box minW="64px" h="64px" bg="bg.gray.200" borderRadius="md" mr={4}>
-              <img src={ActivityIconPurple} alt="blaster-icon" width={64} height={64} />
-            </Box>
-            <Stack spacing={2} pb="32px">
-              <Text fontWeight={500}>Audit Trail</Text>
-              <Text fontSize="14px">Take a look at the numbers of the latest blasts.</Text>
-            </Stack>
-          </Flex>
+        {
+          IS_ADMIN &&
+          <Flex bg="white" px="24px" py="28px" w="343px" h="234px"
+            borderRadius="xl"
+            borderWidth="1px"
+            borderColor="#E0E4E6"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <Flex>
+              <Box minW="64px" h="64px" bg="bg.gray.200" borderRadius="md" mr={4}>
+                <img src={ActivityIconPurple} alt="blaster-icon" width={64} height={64} />
+              </Box>
+              <Stack spacing={2} pb="32px">
+                <Text fontWeight={500}>Audit Trail</Text>
+                <Text fontSize="14px">Take a look at the numbers of the latest blasts.</Text>
+              </Stack>
+            </Flex>
 
-          <Flex justifyContent="center">
-            <NavLink to="/activity/audit-trail">
-              <Button>View Audit Trail</Button>
-            </NavLink>
+            <Flex justifyContent="center">
+              <NavLink to="/activity/audit-trail">
+                <Button>View Audit Trail</Button>
+              </NavLink>
+            </Flex>
           </Flex>
-        </Flex>
+        }
       </Flex>
 
       <LatestActivity />
