@@ -15,66 +15,66 @@ include:
 # Stage: Pre Build  #
 #-------------------#
 
-# eslint:
-#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
-#   stage: pre-build
-#   before_script:
-#     - npm install eslint@8.33.0
-#     - npm install eslint-plugin-react
-#   script:
-#     - npm run lint
-#   only:
-#     - merge_requests
-#     - tags
+eslint:
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  stage: pre-build
+  before_script:
+    - npm install eslint@8.33.0
+    - npm install eslint-plugin-react
+  script:
+    - npm run lint
+  only:
+    - merge_requests
+    - tags
 
-# unit-test:
-#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
-#   stage: pre-build
-#   before_script:
-#     - npm install
-#   script:
-#     - npm run test:test -- --coverage
-#   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-#   artifacts:
-#     expire_in: 1 days
-#     when: on_success
-#     paths:
-#       - node_modules
-#       - coverage
-#   only:
-#     - merge_requests
-#     - tags
+unit-test:
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  stage: pre-build
+  before_script:
+    - npm install
+  script:
+    - npm run test:test -- --coverage
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    expire_in: 1 days
+    when: on_success
+    paths:
+      - node_modules
+      - coverage
+  only:
+    - merge_requests
+    - tags
 
-# code-quality:
-#   stage: pre-build
-#   needs: ["unit-test"]
-#   extends: .sonar-scanner
-#   variables:
-#     SONAR_PROJECT_KEY: $CI_PROJECT_NAME
-#     SONAR_LOGIN: $SONAR_TOKEN
-#     SONAR_PROJECT_BASE_DIR: $PROJECT_DIR
-#   only:
-#     - merge_requests
-#     - tags
+code-quality:
+  stage: pre-build
+  needs: ["unit-test"]
+  extends: .sonar-scanner
+  variables:
+    SONAR_PROJECT_KEY: $CI_PROJECT_NAME
+    SONAR_LOGIN: $SONAR_TOKEN
+    SONAR_PROJECT_BASE_DIR: $PROJECT_DIR
+  only:
+    - merge_requests
+    - tags
 
-# sast:
-#   stage: pre-build
-#   extends: .snyk:code
-#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
-#   allow_failure: true
-#   only:
-#     - merge_requests
-#     - tags
+sast:
+  stage: pre-build
+  extends: .snyk:code
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
+  allow_failure: true
+  only:
+    - merge_requests
+    - tags
 
-# sca:
-#   stage: pre-build
-#   extends: .snyk:sca
-#   variables:
-#     SNYK_PROJECT_NAME: $CI_PROJECT_NAME
-#     SNYK_SCAN_DIR: $CI_PROJECT_DIR
-#   only:
-#     - merge_requests
-#     - tags
+sca:
+  stage: pre-build
+  extends: .snyk:sca
+  variables:
+    SNYK_PROJECT_NAME: $CI_PROJECT_NAME
+    SNYK_SCAN_DIR: $CI_PROJECT_DIR
+  only:
+    - merge_requests
+    - tags
 
 #-------------------#
 # Stage: Build      #
