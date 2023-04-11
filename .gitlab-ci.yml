@@ -102,11 +102,11 @@ build:
 # Stage: Post Build #
 #-------------------#
 
-# container-scanning:
-#   stage: post-build
-#   needs: ["build"]
-#   extends: .snyk:container
-#   variables:
-#     SNYK_CONTAINER_TAG: $CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}
-#   only:
-#     - tags
+container-scanning:
+  stage: post-build
+  needs: ["build"]
+  extends: .snyk:container
+  variables:
+    SNYK_CONTAINER_TAG: $CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}
+  only:
+    - tags
