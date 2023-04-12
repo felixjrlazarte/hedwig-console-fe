@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Flex, Box, Text, Link } from "@chakra-ui/react";
+import { Flex, Box, Text } from "@chakra-ui/react";
 import { useNavigate, Navigate } from "react-router-dom";
 
 import LoginForm from "./LoginForm";
@@ -60,14 +60,7 @@ const Login = () => {
           {
             openAlertBox &&
             <ErrorAlertBox
-              message={
-                <>
-                  {"Account does not exist. If you would like to log into the dashboard, please "}
-                  <Link color="text.link" fontSize="14px" fontWeight={500} textDecoration="underline" href="#">
-                    request for an account.
-                  </Link>
-                </>
-              }
+              message="Invalid log in. Please reach out to system administrator."
               onClose={() => setOpenAlertBox(false)}
             />
           }

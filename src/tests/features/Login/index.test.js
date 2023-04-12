@@ -20,7 +20,7 @@ describe("Login component", () => {
   it("should display error alert box", () => {
     const { getByText, getByTestId } = renderWithProviders(<Login />, customConfig);
 
-    const alertBox = getByText(/Account does not exist./i);
+    const alertBox = getByText(/Invalid log in. Please reach out to system administrator./i);
     expect(alertBox).toBeInTheDocument();
 
     fireEvent.click(getByTestId("error-alertbox-close-btn"));
