@@ -17,31 +17,22 @@ import Logo from "../../assets/images/hc_logo_purple.svg";
 
 import { isEmpty } from "../../utils/helpers";
 
-const TIMEOUT_IN_MINUTES = 30;
+const TIMEOUT_IN_MINUTES = 1_5;
 
 /* istanbul ignore next */
 const IdleHandler = ({ children }) => {
   const dispatch = useDispatch();
 
-  const onPromptState = (resetTimer) => {
+  const onIdleState = (resetTimer) => {
     dispatch(getUserInfo()).unwrap()
       .then(() => resetTimer())
       .catch(() => dispatch(resetUserState()));
   };
 
   const { activate } = useIdleTimer({
-    onPrompt: () => onPromptState(activate),
     timeout: 1000 * 60 * TIMEOUT_IN_MINUTES,
-    promptBeforeIdle: 1000,
-    throttle: 500
-  });
-
-  useEffect(() => {
-    const interval = setInterval(() => { }, 500);
-
-    return () => {
-      clearInterval(interval);
-    };
+    crossTab: true,
+    onIdle: () => onIdleState(activate)
   });
 
   return children;
