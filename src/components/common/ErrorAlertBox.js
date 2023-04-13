@@ -3,10 +3,9 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-  Box,
-  CloseButton
+  Box
 } from "@chakra-ui/react";
-import { WarningDiamondIcon } from "../../assets/images/icons";
+import { WarningDiamondIcon, CloseIcon } from "../../assets/images/icons";
 
 export default function ErrorAlertBox({
   title,
@@ -27,6 +26,7 @@ export default function ErrorAlertBox({
       <Box minWidth="26px" minHeight="26px" mr="18px">
         <img src={WarningDiamondIcon} alt="me" width={26} height={26} />
       </Box>
+
       <Box>
         {
           title && <AlertTitle>{title}</AlertTitle>
@@ -35,14 +35,10 @@ export default function ErrorAlertBox({
           {message}
         </AlertDescription>
       </Box>
-      <CloseButton
-        alignSelf="flex-start"
-        position="relative"
-        data-testid="error-alertbox-close-btn"
-        right={-1}
-        top={-1}
-        onClick={onClose}
-      />
+
+      <Box minWidth="24px" minHeight="24px" ml="15px" onClick={onClose} data-testid="error-alertbox-close-btn">
+        <img src={CloseIcon} alt="me" width={24} height={24} />
+      </Box>
     </Alert>
   );
 }
