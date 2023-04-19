@@ -18,7 +18,6 @@ import {
   ActivityIcon,
   BlasterIcon,
   CheckIcon,
-  UsersIcon,
   CollapseIcon,
   ChevronDownIcon,
   ChevronUpIcon
@@ -42,7 +41,7 @@ const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
         ],
         isOpen: false
       },
-      { name: "Users", url: "/users", icon: UsersIcon, authorize: "ADMIN" }
+      // { name: "Users", url: "/users", icon: UsersIcon, authorize: "ADMIN" }
     ]
   );
 
