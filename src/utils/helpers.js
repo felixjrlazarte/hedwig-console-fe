@@ -49,5 +49,8 @@ export const getBlastMessageCount = (message) => {
 };
 
 export const getUniqueKey = () => {
-  return Math.floor(Math.random() * Date.now()).toString(16);
+  const crypto = window.crypto || window.msCrypto;
+  const array = new Uint32Array(1);
+  
+  return Math.floor(crypto.getRandomValues(array) * Date.now()).toString(16);
 };
