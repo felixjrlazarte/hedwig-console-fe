@@ -1,6 +1,6 @@
 export const isEmpty = (arg) => {
   const checkProperties = (obj) => {
-    for (var key in obj) {
+    for (let key in obj) {
       if (obj[key] === null || obj[key] === "") {
         return true;
       }
