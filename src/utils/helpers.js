@@ -36,3 +36,7 @@ export const containsDoubleByte = (arg) => {
   if (arg.charCodeAt(0) > 255) return true;
   return regex.test(arg);
 };
+
+export const getUniqueKey = () => {
+  return Math.floor(Math.random() * Date.now()).toString(16);
+};
