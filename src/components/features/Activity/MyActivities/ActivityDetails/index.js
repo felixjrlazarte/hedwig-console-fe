@@ -44,7 +44,7 @@ const ActivityDetails = ({
 
   const secondSectionDetails = [
     { label: "ID", value: details && details["id"] },
-    { label: "Sender Mask", value: details && details["senderMask"] },
+    { label: "Sender Mask", value: BLAST_DETAILS && BLAST_DETAILS["senderMask"] },
     { label: "Character Count", value: BLAST_DETAILS && [...BLAST_DETAILS["message"]].length },
     { label: "Message Count", value: BLAST_DETAILS && getMessageCount() },
     { label: "Message Content", value: BLAST_DETAILS && BLAST_DETAILS["message"] }
