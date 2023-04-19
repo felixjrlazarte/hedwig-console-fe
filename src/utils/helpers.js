@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const isEmpty = (arg) => {
   const checkProperties = (obj) => {
     for (let key in obj) {
@@ -49,8 +51,5 @@ export const getBlastMessageCount = (message) => {
 };
 
 export const getUniqueKey = () => {
-  const crypto = window.crypto || window.msCrypto;
-  const array = new Uint32Array(1);
-  
-  return Math.floor(crypto.getRandomValues(array) * Date.now()).toString(16);
+  return uuidv4();
 };
