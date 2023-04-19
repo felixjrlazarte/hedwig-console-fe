@@ -37,6 +37,17 @@ export const containsDoubleByte = (arg) => {
   return regex.test(arg);
 };
 
+export const getBlastMessageCount = (message) => {
+  const BLAST_MESSAGE_CHAR_COUNT = message && message.length;
+  const HAS_UNICODE = message && containsDoubleByte(message);
+
+  if (BLAST_MESSAGE_CHAR_COUNT === 0) return 0;
+
+  const BLAST_MESSAGE_CHAR_COUNT_UNICODE = BLAST_MESSAGE_CHAR_COUNT <= 70 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 70) / 70) + 1;
+  const BLAST_MESSAGE_CHAR_COUNT_NONUNICODE = BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160) / 154) + 1;
+  return HAS_UNICODE ? BLAST_MESSAGE_CHAR_COUNT_UNICODE : BLAST_MESSAGE_CHAR_COUNT_NONUNICODE;
+};
+
 export const getUniqueKey = () => {
   return Math.floor(Math.random() * Date.now()).toString(16);
 };
