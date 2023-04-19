@@ -24,6 +24,13 @@ import {
 } from "../../assets/images/icons";
 import Logo from "../../assets/images/hc_logo.svg";
 
+const getSubItemProperties = (isSubitem, isToggledAndSubitem) => ({
+  justifyContent: isSubitem ? "flex-start" : "center",
+  px: isSubitem ? "16px" : "0",
+  bg: isToggledAndSubitem ? "bg.primary" : "#4829AA",
+  ml: isSubitem ? "33px" : "17px"
+});
+
 const Sidebar = ({ isToggle, sidebarWidth, toggleSidebar, ...rest }) => {
   const [linkItems, setLinkItems] = useState(
     [
@@ -161,12 +168,7 @@ const NavItem = ({
   const role = details.role === 1 ? "ADMIN" : "COORDINATOR";
   const isToggledAndSubitem = isToggle && isSubitem;
 
-  const subItemClass = {
-    justifyContent: isSubitem ? "flex-start" : "center",
-    px: isSubitem ? "16px" : "0",
-    bg: isToggledAndSubitem ? "bg.primary" : "#4829AA",
-    ml: isSubitem ? "33px" : "17px"
-  };
+  const subItemClass = getSubItemProperties(isSubitem, isToggledAndSubitem);
 
   if (authorize && authorize !== role) {
     return;
