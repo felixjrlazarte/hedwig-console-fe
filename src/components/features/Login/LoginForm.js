@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Link } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import TextInput from "../../common/TextInput";
 
 import { ViewIcon, ViewOffIcon } from "../../../assets/images/icons";
@@ -42,10 +42,6 @@ const LoginForm = ({
           required: "Please enter your password"
         }}
       />
-
-      <Link color="text.link" fontSize="16px" fontWeight={500} textDecoration="underline" href="#">
-        Request for an account
-      </Link>
 
       <Button mt="40px" w="full" bg="button.primary" borderRadius="100px" isLoading={isSubmitting} type="submit">
         Log In
