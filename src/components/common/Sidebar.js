@@ -159,6 +159,12 @@ const NavItem = ({
   const { details } = useSelector(userState);
 
   const role = details && details.role === 1 ? "ADMIN" : "COORDINATOR";
+  const subItemClass = {
+    justifyContent: isSubitem ? "flex-start" : "center",
+    px: isSubitem ? "16px" : "0",
+    bg: isToggle && isSubitem ? "bg.primary" : "#4829AA",
+    ml: isSubitem ? "33px" : "17px"
+  };
 
   if (authorize && authorize !== role) {
     return;
@@ -169,13 +175,13 @@ const NavItem = ({
       <Flex
         transition="0.5s ease"
         align="center"
-        justifyContent={isToggle ? (isSubitem ? "flex-start" : "center") : "flex-start"}
+        justifyContent={isToggle ? subItemClass.justifyContent : "flex-start"}
         height="46px"
         py="4"
-        px={isToggle ? isSubitem ? "16px" : "0" : "26px"}
+        px={isToggle ? subItemClass.px : "26px"}
         role="group"
         cursor="pointer"
-        bg={pathname === url ? isToggle && isSubitem ? "bg.primary" : "#4829AA" : "none"}
+        bg={pathname === url ? subItemClass.bg : "none"}
         fontWeight={pathname === url && isToggle && isSubitem ? 500 : "normal"}
         _hover={{ bg: isToggle && isSubitem ? "bg.primary" : "#4829AA" }}
         {...rest}
@@ -186,7 +192,7 @@ const NavItem = ({
         }
         {
           (!isToggle || (isToggle && isSubitem)) &&
-          <Flex ml={!isToggle ? (isSubitem ? "33px" : "17px") : "0"} justifyContent="space-between" alignItems="center" w="full">
+          <Flex ml={!isToggle ? subItemClass.ml : "0"} justifyContent="space-between" alignItems="center" w="full">
             <span>{children}</span>
             {
               (isToggle && isSubitem && pathname === url) &&
