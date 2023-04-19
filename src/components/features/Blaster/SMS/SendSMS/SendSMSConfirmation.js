@@ -11,6 +11,13 @@ import {
 import Button from "../../../../common/Button";
 import { ArrowForwardIcon, ArrowBackIcon, DownloadIcon } from "../../../../../assets/images/icons";
 
+const RenderBlastDetails = ({ label, value }) => (
+  <Grid templateColumns="repeat(5, 1fr)" mb="12px" key={label}>
+    <GridItem colSpan="2" color="text.darkgray" fontWeight="600" fontSize="14px">{label}</GridItem>
+    <GridItem colSpan="3" fontSize="14px" maxHeight="75px" overflow="scroll">{value}</GridItem>
+  </Grid>
+);
+
 const SendSMSConfirmation = ({
   blastDetails,
   handleCancelAction,
@@ -42,13 +49,6 @@ const SendSMSConfirmation = ({
 
     document.body.removeChild(link);
   };
-
-  const RenderBlastDetails = ({ label, value }) => (
-    <Grid templateColumns="repeat(5, 1fr)" mb="12px" key={label}>
-      <GridItem colSpan="2" color="text.darkgray" fontWeight="600" fontSize="14px">{label}</GridItem>
-      <GridItem colSpan="3" fontSize="14px" maxHeight="75px" overflow="scroll">{value}</GridItem>
-    </Grid>
-  );
 
   return (
     <Box>

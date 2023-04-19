@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, GridItem, Divider, Text, Flex } from "@chakra-ui/react";
-import { containsDoubleByte } from "../../../../../utils/helpers";
+import { getBlastMessageCount } from "../../../../../utils/helpers";
 import { blastState } from "../../../../../slices/blast/blastSlice";
 import { getBlastDetails, downloadBlastFile } from "../../../../../slices/blast/blastActions";
 import Drawer from "../../../../common/Drawer";
-// import SendOutRate from "./SendOutRate";
 import { DownloadIcon } from "../../../../../assets/images/icons";
+
+const RenderDetails = ({ label, value }, index) => (
+  <Grid templateColumns="repeat(5, 1fr)" mb="20px" key={`${value}-${index}-ac`}>
+    <GridItem colSpan="2" color="text.lightgray">{label}</GridItem>
+    <GridItem colSpan="3" maxHeight="75px" fontWeight={500} overflow="scroll">{value}</GridItem>
+  </Grid>
+);
 
 const ActivityDetails = ({
   details,
@@ -18,36 +24,24 @@ const ActivityDetails = ({
 
   const BLAST_ID = details && details["id"];
   const BLAST_DETAILS = blastDetails && blastDetails.blast;
-  // const SENDOUT_RATE = blastDetails && blastDetails.sendoutRate ? [blastDetails.sendoutRate["delivered"], blastDetails.sendoutRate["undelivered"]] : [];
   const FILE_NAME = blastDetails && blastDetails.file && blastDetails.file.master_file;
   const INVALID_MDNS_FILE_NAME = blastDetails && blastDetails.file && blastDetails.file.invalid_mdns_file;
   const RECIPIENT_TYPE = BLAST_DETAILS && BLAST_DETAILS.recipient_type;
 
-  const getMessageCount = () => {
-    const BLAST_MESSAGE_CHAR_COUNT = BLAST_DETAILS && [...BLAST_DETAILS["message"]].length;
-    const HAS_UNICODE = BLAST_DETAILS && containsDoubleByte(BLAST_DETAILS["message"]);
-
-    if (BLAST_MESSAGE_CHAR_COUNT === 0) return 0;
-
-    return HAS_UNICODE ?
-      BLAST_MESSAGE_CHAR_COUNT <= 70 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 70) / 70) + 1 :
-      BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160) / 154) + 1;
-  };
-
-  const firstSectionDetails = [
-    { label: "Name", value: details && details["name"] },
-    { label: "Date", value: details && details["date"] },
-    { label: "Status", value: details && details["status"] },
-    ...(details && details.activityType ? [{ label: "Activity Type", value: details && details["activityType"] }] : []),
-    ...(details && details.user ? [{ label: "User", value: details && details["user"] }] : [])
+  const getFirstSectionDetails = () => [
+    { label: "Name", value: details["name"] },
+    { label: "Date", value: details["date"] },
+    { label: "Status", value: details["status"] },
+    ...(details && details.activityType ? [{ label: "Activity Type", value: details["activityType"] }] : []),
+    ...(details && details.user ? [{ label: "User", value: details["user"] }] : [])
   ];
 
-  const secondSectionDetails = [
-    { label: "ID", value: details && details["id"] },
-    { label: "Sender Mask", value: BLAST_DETAILS && BLAST_DETAILS["senderMask"] },
-    { label: "Character Count", value: BLAST_DETAILS && [...BLAST_DETAILS["message"]].length },
-    { label: "Message Count", value: BLAST_DETAILS && getMessageCount() },
-    { label: "Message Content", value: BLAST_DETAILS && BLAST_DETAILS["message"] }
+  const getSecondSectionDetails = () => [
+    { label: "ID", value: BLAST_DETAILS["id"] },
+    { label: "Sender Mask", value: BLAST_DETAILS["senderMask"] },
+    { label: "Character Count", value: [...BLAST_DETAILS["message"]].length },
+    { label: "Message Count", value: getBlastMessageCount(BLAST_DETAILS["message"]) },
+    { label: "Message Content", value: BLAST_DETAILS["message"] }
   ];
 
   /* istanbul ignore next */
@@ -71,13 +65,6 @@ const ActivityDetails = ({
       });
   };
 
-  const RenderDetails = ({ label, value }, index) => (
-    <Grid templateColumns="repeat(5, 1fr)" mb="20px" key={`${value}-${index}-ac`}>
-      <GridItem colSpan="2" color="text.lightgray">{label}</GridItem>
-      <GridItem colSpan="3" maxHeight="75px" fontWeight={500} overflow="scroll">{value}</GridItem>
-    </Grid>
-  );
-
   useEffect(() => {
     /* istanbul ignore next */
     if (BLAST_ID) {
@@ -91,19 +78,11 @@ const ActivityDetails = ({
       isOpen={isOpen && !isLoading}
       title="Activity Details"
     >
-      {firstSectionDetails.map((item, index) => RenderDetails(item, index))}
+      {details && getFirstSectionDetails().map((item, index) => RenderDetails(item, index))}
       <Divider mb="32px" opacity={1} />
 
-      {secondSectionDetails.map((item, index) => RenderDetails(item, index))}
+      {BLAST_DETAILS && getSecondSectionDetails().map((item, index) => RenderDetails(item, index))}
       <Divider mb="32px" opacity={1} />
-
-      {/* {
-        SENDOUT_RATE.length > 0 &&
-        <>
-          <SendOutRate values={SENDOUT_RATE} />
-          <Divider mb="32px" opacity={1} />
-        </>
-      } */}
 
       <Grid templateColumns="repeat(5, 1fr)" mb="20px">
         <GridItem colSpan="2" color="text.lightgray">{RECIPIENT_TYPE === "single" ? "Recipient" : "Recipients"}</GridItem>
