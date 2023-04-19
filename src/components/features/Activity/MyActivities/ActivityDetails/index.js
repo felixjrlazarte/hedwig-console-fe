@@ -28,20 +28,20 @@ const ActivityDetails = ({
   const INVALID_MDNS_FILE_NAME = blastDetails && blastDetails.file && blastDetails.file.invalid_mdns_file;
   const RECIPIENT_TYPE = BLAST_DETAILS && BLAST_DETAILS.recipient_type;
 
-  const firstSectionDetails = [
-    { label: "Name", value: details && details["name"] },
-    { label: "Date", value: details && details["date"] },
-    { label: "Status", value: details && details["status"] },
-    ...(details && details.activityType ? [{ label: "Activity Type", value: details && details["activityType"] }] : []),
-    ...(details && details.user ? [{ label: "User", value: details && details["user"] }] : [])
+  const getFirstSectionDetails = () => [
+    { label: "Name", value: details["name"] },
+    { label: "Date", value: details["date"] },
+    { label: "Status", value: details["status"] },
+    ...(details && details.activityType ? [{ label: "Activity Type", value: details["activityType"] }] : []),
+    ...(details && details.user ? [{ label: "User", value: details["user"] }] : [])
   ];
 
-  const secondSectionDetails = [
-    { label: "ID", value: details && details["id"] },
-    { label: "Sender Mask", value: BLAST_DETAILS && BLAST_DETAILS["senderMask"] },
-    { label: "Character Count", value: BLAST_DETAILS && [...BLAST_DETAILS["message"]].length },
-    { label: "Message Count", value: BLAST_DETAILS && getBlastMessageCount(BLAST_DETAILS["message"]) },
-    { label: "Message Content", value: BLAST_DETAILS && BLAST_DETAILS["message"] }
+  const getSecondSectionDetails = () => [
+    { label: "ID", value: BLAST_DETAILS["id"] },
+    { label: "Sender Mask", value: BLAST_DETAILS["senderMask"] },
+    { label: "Character Count", value: [...BLAST_DETAILS["message"]].length },
+    { label: "Message Count", value: getBlastMessageCount(BLAST_DETAILS["message"]) },
+    { label: "Message Content", value: BLAST_DETAILS["message"] }
   ];
 
   /* istanbul ignore next */
@@ -78,10 +78,10 @@ const ActivityDetails = ({
       isOpen={isOpen && !isLoading}
       title="Activity Details"
     >
-      {firstSectionDetails.map((item, index) => RenderDetails(item, index))}
+      {details && getFirstSectionDetails().map((item, index) => RenderDetails(item, index))}
       <Divider mb="32px" opacity={1} />
 
-      {secondSectionDetails.map((item, index) => RenderDetails(item, index))}
+      {BLAST_DETAILS && getSecondSectionDetails().map((item, index) => RenderDetails(item, index))}
       <Divider mb="32px" opacity={1} />
 
       <Grid templateColumns="repeat(5, 1fr)" mb="20px">
