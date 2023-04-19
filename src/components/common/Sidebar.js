@@ -158,11 +158,13 @@ const NavItem = ({
   const { pathname } = useLocation();
   const { details } = useSelector(userState);
 
-  const role = details && details.role === 1 ? "ADMIN" : "COORDINATOR";
+  const role = details.role === 1 ? "ADMIN" : "COORDINATOR";
+  const isToggledAndSubitem = isToggle && isSubitem;
+
   const subItemClass = {
     justifyContent: isSubitem ? "flex-start" : "center",
     px: isSubitem ? "16px" : "0",
-    bg: isToggle && isSubitem ? "bg.primary" : "#4829AA",
+    bg: isToggledAndSubitem ? "bg.primary" : "#4829AA",
     ml: isSubitem ? "33px" : "17px"
   };
 
@@ -182,8 +184,8 @@ const NavItem = ({
         role="group"
         cursor="pointer"
         bg={pathname === url ? subItemClass.bg : "none"}
-        fontWeight={pathname === url && isToggle && isSubitem ? 500 : "normal"}
-        _hover={{ bg: isToggle && isSubitem ? "bg.primary" : "#4829AA" }}
+        fontWeight={pathname === url && isToggledAndSubitem ? 500 : "normal"}
+        _hover={{ bg: isToggledAndSubitem ? "bg.primary" : "#4829AA" }}
         {...rest}
       >
         {
@@ -191,11 +193,11 @@ const NavItem = ({
           <img src={icon} alt="Logo" width={16} height={16} />
         }
         {
-          (!isToggle || (isToggle && isSubitem)) &&
+          (!isToggle || isToggledAndSubitem) &&
           <Flex ml={!isToggle ? subItemClass.ml : "0"} justifyContent="space-between" alignItems="center" w="full">
             <span>{children}</span>
             {
-              (isToggle && isSubitem && pathname === url) &&
+              (isToggledAndSubitem && pathname === url) &&
               <span><img src={CheckIcon} alt="CheckIcon" width={20} height={20} /></span>
             }
           </Flex>
