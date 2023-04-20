@@ -4,7 +4,7 @@ ARG dproxy_url
 FROM $dproxy_url/node:18.12.1-alpine as builder
 RUN apk add --no-cache git
 
-ARG ENV=test
+ARG ENV=staging
 ENV REACT_APP_NODE_ENV=${ENV}
 
 WORKDIR /app

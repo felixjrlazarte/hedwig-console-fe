@@ -10,11 +10,11 @@ export const configData = {
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
   "staging": {
-    "SERVER_URL": "http://localhost:3003/",
+    "SERVER_URL": "https://hedwig-console-staging.voyagerapis.com/api",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   },
   "production": {
-    "SERVER_URL": "http://localhost:3004/",
+    "SERVER_URL": "https://hedwig-console.voyagerapis.com/api",
     "HEDWIG_TOKEN": "HEDWIG_CONSOLE_TOKEN"
   }
 };
