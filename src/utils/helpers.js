@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const isEmpty = (arg) => {
   const checkProperties = (obj) => {
-    for (var key in obj) {
+    for (let key in obj) {
       if (obj[key] === null || obj[key] === "") {
         return true;
       }
@@ -35,4 +37,19 @@ export const containsDoubleByte = (arg) => {
   if (!arg.length) return false;
   if (arg.charCodeAt(0) > 255) return true;
   return regex.test(arg);
+};
+
+export const getBlastMessageCount = (message) => {
+  const BLAST_MESSAGE_CHAR_COUNT = message && message.length;
+  const HAS_UNICODE = message && containsDoubleByte(message);
+
+  if (BLAST_MESSAGE_CHAR_COUNT === 0) return 0;
+
+  const BLAST_MESSAGE_CHAR_COUNT_UNICODE = BLAST_MESSAGE_CHAR_COUNT <= 70 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 70) / 70) + 1;
+  const BLAST_MESSAGE_CHAR_COUNT_NONUNICODE = BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160) / 154) + 1;
+  return HAS_UNICODE ? BLAST_MESSAGE_CHAR_COUNT_UNICODE : BLAST_MESSAGE_CHAR_COUNT_NONUNICODE;
+};
+
+export const getUniqueKey = () => {
+  return uuidv4();
 };

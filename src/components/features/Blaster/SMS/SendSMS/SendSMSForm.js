@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Flex, Box, Text } from "@chakra-ui/react";
 
-import { isEmpty, containsDoubleByte } from "../../../../../utils/helpers";
+import { isEmpty, containsDoubleByte, getBlastMessageCount } from "../../../../../utils/helpers";
 import { blastState } from "../../../../../slices/blast/blastSlice";
 
 import TextInput from "../../../../common/TextInput";
@@ -26,7 +26,7 @@ const SendSMSForm = ({
   const MAX_NON_UNICODE_CHAR = 800;
   const MAX_WITH_UNICODE_CHAR = 400;
   const HAS_UNICODE = blastMessageValue && containsDoubleByte(blastMessageValue);
-  const BLAST_MESSAGE_CHAR_COUNT = blastMessageValue ? HAS_UNICODE ? [...blastMessageValue].length : blastMessageValue.length : 0;
+  const BLAST_MESSAGE_CHAR_COUNT = blastMessageValue ? [...blastMessageValue].length : 0;
   const IS_BUTTON_DISABLED = isEmpty(watch()) || !isEmpty(errors);
   const DEFAULT_MASK = !isEmpty(senderMasks) ? senderMasks[0].id : "";
   const RECIPIENT_TYPE = watch("recipientType");
@@ -36,14 +36,6 @@ const SendSMSForm = ({
     { text: "Single Recipient", value: "single" },
     { text: "Multiple Recipients", value: "multiple" }
   ];
-
-  const getMessageCount = () => {
-    if (BLAST_MESSAGE_CHAR_COUNT === 0) return 0;
-
-    return HAS_UNICODE ?
-      BLAST_MESSAGE_CHAR_COUNT <= 70 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 70) / 70) + 1 :
-      BLAST_MESSAGE_CHAR_COUNT <= 160 ? 1 : Math.ceil((BLAST_MESSAGE_CHAR_COUNT - 160) / 154) + 1;
-  };
 
   useEffect(() => {
     if (RECIPIENT_TYPE === "single") {
@@ -170,7 +162,7 @@ const SendSMSForm = ({
         mt="-16px"
       >
         <Text>{`Character count: ${BLAST_MESSAGE_CHAR_COUNT}/${HAS_UNICODE ? MAX_WITH_UNICODE_CHAR : MAX_NON_UNICODE_CHAR}`}</Text>
-        <Text>{`Message count: ${getMessageCount()}`}</Text>
+        <Text>{`Message count: ${getBlastMessageCount(blastMessageValue)}`}</Text>
       </Box>
 
       <Flex mt="64px" justifyContent="space-between">

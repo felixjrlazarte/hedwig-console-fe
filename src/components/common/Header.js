@@ -33,8 +33,9 @@ const Header = ({ ...rest }) => {
   const handleLogout = async (e) => {
     e.preventDefault();
 
-    await dispatch(logoutUser());
-    await dispatch(resetUserState());
+    await Promise.resolve(dispatch(logoutUser()));
+    await Promise.resolve(dispatch(resetUserState()));
+    
     navigate("/login");
   };
 
