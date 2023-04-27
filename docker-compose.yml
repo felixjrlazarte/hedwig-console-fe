@@ -13,4 +13,9 @@ services:
     ports:
       - 8080:80
 
-# docker push registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:v1.0.4
+# pull docker image from container registry
+# docker login registry.gitlab.corp.paymaya.com
+# docker pull registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:v1.0.4
+
+# running a docker container
+# docker run -d -p 80:80 registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:hc-app-staging-v1.1.1
