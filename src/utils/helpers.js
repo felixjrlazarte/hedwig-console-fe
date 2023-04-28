@@ -40,7 +40,7 @@ export const containsDoubleByte = (arg) => {
 };
 
 export const getBlastMessageCount = (message) => {
-  const BLAST_MESSAGE_CHAR_COUNT = message && message.length;
+  const BLAST_MESSAGE_CHAR_COUNT = message && [...message].length;
   const HAS_UNICODE = message && containsDoubleByte(message);
 
   if (BLAST_MESSAGE_CHAR_COUNT === 0) return 0;

@@ -45,7 +45,7 @@ unit-test:
     - merge_requests
     - tags
 
-code-quality:
+sast:
   stage: pre-build
   needs: ["unit-test"]
   extends: .sonar-scanner
@@ -53,15 +53,6 @@ code-quality:
     SONAR_PROJECT_KEY: $CI_PROJECT_NAME
     SONAR_LOGIN: $SONAR_TOKEN
     SONAR_PROJECT_BASE_DIR: $PROJECT_DIR
-  only:
-    - merge_requests
-    - tags
-
-sast:
-  stage: pre-build
-  extends: .snyk:code
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/node:18.12.1-buster
-  allow_failure: true
   only:
     - merge_requests
     - tags
