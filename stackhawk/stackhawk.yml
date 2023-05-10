@@ -1,0 +1,47 @@
+app:
+  # host: https://hedwig-fe-test.voyagerapis.com
+  host: http://localhost:3000
+  antiCsrfParam: ""
+  applicationId: 17edac5e-c1a5-4489-b7d5-732d3a6ea4a2
+  env: Development
+  autoPolicy: false
+  autoInputVectors: false
+hawk:
+  spider:
+    base: true
+    ajax: false
+    maxDurationMinutes: 5
+    ajaxBrowser: FIREFOX_HEADLESS
+  startupTimeoutMinutes: 5
+  failureThreshold: high
+  scan:
+    maxDurationMinutes: "0"
+    maxRuleDurationMinutes: "0"
+    requestDelayMillis: "0"
+    concurrentRequests: "20"
+    throttlePassiveBacklog: "50"
+    policyName: ""
+
+# app:
+#   # -- An applicationId obtained from the StackHawk platform. --
+#   applicationId: 4bdf9348-acd9-42d4-8636-b840cc0e39df # (required)
+#   # -- The environment for the applicationId defined in the StackHawk platform. --
+#   env: Development # (required)
+#   # -- The url of your application to scan --
+#   host: http://localhost:3000 # (required)
+
+# # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
+# # openApiConf:
+# #   path: /swagger.json # OR...
+# #       filePath: openApi.json
+# # autoPolicy: true
+# # autoInputVectors: true
+# # Configuration Docs: https://docs.stackhawk.com/hawkscan/configuration/
+
+# # -- If Authenticated Scanning is needed, add here --
+# # Authenticated Scanning Docs: https://docs.stackhawk.com/hawkscan/authenticated-scanning.html
+# # Authenticated Scanning Repo: https://github.com/kaakaww/scan-configuration/tree/main/Authentication
+
+# # -- Help Section --
+# # Docs: https://docs.stackhawk.com/
+# # Contact Support: support@stackhawk.com
