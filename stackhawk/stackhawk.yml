@@ -1,6 +1,6 @@
 app:
-  # host: https://hedwig-fe-test.voyagerapis.com
-  host: http://localhost:3000
+  host: https://hedwig-fe-test.voyagerapis.com
+  # host: http://localhost:3000
   antiCsrfParam: ""
   applicationId: 17edac5e-c1a5-4489-b7d5-732d3a6ea4a2
   env: Development
