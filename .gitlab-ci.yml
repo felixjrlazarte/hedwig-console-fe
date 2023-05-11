@@ -10,6 +10,7 @@ include:
     file:
       - security/snyk.gitlab-ci.yml
       - security/sonar-scanner.gitlab-ci.yml
+      - security/hawk-scan.gitlab-ci.yml
 
 #-------------------#
 # Stage: Pre Build  #
@@ -90,7 +91,7 @@ build:
     - tags
 
 #-------------------#
-# Stage: Post Build #
+# Stage: Test       #
 #-------------------#
 
 container-scanning:
@@ -99,5 +100,32 @@ container-scanning:
   extends: .snyk:container
   variables:
     SNYK_CONTAINER_TAG: $CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}
+  only:
+    - tags
+
+#-------------------#
+# Stage: Post Test  #
+#-------------------#
+
+post-test-dast:
+  stage: test
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:20.10.17
+  needs: ["build"]
+  extends: .hawkscan
+  variables: 
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - name: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:20.10.17-dind
+      alias: docker
+      command: ["--tls=false"]
+  before_script:
+      # For Docker build
+      # - echo -n ${CI_REGISTRY_PASSWORD} | docker login -u ${CI_REGISTRY_USER} --password-stdin registry.gitlab.corp.paymaya.com # For Docker build
+      # - docker pull registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:${CI_COMMIT_REF_NAME}
+      - docker pull stackhawk/hawkscan
+  script:
+    # - docker run --name=hedwigconsole -d -p 8080:80 registry.gitlab.corp.paymaya.com/core/growth/messaging-platform/communications-mesh-team/hedwig-console-fe:${CI_COMMIT_REF_NAME} # For Docker build
+    - docker run --name stackhawkscan --network="host" -v $(pwd):/hawk:rw -t -e API_KEY="hawk.${HAWK_API_ID}.${HAWK_API_SECRET}" -e NO_COLOR=true stackhawk/hawkscan stackhawk/stackhawk.yml
   only:
     - tags
