@@ -10,6 +10,7 @@ export function axiosInterceptor() {
     config => {
       config.headers["Accept"] = "application/json";
       config.headers["Authorization"] = sessionStorage.getItem(CONFIG.HEDWIG_TOKEN);
+      config.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains; preload";
       config.baseURL = CONFIG.SERVER_URL;
       return config;
     },
